@@ -1,29 +1,35 @@
-const { Tech, Matchup } = require('../models');
+const { User, Band, favoriteSchema } = require('../models');
 
 const resolvers = {
   Query: {
-    tech: async () => {
-      return Tech.find({});
+    users: async () => {
+      return User.find({});
     },
-    matchups: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Matchup.find(params);
+    user: async (parent, { _id }) => {
+      const id = _id ? { _id } : {};
+      return User.findById(id);
     },
+    bands: async () => {
+      return Band.find({});
+    },
+    band: async (parent, { _id }) => {
+      const id = _id ? { _id } : {};
+      return Band.findById(id);
+    }
   },
   Mutation: {
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
+    createUser: async (parent, args) => {
+      const user = await User.create(args);
+      return user;
     },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
-        { new: true }
-      );
-      return vote;
-    },
-  },
+    updateUser: async (parent, args, context) => {
+        if (context.user) {
+          return User.findByIdAndUpdate(context.user.id, args, {
+            new: true,
+          });
+        }
+    }
+  }
 };
 
 module.exports = resolvers;

@@ -1,4 +1,6 @@
 const { User, Band, favoriteSchema } = require('../models');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
   Query: {
@@ -24,10 +26,28 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
         if (context.user) {
-          return User.findByIdAndUpdate(context.user.id, args, {
-            new: true,
-          });
+          return User.findByIdAndUpdate(
+            context.user.id,
+            args,
+            { new: true }
+          );
         }
+    },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+      return { token, user };
     }
   }
 };

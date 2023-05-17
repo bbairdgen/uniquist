@@ -66,7 +66,10 @@ const Home = () => {
     for (let i = 0; i < promptArray.length; i++) {
       const word = promptArray[i].toLowerCase();
 
-      const url = `https://languagetools.p.rapidapi.com/synonyms/${word}`;
+      const wordTypes = ["synonyms", "hypernyms", "hyponyms"];
+      const currentWordType = wordTypes[Math.floor(Math.random() * 3)];
+
+      const url = `https://languagetools.p.rapidapi.com/${currentWordType}/${word}`;
       const options = {
         method: 'GET',
         headers: {
@@ -78,7 +81,7 @@ const Home = () => {
       try {
         const response = await fetch(url, options);
         const result = await response.text();
-        console.log(response);
+        // console.log(response);
         console.log(result);
 
         // const synCount = response.synonyms.length;
@@ -92,7 +95,7 @@ const Home = () => {
       // Randomly select 1-3 words
       const bandName = bandNameArray[Math.random() * bandNameArray.length]
 
-      console.log(bandName)
+      // console.log(bandName)
     }
 
 

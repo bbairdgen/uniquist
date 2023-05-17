@@ -8,6 +8,10 @@ const { gql } = require("apollo-server-express");
 // createUser(username: String!, email: String!, password: String!): Auth
 // login(username: String!, password: String!): Auth
 
+//removed members from  createBand(bandname: String!, members: [Input]): Band
+
+//removed members from  updateBand(bandname: String, members: [User]): Band
+
 const typeDefs = gql`
   type User {
     _id: ID!
@@ -34,8 +38,8 @@ const typeDefs = gql`
   type Mutation {
     createUser: User
     updateUser(email: String, password: String): User
-    createBand(bandname: String!, members: [User]): Band
-    updateBand(bandname: String, members: [User]): Band
+    createBand(bandname: String!): Band
+    updateBand(bandname: String): Band
     addFavorite(bandname: String!): User
     removeFavorite(bandname: String): User
   }

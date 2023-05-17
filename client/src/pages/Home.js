@@ -1,59 +1,53 @@
-import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_MATCHUPS } from '../utils/queries';
-import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_MATCHUPS } from "../utils/queries";
+import React, { useState } from "react";
 
-const styles = {
-  mainDivStyles: {
-    margin: "2% 8%",
-    padding: '20px 30px',
-    backgroundColor: '#A569BD',
-    color: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  formStyles: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '300px'
-  },
-  inputStyles: {
-    margin: '10px 0px',
-    border: 'none',
-    padding: '8px 8px',
-    borderRadius: '5px',
-    width: '80%'
-  },
-  imageStyle: {
-    width: '300px',
-    margin: '10px 0px',
-    border: '6px solid #A569BD'
-  }
-};
+// const styles = {
+//   mainDivStyles: {
+//     margin: "2% 8%",
+//     padding: '20px 30px',
+//     backgroundColor: '#A569BD',
+//     color: 'white',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center'
+//   },
+//   formStyles: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     width: '300px'
+//   },
+//   inputStyles: {
+//     margin: '10px 0px',
+//     border: 'none',
+//     padding: '8px 8px',
+//     borderRadius: '5px',
+//     width: '80%'
+//   },
+//   imageStyle: {
+//     width: '300px',
+//     margin: '10px 0px',
+//     border: '6px solid #A569BD'
+//   }
+// };
 
 const Home = () => {
-  const [prompt, setPrompt] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const { loading, data } = useQuery(QUERY_MATCHUPS, {
-    fetchPolicy: "no-cache"
-  });
-
-  const matchupList = data?.matchups || [];
+  const [prompt, setPrompt] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { target } = e;
     const inputType = target.name;
     const inputValue = target.value;
 
-    if (inputType === 'prompt') {
+    if (inputType === "prompt") {
       setPrompt(inputValue);
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (!prompt) {
@@ -69,58 +63,47 @@ const Home = () => {
 
     const bandNameArray = []
 
-
     for (let i = 0; i < promptArray.length; i++) {
-      const word = promptArray[i];
+      const word = promptArray[i].toLowerCase();
 
-      // const request = require('request');
-      // request.get({
-      //   url: 'https://api.api-ninjas.com/v1/thesaurus?word=' + word,
-      //   headers: {
-      //     'X-Api-Key': '5Ayl23OqevNqajXiMG1rxQ==HM7LlqV7uVkR13kj'
-      //   },
-      // }, function (error, response, body) {
-      //   if (error) return console.error('Request failed:', error);
-      //   else if (response.statusCode != 200) return console.error('Error:', response.statusCode, body.toString('utf8'));
-      //   else console.log(body)
-      // // Create a new array based on return from API, randomly select 1-3 words
-      // const randSyn = Math.random() * body.synonyms.length;
-      // bandNameArray.push(body.synonyms[randSyn])
-      // });
+      const url = `https://languagetools.p.rapidapi.com/synonyms/${word}`;
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '2b2680de1emshab268001c35cf4ap1ccbf9jsn13714f7ac882',
+          'X-RapidAPI-Host': 'languagetools.p.rapidapi.com'
+        }
+      };
 
+      try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        console.log(response);
+        console.log(result);
 
-      // $.ajax({
-      //   method: 'GET',
-      //   url: 'https://api.api-ninjas.com/v1/thesaurus?word=' + word,
-      //   headers: { 'X-Api-Key': 'YOUR_API_KEY' },
-      //   contentType: 'application/json',
-      //   success: function (result) {
-      //     console.log(result);
-      //   },
-      //   error: function ajaxError(jqXHR) {
-      //     console.error('Error: ', jqXHR.responseText);
-      //     // Create a new array based on return from API, randomly select 1-3 words
-      //     // const randSyn = Math.random() * body.synonyms.length;
-      //     // bandNameArray.push(body.synonyms[randSyn])
-      //   }
-      // });
+        // const synCount = response.synonyms.length;
+        // bandNameArray.append(result.synonyms[Math.random() * synCount]);
+
+        // console.log(bandNameArray)
+      } catch (error) {
+        console.error(error);
+      }
 
       // Randomly select 1-3 words
       const bandName = bandNameArray[Math.random() * bandNameArray.length]
 
       console.log(bandName)
-
     }
 
 
     // Return result
 
     if (!prompt) {
-      setErrorMessage('No name entered');
+      setErrorMessage("No name entered");
       return;
     }
 
-    setPrompt('');
+    setPrompt("");
   };
 
   return (
@@ -151,7 +134,7 @@ const Home = () => {
         <form>
           {/* <Link to="/matchup"> */}
           <input
-            style={styles.inputStyles}
+            // style={styles.inputStyles}
             value={[prompt]}
             name="prompt"
             onChange={handleInputChange}

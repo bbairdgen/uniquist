@@ -56,11 +56,62 @@ const Home = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
+    if (!prompt) {
+      setErrorMessage('No prompt entered');
+      return;
+    }
+
     // Create array with words in prompt
+
+    const promptArray = prompt.split(' ');
 
     // Make API calls with words in array
 
-    // Create a new array based on return from API, randomly select 1-3 words
+    const bandNameArray = []
+
+
+    for (let i = 0; i < promptArray.length; i++) {
+      const word = promptArray[i];
+
+      // const request = require('request');
+      // request.get({
+      //   url: 'https://api.api-ninjas.com/v1/thesaurus?word=' + word,
+      //   headers: {
+      //     'X-Api-Key': '5Ayl23OqevNqajXiMG1rxQ==HM7LlqV7uVkR13kj'
+      //   },
+      // }, function (error, response, body) {
+      //   if (error) return console.error('Request failed:', error);
+      //   else if (response.statusCode != 200) return console.error('Error:', response.statusCode, body.toString('utf8'));
+      //   else console.log(body)
+      // // Create a new array based on return from API, randomly select 1-3 words
+      // const randSyn = Math.random() * body.synonyms.length;
+      // bandNameArray.push(body.synonyms[randSyn])
+      // });
+
+
+      // $.ajax({
+      //   method: 'GET',
+      //   url: 'https://api.api-ninjas.com/v1/thesaurus?word=' + word,
+      //   headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+      //   contentType: 'application/json',
+      //   success: function (result) {
+      //     console.log(result);
+      //   },
+      //   error: function ajaxError(jqXHR) {
+      //     console.error('Error: ', jqXHR.responseText);
+      //     // Create a new array based on return from API, randomly select 1-3 words
+      //     // const randSyn = Math.random() * body.synonyms.length;
+      //     // bandNameArray.push(body.synonyms[randSyn])
+      //   }
+      // });
+
+      // Randomly select 1-3 words
+      const bandName = bandNameArray[Math.random() * bandNameArray.length]
+
+      console.log(bandName)
+
+    }
+
 
     // Return result
 
@@ -107,9 +158,10 @@ const Home = () => {
             type="prompt"
             placeholder="prompt"
           />
-          <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>Create Matchup!</button>
+          <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>Generate Name!</button>
           {/* </Link> */}
         </form>
+        <h2 id='band-name'></h2>
       </div>
     </div>
   );

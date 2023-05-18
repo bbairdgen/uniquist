@@ -1,0 +1,40 @@
+/*bluenothing*/
+:root {
+    --waikawa-gray: #545987;
+    --spun-pearl: #b4b1bc;
+    --scampi: #5b67ad;
+    --shark: #1b1b1e;
+    --pickled-bluewood: #303852;
+    --glacier: #73a3be;
+    --zambezi: #635857;
+    --mineral-green: #435d5f;
+    --au-chico: #9c5460;
+    }
+
+:root {
+    --link-shadow: #b4b1bc 0px -15px 2px, #b4b1bc 0px 15px 2px,#b4b1bcae 0px -29px 3px, #b4b1bcae 0px 29px 3px, #b4b1bc78 0px 42px 4px, #b4b1bc78 0px -42px 4px, #b4b1bc39 0px -54px 5px, #b4b1bc39 0px 54px 5px, #b4b1bc21 0px -65px 6px, #b4b1bc21 0px 65px 6px, #b4b1bc14 0px 75px 7px, #b4b1bc14 0px -75px 7px, #b4b1bc09 0px 84px 8px, #b4b1bc09 0px -84px 8px, #b4b1bc06 0px 72px 9px, #b4b1bc06 0px -72px 9px;
+}
+
+@keyframes wackyShadow {
+    from {text-shadow: none;}
+    to {text-shadow: var(--link-shadow)}
+}
+
+body {
+    
+    font-family: 'Raleway', sans-serif;
+    color:#73a3be;
+    background: linear-gradient(0deg,  hsl(234, 19%, 20%), hsl(226, 15%, 15%),hsl(236, 14%, 8%), hsl(240, 9%, 3%), hsl(226, 15%, 15%), hsl(234, 19%, 20%));
+    background-size: 100vw 400vh;
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    
+}
+
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: #b4b1bc 0px 5px 10px, #b4b1bc 0px -5px 10px ;
+}
+

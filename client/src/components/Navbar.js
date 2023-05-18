@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import "../css/navbar.css";
 
-import Spotify from "../pages/Spotify";
-
 function Navbar() {
   const [content, setContent] = useState();
   let navigate = useNavigate();
@@ -21,6 +19,16 @@ function Navbar() {
         <li>
           <p className="nav-item" onClick={() => navigate("/")}>
             Home
+          </p>
+        </li>
+        <li>
+          <p className="nav-item" onClick={() => navigate("/signup")}>
+            Sign Up
+          </p>
+        </li>
+        <li>
+          <p className="nav-item" onClick={() => navigate("/login")}>
+            Log in
           </p>
         </li>
       </ul>

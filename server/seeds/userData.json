@@ -1,7 +1,6 @@
 [
     {
         "username": "John",
-        "email": "john@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Appalachious 7" },
@@ -13,7 +12,6 @@
     },
     {
         "username": "Emily",
-        "email": "emily@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "The Farm" },
@@ -25,7 +23,6 @@
     },
     {
         "username": "Frida",
-        "email": "frida@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Ros3s" },
@@ -37,7 +34,6 @@
     },
     {
         "username": "Zhang",
-        "email": "zhang@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Secret Demise" },
@@ -49,7 +45,6 @@
     },
     {
         "username": "Ophelia",
-        "email": "ophelia@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Holy Water" },
@@ -61,7 +56,6 @@
     },
     {
         "username": "Eric",
-        "email": "eric@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Be This A Warning" },
@@ -73,7 +67,6 @@
     },
     {
         "username": "Harold",
-        "email": "harold@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Open-Casket Burger" },
@@ -85,7 +78,6 @@
     },
     {
         "username": "Bingdinger",
-        "email": "bingdinger@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Cursed Shadow" },
@@ -97,7 +89,6 @@
     },
     {
         "username": "Alex",
-        "email": "alex@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "The Carpet Cleaners" },
@@ -109,7 +100,6 @@
     },
     {
         "username": "Priscilla",
-        "email": "priscilla@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Surprise Beach Ball" },
@@ -121,7 +111,6 @@
     },
     {
         "username": "Jelli",
-        "email": "jelli@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Still Tired" },
@@ -133,7 +122,6 @@
     },
     {
         "username": "Hope",
-        "email": "hope@gmail.com",
         "password": "12341234",
         "favorites": [
             { "bandname": "Shingles" },

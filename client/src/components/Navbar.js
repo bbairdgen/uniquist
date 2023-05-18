@@ -14,7 +14,14 @@ function Navbar() {
     <div>
       <ul className="nav-list">
         <li>
-          <p onClick={() => navigate("/search")}>Spotify Search</p>
+          <p className="nav-item" onClick={() => navigate("/search")}>
+            Spotify Search
+          </p>
+        </li>
+        <li>
+          <p className="nav-item" onClick={() => navigate("/")}>
+            Home
+          </p>
         </li>
       </ul>
     </div>

@@ -12,19 +12,29 @@ const resolvers = {
         })
         .populate({
           path: 'bands',
-          populate: 'bandname'
+          populate: ['bandname', 'members']
         });
     },
     user: async (parent, { _id }) => {
       const id = _id ? { _id } : {};
-      return User.findById(id);
+      return User.findById(id)
+        .populate({
+          path: 'friends',
+          populate: 'username'
+        })
+        .populate({
+          path: 'bands',
+          populate: ['bandname', 'members']
+        });
     },
     bands: async () => {
-      return Band.find({});
+      return Band.find({})
+        .populate('members');
     },
     band: async (parent, { _id }) => {
       const id = _id ? { _id } : {};
-      return Band.findById(id);
+      return Band.findById(id)
+        .populate('members');
     }
   },
   Mutation: {
@@ -41,8 +51,8 @@ const resolvers = {
           );
         }
     },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError('Incorrect credentials');
@@ -61,10 +71,10 @@ const resolvers = {
       const band = await Band.create(args);
       return band;
     },
-    updateBand: async (parent, { bandname, members }) => {
+    updateBand: async (parent, args) => {
       const band = await Band.findOneAndUpdate(
-        { bandname }, // find by bandname
-        { bandname, members }, // apply updated bandname and members list
+        { bandname }, // filter: find by bandname
+        { args }, // update: apply updated info
         { new: true }
       );
     },

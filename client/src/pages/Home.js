@@ -1,13 +1,28 @@
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { QUERY_MATCHUPS } from "../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_ALL_USERS } from "../utils/queries";
 import React, { useState } from "react";
 
 const Home = () => {
+  const { loading, data } = useQuery(QUERY_ALL_USERS);
+  const userList = data?.users || [];
+  console.log(userList);
+  for (let i = 0; i > userList.length; i++) {
+    const user = userList[i];
+    console.log(user);
+  }
+
   return (
-    <div className="card bg-white card-rounded w-50">
-      <div className="card-footer text-center"></div>
-    </div>
+    <section className="user-info">
+      <h2>check out all these guys</h2>
+      {userList.map((user, i) => {
+        return (
+          <div className="user-card">
+            <h3>{user.username}</h3>
+          </div>
+        );
+      })}
+    </section>
   );
 };
 

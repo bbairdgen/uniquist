@@ -16,7 +16,6 @@ const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
-    email: String!
     dateJoined: String!
     favorites: [Favorite]
     friends: [User]
@@ -52,13 +51,13 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser: User
-    updateUser(email: String, password: String): User
+    createUser(username: String!, password: String!): User
+    updateUser(username: String, password: String, friends: [UserInput]): User
     login(username: String!, password: String!): Auth
     createBand(bandname: String!, members: [UserInput]): Band
     updateBand(bandname: String, members: [UserInput]): Band
     addFavorite(bandname: String!): User
-    removeFavorite(bandname: String): User
+    removeFavorite(bandname: String!): User
   }
 `;
 

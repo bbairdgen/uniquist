@@ -6,7 +6,9 @@ import Home from "./pages/Home";
 import Matchup from "./pages/Matchup";
 import Vote from "./pages/Vote";
 import NotFound from "./pages/NotFound";
-import Spotify from "./components/Spotify";
+import Spotify from "./pages/Spotify";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -16,17 +18,20 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
+      <Header />
+      {/* <Navbar /> */}
       <Router>
-        <div className="flex-column justify-center align-center min-100-vh bg-primary">
+        <Navbar />
+        <div className="stuff">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/search" element={<Spotify />} />
             <Route path="/matchup" element={<Matchup />} />
             <Route path="/matchup/:id" element={<Vote />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Router>
-      <Spotify />
     </ApolloProvider>
   );
 }

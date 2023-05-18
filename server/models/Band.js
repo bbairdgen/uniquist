@@ -6,6 +6,9 @@ const bandSchema = new Schema({
         required: true,
         unqiue: true
     },
+    genre: {
+        type: String
+    },
     members: [{
         type: Schema.Types.ObjectId,
         ref: 'User'

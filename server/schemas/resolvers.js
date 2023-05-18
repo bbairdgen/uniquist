@@ -5,7 +5,15 @@ const { AuthenticationError } = require('apollo-server-express');
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find({});
+      return User.find({})
+        .populate({
+          path: 'friends',
+          populate: 'username'
+        })
+        .populate({
+          path: 'bands',
+          populate: 'bandname'
+        });
     },
     user: async (parent, { _id }) => {
       const id = _id ? { _id } : {};
@@ -48,6 +56,35 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
+    },
+    createBand: async (parent, args) => {
+      const band = await Band.create(args);
+      return band;
+    },
+    updateBand: async (parent, { bandname, members }) => {
+      const band = await Band.findOneAndUpdate(
+        { bandname }, // find by bandname
+        { bandname, members }, // apply updated bandname and members list
+        { new: true }
+      );
+    },
+    addFavorite: async (parent, { bandname }, context) => {
+      if (context.user) {
+        return User.findByIdAndUpdate(
+          context.user.id,
+          { $addToSet: { favorites: bandname } },
+          { new: true }
+        )
+      }
+    },
+    removeFavorite: async (parent, { bandname }, context) => {
+      if (context.user) {
+        return User.findByIdAndUpdate(
+          context.user.id,
+          { $pull: { favorites: bandname } },
+          { new: true }
+        )
+      }
     }
   }
 };

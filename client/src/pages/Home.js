@@ -1,44 +1,44 @@
-import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_MATCHUPS } from '../utils/queries';
-import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_MATCHUPS } from "../utils/queries";
+import React, { useState } from "react";
 
-const styles = {
-  mainDivStyles: {
-    margin: "2% 8%",
-    padding: '20px 30px',
-    backgroundColor: '#A569BD',
-    color: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  formStyles: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '300px'
-  },
-  inputStyles: {
-    margin: '10px 0px',
-    border: 'none',
-    padding: '8px 8px',
-    borderRadius: '5px',
-    width: '80%'
-  },
-  imageStyle: {
-    width: '300px',
-    margin: '10px 0px',
-    border: '6px solid #A569BD'
-  }
-};
+// const styles = {
+//   mainDivStyles: {
+//     margin: "2% 8%",
+//     padding: '20px 30px',
+//     backgroundColor: '#A569BD',
+//     color: 'white',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center'
+//   },
+//   formStyles: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     width: '300px'
+//   },
+//   inputStyles: {
+//     margin: '10px 0px',
+//     border: 'none',
+//     padding: '8px 8px',
+//     borderRadius: '5px',
+//     width: '80%'
+//   },
+//   imageStyle: {
+//     width: '300px',
+//     margin: '10px 0px',
+//     border: '6px solid #A569BD'
+//   }
+// };
 
 const Home = () => {
-  const [prompt, setPrompt] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [prompt, setPrompt] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { loading, data } = useQuery(QUERY_MATCHUPS, {
-    fetchPolicy: "no-cache"
+    fetchPolicy: "no-cache",
   });
 
   const matchupList = data?.matchups || [];
@@ -48,7 +48,7 @@ const Home = () => {
     const inputType = target.name;
     const inputValue = target.value;
 
-    if (inputType === 'prompt') {
+    if (inputType === "prompt") {
       setPrompt(inputValue);
     }
   };
@@ -65,11 +65,11 @@ const Home = () => {
     // Return result
 
     if (!prompt) {
-      setErrorMessage('No name entered');
+      setErrorMessage("No name entered");
       return;
     }
 
-    setPrompt('');
+    setPrompt("");
   };
 
   return (
@@ -100,14 +100,16 @@ const Home = () => {
         <form>
           {/* <Link to="/matchup"> */}
           <input
-            style={styles.inputStyles}
+            // style={styles.inputStyles}
             value={[prompt]}
             name="prompt"
             onChange={handleInputChange}
             type="prompt"
             placeholder="prompt"
           />
-          <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>Create Matchup!</button>
+          <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>
+            Create Matchup!
+          </button>
           {/* </Link> */}
         </form>
       </div>

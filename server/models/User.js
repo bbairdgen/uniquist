@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const favoriteSchema = require('./Favorite');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt')
 
 const userSchema = new Schema({
   username: {
@@ -10,11 +10,13 @@ const userSchema = new Schema({
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    match: [/.+@.+\..+/, 'Must be an email address!']
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    minLength: 5
   },
   dateJoined: {
     type: Date,

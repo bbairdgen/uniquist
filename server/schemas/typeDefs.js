@@ -1,4 +1,16 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
+
+//to add under User:
+// dateJoined: Date!
+// favorites: [Favorite]
+
+//to add under mutation:
+// createUser(username: String!, email: String!, password: String!): Auth
+// login(username: String!, password: String!): Auth
+
+//removed members from  createBand(bandname: String!, members: [Input]): Band
+
+//removed members from  updateBand(bandname: String, members: [User]): Band
 
 const typeDefs = gql`
   type User {
@@ -40,7 +52,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): Auth
+    createUser: User
     updateUser(email: String, password: String): User
     login(username: String!, password: String!): Auth
     createBand(bandname: String!, members: [UserInput]): Band

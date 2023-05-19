@@ -11,11 +11,10 @@ const SignUp = () => {
         username: '',
         password: '',
     });
-    const [addUser, { error, data }] = useMutation(ADD_USER);
+    const [addUser, { error }] = useMutation(ADD_USER);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
         setFormState({
             ...formState,
             [name]: value,
@@ -25,14 +24,16 @@ const SignUp = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(formState);
-
+   
         try {
+            
             const { data } = await addUser({
                 variables: { ...formState },
             });
-
-            Auth.login(data.addUser.token);
+            console.log("1.2", data);
+            Auth.login(data.createUser.token);
         } catch (err) {
+            console.log(formState);
             console.error(err);
         }
     };
@@ -42,16 +43,16 @@ const SignUp = () => {
             <div className="card">
                 <h3>Sign Up</h3>
                 <div className="card-body">
-                    {data ? (
-                        <Link to="/"></Link>
+                    {false ? (
+                        <p>Welcome</p>
                     ) : (
                         <form onSubmit={handleFormSubmit}>
                             <input
                                 className="form-input"
                                 placeholder="Username:"
                                 name="username"
-                                type="text"
-                                value={formState.name}
+                                type="username"
+                                value={formState.username}
                                 onChange={handleChange}
                             />
                             <input

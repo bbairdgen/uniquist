@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "../utils/mutations";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const SignUp = () => {
     const [formState, setFormState] = useState({
@@ -69,15 +69,11 @@ const SignUp = () => {
                         </form>
                     )}
 
-                    {error && (
-                        <div>
-                            {error.message}
-                        </div>
-                    )}
-                </div>
-            </div>
-        </main>
-    )
-}
+          {error && <div>{error.message}</div>}
+        </div>
+      </div>
+    </main>
+  );
+};
 
-export default SignUp
+export default SignUp;

@@ -43,14 +43,14 @@ const resolvers = {
       const token = signToken(user)
       return {token, user};
     },
-    updateUser: async (parent, args, context) => {
-        if (context.user) {
+    updateUser: async (parent, { _id, username, password, favorites, friends, bands }, context) => {
+        // if (context.user) {
           return User.findByIdAndUpdate(
-            context.user.id,
-            args,
+            /*context.user_id,*/ _id,
+            { username, password, favorites, friends, bands },
             { new: true }
           );
-        }
+        // }
     },
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
@@ -72,30 +72,12 @@ console.log(correctPw);
       const band = await Band.create(args);
       return band;
     },
-    updateBand: async (parent, args) => {
-      const band = await Band.findOneAndUpdate(
-        { bandname }, // filter: find by bandname
-        { args }, // update: apply updated info
+    updateBand: async (parent, { _id, bandname, stream_links }) => {
+      const updatedBand = await Band.findByIdAndUpdate(
+        _id, // filter: find by bandname
+        { bandname, stream_links }, // replaces old data with variables
         { new: true }
       );
-    },
-    addFavorite: async (parent, { bandname }, context) => {
-      if (context.user) {
-        return User.findByIdAndUpdate(
-          context.user.id,
-          { $addToSet: { favorites: bandname } },
-          { new: true }
-        )
-      }
-    },
-    removeFavorite: async (parent, { bandname }, context) => {
-      if (context.user) {
-        return User.findByIdAndUpdate(
-          context.user.id,
-          { $pull: { favorites: bandname } },
-          { new: true }
-        )
-      }
     }
   }
 };

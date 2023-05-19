@@ -233,7 +233,7 @@ const resolvers = {
       } else return band;
     },
 
-    updateBandName: async (parent, { bandID, bandname }, context) => {
+    updateBandname: async (parent, { bandID, bandname }, context) => {
       if (!context.user) {
         throw new AuthenticationError('Authentication required');
       }

@@ -68,7 +68,7 @@ const typeDefs = gql`
 
     # BAND ROUTES
       createBand(bandname: String!, members: [ID], stream_links: [String]): Band
-      updateBandName(bandID: ID!, bandname: String): Band
+      updateBandname(bandID: ID!, bandname: String): Band
       addBandMember(bandID: ID!, userID: ID!): Band
       removeBandMember(bandID: ID!, userID: ID!): Band
       addStreamLink(bandID: ID!, streamLink: String!): Band

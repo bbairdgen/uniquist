@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation login($username: String!, $password: String!) {
@@ -12,7 +12,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const ADD_USER = gql`
+export const CREATE_USER = gql`
   mutation createUser($username: String!, $password: String!) {
     createUser(username: $username, password: $password) {
       token
@@ -25,8 +25,22 @@ export const ADD_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation UpdateUser($_id: ID!, $username: String, $password: String, $favorites: [StringInput], $friends: [UserInput], $bands: [BandInput]) {
-    updateUser(_id: $_id, username: $username, password: $password, favorites: $favorites, friends: $friends, bands: $bands) {
+  mutation UpdateUser(
+    $_id: ID!
+    $username: String
+    $password: String
+    $favorites: [StringInput]
+    $friends: [UserInput]
+    $bands: [BandInput]
+  ) {
+    updateUser(
+      _id: $_id
+      username: $username
+      password: $password
+      favorites: $favorites
+      friends: $friends
+      bands: $bands
+    ) {
       username
       password
       favorites {
@@ -44,7 +58,11 @@ export const UPDATE_USER = gql`
 
 export const CREATE_BAND = gql`
   mutation CreateBand($bandname: String!, $members: [UserInput]) {
-    createBand(bandname: $bandname, members: $members, stream_links: $stream_links) {
+    createBand(
+      bandname: $bandname
+      members: $members
+      stream_links: $stream_links
+    ) {
       bandname
       stream_links
       members {
@@ -55,8 +73,18 @@ export const CREATE_BAND = gql`
 `;
 
 export const UPDATE_BAND = gql`
-  mutation updateBand($_id: ID!, $bandname: String, $members: [UserInput], $stream_links: [LinksInput]) {
-    updateBand(_id: $_id, bandname: $bandname, members: $members, stream_links: $stream_links) {
+  mutation updateBand(
+    $_id: ID!
+    $bandname: String
+    $members: [UserInput]
+    $stream_links: [LinksInput]
+  ) {
+    updateBand(
+      _id: $_id
+      bandname: $bandname
+      members: $members
+      stream_links: $stream_links
+    ) {
       bandname
       members {
         _id

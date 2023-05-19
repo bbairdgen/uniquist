@@ -30,6 +30,9 @@ function Navbar() {
           <p className="nav-item" onClick={() => navigate("/login")}>
             Log in
           </p>
+          <p className="nav-item" onClick={() => navigate("/allusers")}>
+            See Users
+          </p>
         </li>
       </ul>
     </div>

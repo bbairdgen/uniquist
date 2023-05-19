@@ -22,17 +22,17 @@ const Home = () => {
     e.preventDefault();
 
     if (!prompt) {
-      setErrorMessage('No prompt entered');
+      setErrorMessage("No prompt entered");
       return;
     }
 
     // Create array with words in prompt
 
-    const promptArray = prompt.split(' ');
+    const promptArray = prompt.split(" ");
 
     // Make API calls with words in array
 
-    let bandNameArray = []
+    let bandNameArray = [];
 
     for (let i = 0; i < promptArray.length; i++) {
       const word = promptArray[i].toLowerCase();
@@ -42,11 +42,12 @@ const Home = () => {
 
       const url = `https://languagetools.p.rapidapi.com/${currentWordType}/${word}`;
       const options = {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'X-RapidAPI-Key': '2b2680de1emshab268001c35cf4ap1ccbf9jsn13714f7ac882',
-          'X-RapidAPI-Host': 'languagetools.p.rapidapi.com'
-        }
+          "X-RapidAPI-Key":
+            "2b2680de1emshab268001c35cf4ap1ccbf9jsn13714f7ac882",
+          "X-RapidAPI-Host": "languagetools.p.rapidapi.com",
+        },
       };
 
       try {
@@ -55,30 +56,37 @@ const Home = () => {
         // console.log(response);
         // console.log(result);
 
-        const currentWordArray = JSON.parse(result)
+        const currentWordArray = JSON.parse(result);
 
         if (currentWordArray.synonyms) {
-          const currentWord = currentWordArray.synonyms[Math.floor(Math.random() * currentWordArray.synonyms.length)]
-          bandNameArray.push(currentWord)
+          const currentWord =
+            currentWordArray.synonyms[
+              Math.floor(Math.random() * currentWordArray.synonyms.length)
+            ];
+          bandNameArray.push(currentWord);
         } else if (currentWordArray.hypernyms) {
-          const currentWord = currentWordArray.hypernyms[Math.floor(Math.random() * currentWordArray.hypernyms.length)]
-          bandNameArray.push(currentWord)
+          const currentWord =
+            currentWordArray.hypernyms[
+              Math.floor(Math.random() * currentWordArray.hypernyms.length)
+            ];
+          bandNameArray.push(currentWord);
         } else if (currentWordArray.hyponyms) {
-          const currentWord = currentWordArray.hyponyms[Math.floor(Math.random() * currentWordArray.hyponyms.length)]
-          bandNameArray.push(currentWord)
+          const currentWord =
+            currentWordArray.hyponyms[
+              Math.floor(Math.random() * currentWordArray.hyponyms.length)
+            ];
+          bandNameArray.push(currentWord);
         }
 
-
         // Append random words to bandNameArray
-
       } catch (error) {
         console.error(error);
       }
 
       // Randomly select 1-3 words, return them
-
     }
-    const bandName = bandNameArray[Math.floor(Math.random() * bandNameArray.length)]
+    const bandName =
+      bandNameArray[Math.floor(Math.random() * bandNameArray.length)];
     setBandNameHeader(bandName);
     // console.log(bandName)
 
@@ -127,10 +135,12 @@ const Home = () => {
             type="prompt"
             placeholder="prompt"
           />
-          <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>Generate Name!</button>
+          <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>
+            Generate Name!
+          </button>
           {/* </Link> */}
         </form>
-        <h2 id='band-name'>{bandNameHeader}</h2>
+        <h2 id="band-name">{bandNameHeader}</h2>
       </div>
     </div>
   );

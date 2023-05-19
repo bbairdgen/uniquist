@@ -10,6 +10,11 @@ function Spotify() {
   const [albums, setAlbums] = useState([]);
   const [artistName, setArtistName] = useState("");
 
+  async function addToFavorites() {
+    const faveName = searchInput;
+    console.log("you added " + faveName + " to your favorite band names");
+  }
+
   useEffect(() => {
     var authParameters = {
       method: "POST",
@@ -94,6 +99,12 @@ function Spotify() {
           </button>
         </input-group>
       </container>
+      <div>
+        <h3>{searchInput}</h3>
+        <button className="favorite-button" onClick={addToFavorites}>
+          add to favorites
+        </button>
+      </div>
       <container className="spotify-data">
         <h3>Closest match on Spotify:</h3>
         <h2>{artistName}</h2>
@@ -113,7 +124,7 @@ function Spotify() {
             );
           })}
         </section>
-      </container>        
+      </container>
     </div>
   );
 }

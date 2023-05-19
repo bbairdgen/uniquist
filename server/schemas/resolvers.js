@@ -1,6 +1,6 @@
+const { AuthenticationError } = require('apollo-server-express');
 const { User, Band, favoriteSchema } = require('../models');
 const { signToken } = require('../utils/auth');
-const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
   Query: {
@@ -49,9 +49,8 @@ const resolvers = {
       if (!user) {
         throw new AuthenticationError('Incorrect username');
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
+console.log(correctPw);
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password');
       }
@@ -79,6 +78,7 @@ const resolvers = {
       }
 
       const token = signToken(user);
+      console.log(token);
       return { token, user };
     },
 

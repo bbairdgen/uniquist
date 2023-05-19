@@ -6,6 +6,7 @@ import React, { useState } from "react";
 const Home = () => {
   const [prompt, setPrompt] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [bandNameHeader, setBandNameHeader] = useState("");
 
   const handleInputChange = (e) => {
     const { target } = e;
@@ -78,7 +79,8 @@ const Home = () => {
 
     }
     const bandName = bandNameArray[Math.floor(Math.random() * bandNameArray.length)]
-    console.log(bandName)
+    setBandNameHeader(bandName);
+    // console.log(bandName)
 
     // Return result
 
@@ -128,7 +130,7 @@ const Home = () => {
           <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>Generate Name!</button>
           {/* </Link> */}
         </form>
-        <h2 id='band-name'></h2>
+        <h2 id='band-name'>{bandNameHeader}</h2>
       </div>
     </div>
   );

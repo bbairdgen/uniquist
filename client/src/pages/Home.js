@@ -23,6 +23,7 @@ const Home = () => {
 
     if (!prompt) {
       setErrorMessage("No prompt entered");
+      setBandNameHeader("No prompt entered");
       return;
     }
 
@@ -61,19 +62,19 @@ const Home = () => {
         if (currentWordArray.synonyms) {
           const currentWord =
             currentWordArray.synonyms[
-              Math.floor(Math.random() * currentWordArray.synonyms.length)
+            Math.floor(Math.random() * currentWordArray.synonyms.length)
             ];
           bandNameArray.push(currentWord);
         } else if (currentWordArray.hypernyms) {
           const currentWord =
             currentWordArray.hypernyms[
-              Math.floor(Math.random() * currentWordArray.hypernyms.length)
+            Math.floor(Math.random() * currentWordArray.hypernyms.length)
             ];
           bandNameArray.push(currentWord);
         } else if (currentWordArray.hyponyms) {
           const currentWord =
             currentWordArray.hyponyms[
-              Math.floor(Math.random() * currentWordArray.hyponyms.length)
+            Math.floor(Math.random() * currentWordArray.hyponyms.length)
             ];
           bandNameArray.push(currentWord);
         }
@@ -87,15 +88,9 @@ const Home = () => {
     }
     const bandName =
       bandNameArray[Math.floor(Math.random() * bandNameArray.length)];
-    setBandNameHeader(bandName);
+
+    bandName ? setBandNameHeader(bandName) : setBandNameHeader("Prompt not descriptive enough");
     // console.log(bandName)
-
-    // Return result
-
-    if (!prompt) {
-      setErrorMessage("No name entered");
-      return;
-    }
 
     setPrompt("");
   };
@@ -133,7 +128,7 @@ const Home = () => {
             name="prompt"
             onChange={handleInputChange}
             type="prompt"
-            placeholder="prompt"
+            placeholder="Prompt (genre, style, etc.)"
           />
           <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>
             Generate Name!

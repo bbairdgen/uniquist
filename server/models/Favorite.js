@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 
 const favoriteSchema = new Schema({
-  bandname: {
+  text: {
     type: String,
     required: true
   }

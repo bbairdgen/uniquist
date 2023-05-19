@@ -16,6 +16,7 @@ const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
+    password: String!
     dateJoined: String!
     favorites: [Favorite]
     friends: [User]
@@ -31,7 +32,7 @@ const typeDefs = gql`
 
   type Favorite {
     _id: ID!
-    bandname: String!
+    text: String!
   }
 
   type Auth {
@@ -50,18 +51,20 @@ const typeDefs = gql`
     _id: ID!
   }
 
+  input BandInput {
+    _id: ID!
+  }
+
   input StringInput {
-    string: String!
+    text: String!
   }
 
   type Mutation {
     createUser(username: String!, password: String!): User
-    updateUser(username: String, password: String, friends: [UserInput]): User
+    updateUser(_id: ID!, username: String, password: String, favorites: [StringInput], friends: [UserInput], bands: [BandInput]): User
     login(username: String!, password: String!): Auth
-    createBand(bandname: String!, members: [UserInput], stream_links: [StringInput]): Band
-    updateBand(bandname: String, members: [UserInput], stream_links: [StringInput]): Band
-    addFavorite(bandname: String!): User
-    removeFavorite(bandname: String!): User
+    createBand(bandname: String!, members: [UserInput], stream_links: [String]): Band
+    updateBand(_id: ID!, bandname: String, members: [UserInput], stream_links: [StringInput]): Band
   }
 `;
 

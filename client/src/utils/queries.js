@@ -17,7 +17,7 @@ export const QUERY_ALL_USERS = gql`
       dateJoined
       favorites {
         _id
-        bandname
+        text
       }
       friends {
         _id

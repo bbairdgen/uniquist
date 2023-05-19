@@ -3,9 +3,9 @@
         "username": "John",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Appalachious 7" },
-            { "bandname": "A Flat Miner" },
-            { "bandname": "Minion Territory" }
+            { "text": "Appalachious 7" },
+            { "text": "A Flat Miner" },
+            { "text": "Minion Territory" }
         ],
         "friends": [],
         "bands": []
@@ -14,9 +14,9 @@
         "username": "Emily",
         "password": "12341234",
         "favorites": [
-            { "bandname": "The Farm" },
-            { "bandname": "Blessings from Bookcases" },
-            { "bandname": "Stance" }
+            { "text": "The Farm" },
+            { "text": "Blessings from Bookcases" },
+            { "text": "Stance" }
         ],
         "friends": [],
         "bands": []
@@ -25,9 +25,9 @@
         "username": "Frida",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Ros3s" },
-            { "bandname": "What Patricia Lacks" },
-            { "bandname": "Desiree" }
+            { "text": "Ros3s" },
+            { "text": "What Patricia Lacks" },
+            { "text": "Desiree" }
         ],
         "friends": [],
         "bands": []
@@ -36,9 +36,9 @@
         "username": "Zhang",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Secret Demise" },
-            { "bandname": "Dragon City" },
-            { "bandname": "Justice P." }
+            { "text": "Secret Demise" },
+            { "text": "Dragon City" },
+            { "text": "Justice P." }
         ],
         "friends": [],
         "bands": []
@@ -47,9 +47,9 @@
         "username": "Ophelia",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Holy Water" },
-            { "bandname": "Friendly Neighborhood Idiot" },
-            { "bandname": "Lesser" }
+            { "text": "Holy Water" },
+            { "text": "Friendly Neighborhood Idiot" },
+            { "text": "Lesser" }
         ],
         "friends": [],
         "bands": []
@@ -58,9 +58,9 @@
         "username": "Eric",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Be This A Warning" },
-            { "bandname": "Fullshatter" },
-            { "bandname": "Jupiter's Wedding Day" }
+            { "text": "Be This A Warning" },
+            { "text": "Fullshatter" },
+            { "text": "Jupiter's Wedding Day" }
         ],
         "friends": [],
         "bands": []
@@ -69,9 +69,9 @@
         "username": "Harold",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Open-Casket Burger" },
-            { "bandname": "Crease" },
-            { "bandname": "Fortune 700" }
+            { "text": "Open-Casket Burger" },
+            { "text": "Crease" },
+            { "text": "Fortune 700" }
         ],
         "friends": [],
         "bands": []
@@ -80,9 +80,9 @@
         "username": "Bingdinger",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Cursed Shadow" },
-            { "bandname": "Follower Count" },
-            { "bandname": "One And Done" }
+            { "text": "Cursed Shadow" },
+            { "text": "Follower Count" },
+            { "text": "One And Done" }
         ],
         "friends": [],
         "bands": []
@@ -91,9 +91,9 @@
         "username": "Alex",
         "password": "12341234",
         "favorites": [
-            { "bandname": "The Carpet Cleaners" },
-            { "bandname": "Heavy Eyes" },
-            { "bandname": "Terser" }
+            { "text": "The Carpet Cleaners" },
+            { "text": "Heavy Eyes" },
+            { "text": "Terser" }
         ],
         "friends": [],
         "bands": []
@@ -102,9 +102,9 @@
         "username": "Priscilla",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Surprise Beach Ball" },
-            { "bandname": "Conversationalist" },
-            { "bandname": "Pizza Earrings" }
+            { "text": "Surprise Beach Ball" },
+            { "text": "Conversationalist" },
+            { "text": "Pizza Earrings" }
         ],
         "friends": [],
         "bands": []
@@ -113,9 +113,9 @@
         "username": "Jelli",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Still Tired" },
-            { "bandname": "The Epoch" },
-            { "bandname": "History Repeated" }
+            { "text": "Still Tired" },
+            { "text": "The Epoch" },
+            { "text": "History Repeated" }
         ],
         "friends": [],
         "bands": []
@@ -124,9 +124,9 @@
         "username": "Hope",
         "password": "12341234",
         "favorites": [
-            { "bandname": "Shingles" },
-            { "bandname": "Lighter Day" },
-            { "bandname": "Awful Name For A Band" }
+            { "text": "Shingles" },
+            { "text": "Lighter Day" },
+            { "text": "Awful Name For A Band" }
         ],
         "friends": [],
         "bands": []

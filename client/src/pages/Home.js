@@ -61,7 +61,7 @@ const Home = () => {
 
     // Make API calls with words in array
 
-    const bandNameArray = []
+    let bandNameArray = []
 
     for (let i = 0; i < promptArray.length; i++) {
       const word = promptArray[i].toLowerCase();
@@ -82,22 +82,33 @@ const Home = () => {
         const response = await fetch(url, options);
         const result = await response.text();
         // console.log(response);
-        console.log(result);
+        // console.log(result);
 
-        // const synCount = response.synonyms.length;
-        // bandNameArray.append(result.synonyms[Math.random() * synCount]);
+        const currentWordArray = JSON.parse(result)
 
-        // console.log(bandNameArray)
+        if (currentWordArray.synonyms) {
+          const currentWord = currentWordArray.synonyms[Math.floor(Math.random() * currentWordArray.synonyms.length)]
+          bandNameArray.push(currentWord)
+        } else if (currentWordArray.hypernyms) {
+          const currentWord = currentWordArray.hypernyms[Math.floor(Math.random() * currentWordArray.hypernyms.length)]
+          bandNameArray.push(currentWord)
+        } else if (currentWordArray.hyponyms) {
+          const currentWord = currentWordArray.hyponyms[Math.floor(Math.random() * currentWordArray.hyponyms.length)]
+          bandNameArray.push(currentWord)
+        }
+
+
+        // Append random words to bandNameArray
+
       } catch (error) {
         console.error(error);
       }
 
-      // Randomly select 1-3 words
-      const bandName = bandNameArray[Math.random() * bandNameArray.length]
+      // Randomly select 1-3 words, return them
 
-      // console.log(bandName)
     }
-
+    const bandName = bandNameArray[Math.floor(Math.random() * bandNameArray.length)]
+    console.log(bandName)
 
     // Return result
 

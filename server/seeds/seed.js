@@ -13,8 +13,8 @@ connection.once('open', async () => {
   await Band.deleteMany({});
 
   // bulk creation from JSON data files
-  const users = await User.insertMany(userData);
-  const bands = await Band.insertMany(bandData);
+  const users = await User.create(userData);
+  const bands = await Band.create(bandData);
 
   for (let newUser of users) {
     // give user three random friends, cannot be themselves

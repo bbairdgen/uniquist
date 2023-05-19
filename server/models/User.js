@@ -10,8 +10,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minLength: 8,
-    maxLength: 30
+    minLength: 8
   },
   dateJoined: {
     type: Date,
@@ -33,8 +32,10 @@ const userSchema = new Schema({
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
+    // VSCode says await "has no effect" here, but it definitely does.
+    // Without this await, passwords do not get hashed.
     this.password = await bcrypt.hash(this.password, saltRounds);
-    console.log("this is here", this.password);
+    // console.log("this is here", this.password); // debug
   }
 
   return next();

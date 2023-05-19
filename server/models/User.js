@@ -30,13 +30,14 @@ const userSchema = new Schema({
 });
 
 // hash user password on user creation
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
-    this.password = bcrypt.hash(this.password, saltRounds);
+    this.password = await bcrypt.hash(this.password, saltRounds);
+    console.log("this is here", this.password);
   }
 
-  next();
+  return next();
 });
 
 // a method to verify an entered password

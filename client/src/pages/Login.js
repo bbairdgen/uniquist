@@ -12,7 +12,7 @@ const Login = (props) => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
+        // console.log(name, value);
         setFormState({
             ...formState,
             [name]: value,
@@ -21,14 +21,17 @@ const Login = (props) => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault(); 
-        // console.log(formState);
+        console.log(formState);
         try {
+            console.log("Goodbye");
             const { data } = await login({
                 variables: { ...formState}
             });
-
+            console.log(formState);
+            console.log(data, "Hello");
             Auth.login(data.login.token)
         } catch (err) {
+           
             console.error(err);
         }
 
@@ -44,7 +47,8 @@ const Login = (props) => {
                 <h3>Login</h3>
                 <div className='card-body'>
                     {data ? (
-                        <Link to="User"/>
+                        // <Link to="User"/>
+                        <p>Success!</p>
                     ): (
                         <form onSubmit={handleFormSubmit}>
                             <input
@@ -52,7 +56,7 @@ const Login = (props) => {
                             placeholder="Username:"
                             name="username"
                             type="username"
-                            value={formState.email}
+                            value={formState.username}
                             onChange={handleChange}
                             />
                             <input
@@ -65,7 +69,7 @@ const Login = (props) => {
                             />
                             <button
                               className="btn"
-                              style={{ cursor: 'pointer'}}
+                              style={{ cursor: 'pointer'}}
                               type="submit"
                               >
                             Submit

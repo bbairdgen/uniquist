@@ -50,7 +50,7 @@ const resolvers = {
         throw new AuthenticationError('Incorrect username');
       }
       const correctPw = await user.isCorrectPassword(password);
-console.log(correctPw);
+      // console.log(`---\n${password} (entered)\n${user.password} (correct)\ncorrectPw is ${correctPw}\n---`);
       if (!correctPw) {
         throw new AuthenticationError('Incorrect password');
       }
@@ -78,7 +78,6 @@ console.log(correctPw);
       }
 
       const token = signToken(user);
-      console.log(token);
       return { token, user };
     },
 

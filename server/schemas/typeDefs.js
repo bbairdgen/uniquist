@@ -1,11 +1,22 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
+
+//to add under User:
+// dateJoined: Date!
+// favorites: [Favorite]
+
+//to add under mutation:
+// createUser(username: String!, email: String!, password: String!): Auth
+// login(username: String!, password: String!): Auth
+
+//removed members from  createBand(bandname: String!, members: [Input]): Band
+
+//removed members from  updateBand(bandname: String, members: [User]): Band
 
 const typeDefs = gql`
   type User {
     _id: ID!
     username: String!
-    email: String!
-    dateJoined: Date!
+    dateJoined: String!
     favorites: [Favorite]
     friends: [User]
     bands: [Band]
@@ -18,6 +29,16 @@ const typeDefs = gql`
     stream_links: [String]
   }
 
+  type Favorite {
+    _id: ID!
+    bandname: String!
+  }
+
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Query {
     users: [User]
     user(_id: ID!): User
@@ -25,14 +46,22 @@ const typeDefs = gql`
     band(_id: ID!): Band
   }
 
+  input UserInput {
+    _id: ID!
+  }
+
+  input StringInput {
+    string: String!
+  }
+
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): Auth
-    updateUser(email: String, password: String): User
+    createUser(username: String!, password: String!): User
+    updateUser(username: String, password: String, friends: [UserInput]): User
     login(username: String!, password: String!): Auth
-    createBand(bandname: String!, members: [User]): Band
-    updateBand(bandname: String, members: [User]): Band
+    createBand(bandname: String!, members: [UserInput], stream_links: [StringInput]): Band
+    updateBand(bandname: String, members: [UserInput], stream_links: [StringInput]): Band
     addFavorite(bandname: String!): User
-    removeFavorite(bandname: String): User
+    removeFavorite(bandname: String!): User
   }
 `;
 

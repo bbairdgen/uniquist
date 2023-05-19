@@ -3,8 +3,11 @@ const { Schema, model } = require('mongoose');
 const bandSchema = new Schema({
     bandname: {
         type: String,
-        required: true,
-        unqiue: true
+        unique: true,
+        required: true
+    },
+    genre: {
+        type: String
     },
     members: [{
         type: Schema.Types.ObjectId,

@@ -1,37 +1,7 @@
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { QUERY_MATCHUPS } from "../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_ALL_USERS } from "../utils/queries";
 import React, { useState } from "react";
-
-// const styles = {
-//   mainDivStyles: {
-//     margin: "2% 8%",
-//     padding: '20px 30px',
-//     backgroundColor: '#A569BD',
-//     color: 'white',
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center'
-//   },
-//   formStyles: {
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//     width: '300px'
-//   },
-//   inputStyles: {
-//     margin: '10px 0px',
-//     border: 'none',
-//     padding: '8px 8px',
-//     borderRadius: '5px',
-//     width: '80%'
-//   },
-//   imageStyle: {
-//     width: '300px',
-//     margin: '10px 0px',
-//     border: '6px solid #A569BD'
-//   }
-// };
 
 const Home = () => {
   const [prompt, setPrompt] = useState("");

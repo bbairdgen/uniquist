@@ -1,22 +1,134 @@
 [
     {
-        "usernname": "john24",
-        "email": "john24@gmail.com",
-        "password": "12341234"
+        "username": "John",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Appalachious 7" },
+            { "bandname": "A Flat Miner" },
+            { "bandname": "Minion Territory" }
+        ],
+        "friends": [],
+        "bands": []
     },
     {
-        "usernname": "emily24",
-        "email": "emily24@gmail.com",
-        "password": "12341234"
+        "username": "Emily",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "The Farm" },
+            { "bandname": "Blessings from Bookcases" },
+            { "bandname": "Stance" }
+        ],
+        "friends": [],
+        "bands": []
     },
     {
-        "usernname": "frida24",
-        "email": "frida24@gmail.com",
-        "password": "12341234"
+        "username": "Frida",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Ros3s" },
+            { "bandname": "What Patricia Lacks" },
+            { "bandname": "Desiree" }
+        ],
+        "friends": [],
+        "bands": []
     },
     {
-        "usernname": "baba24",
-        "email": "baba24@gmail.com",
-        "password": "12341234"
+        "username": "Zhang",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Secret Demise" },
+            { "bandname": "Dragon City" },
+            { "bandname": "Justice P." }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Ophelia",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Holy Water" },
+            { "bandname": "Friendly Neighborhood Idiot" },
+            { "bandname": "Lesser" }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Eric",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Be This A Warning" },
+            { "bandname": "Fullshatter" },
+            { "bandname": "Jupiter's Wedding Day" }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Harold",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Open-Casket Burger" },
+            { "bandname": "Crease" },
+            { "bandname": "Fortune 700" }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Bingdinger",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Cursed Shadow" },
+            { "bandname": "Follower Count" },
+            { "bandname": "One And Done" }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Alex",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "The Carpet Cleaners" },
+            { "bandname": "Heavy Eyes" },
+            { "bandname": "Terser" }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Priscilla",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Surprise Beach Ball" },
+            { "bandname": "Conversationalist" },
+            { "bandname": "Pizza Earrings" }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Jelli",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Still Tired" },
+            { "bandname": "The Epoch" },
+            { "bandname": "History Repeated" }
+        ],
+        "friends": [],
+        "bands": []
+    },
+    {
+        "username": "Hope",
+        "password": "12341234",
+        "favorites": [
+            { "bandname": "Shingles" },
+            { "bandname": "Lighter Day" },
+            { "bandname": "Awful Name For A Band" }
+        ],
+        "friends": [],
+        "bands": []
     }
 ]

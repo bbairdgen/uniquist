@@ -1,0 +1,15 @@
+.nav-list {
+    list-style-type: none;
+}
+
+.nav-item {
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: #b4b1bc 0px 5px 10px, #b4b1bc 0px -5px 10px ;
+}
+
+.nav-item:hover {
+    text-shadow: var(--link-shadow);
+    font-weight: bold;
+    animation-name: wackyShadow;
+    animation-duration: 1s;
+}

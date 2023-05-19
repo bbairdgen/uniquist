@@ -1,14 +1,29 @@
 [
     {
         "bandname": "The Hunky Spelunkers",
+        "genre": "Heavy Metal",
         "stream_links": [
-            "https://www.spotify.com"
-        ]
+            "https://www.spotify.com",
+            "https://www.music.apple.com"
+        ],
+        "members": []
     },
     {
         "bandname": "The Open Heart Surgeons",
+        "genre": "Psychedelic Pop",
         "stream_links": [
-            "https://www.spotify.com"
-        ]
+            "https://www.bandcamp.com",
+            "https://www.soundcloud.com"
+        ],
+        "members": []
+    },
+    {
+        "bandname": "900 Dragons",
+        "genre": "Emo Rock",
+        "stream_links": [
+            "https://www.youtube.com",
+            "https://www.itunes.com"
+        ],
+        "members": []
     }
 ]

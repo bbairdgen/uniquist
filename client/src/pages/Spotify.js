@@ -1,6 +1,7 @@
 import { Await } from "react-router-dom";
 import "../css/spotify.css";
 import { useState, useEffect } from "react";
+import SpotArtist from "../components/SpotArtist";
 
 const CLIENT_ID = "009b187e349649059f1e99553e63cc23";
 const CLIENT_SECRET = "37d17a81bf0548a287403f1e9d3c8036";
@@ -9,8 +10,10 @@ function Spotify() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [returnedArtists, setReturnedArtists] = useState([]);
+  const [artistResults, setArtistResults] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artistName, setArtistName] = useState("");
+  const [artistID, setArtistID] = useState("");
 
   async function addToFavorites() {
     const faveName = searchInput;
@@ -46,7 +49,7 @@ function Spotify() {
         Authorization: "Bearer " + accessToken,
       },
     };
-    var artistID = await fetch(
+    var artistFetch = await fetch(
       "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
       searchParameters
     )
@@ -68,19 +71,35 @@ function Spotify() {
 
         collectNames();
 
-        console.log("returned artists");
-        console.log(returnedArtists);
+        setArtistResults(data.artists.items);
+        console.log("artist results");
+        console.log(artistResults);
+        // return data.artists.items;
 
         setArtistName(data.artists.items[0].name);
         console.log(artistName);
 
+        // setArtistID(data.artists.items[0].id);
+
         return data.artists.items[0].id;
       });
-    console.log("artist ID is " + artistID);
 
-    var returnedAlbums = await fetch(
+    // Get request with Artist ID grab all the albums from that artist
+
+    //Display those albums to the user
+  }
+
+  const returnedAlbums = async function (aId) {
+    var searchParameters = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    };
+    await fetch(
       "https://api.spotify.com/v1/artists/" +
-        artistID +
+        aId +
         "/albums" +
         "?include_groups=album,single&market=US&limit=50",
       searchParameters
@@ -91,11 +110,7 @@ function Spotify() {
         console.log(data.items);
         setAlbums(data.items);
       });
-
-    // Get request with Artist ID grab all the albums from that artist
-
-    //Display those albums to the user
-  }
+  };
 
   return (
     <div className="spotify-comp">
@@ -105,11 +120,6 @@ function Spotify() {
             <input
               placeholder="Search for Artist"
               type="text"
-              handleKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  search();
-                }
-              }}
               onChange={(event) => setSearchInput(event.target.value)}
             />
           </form>
@@ -128,13 +138,25 @@ function Spotify() {
         <h3>Closest match on Spotify:</h3>
         <h3>top 20 matches from spotify</h3>
         <section className="artists-section">
-          <ul>
-            {returnedArtists.map((arteest, i) => {
-              return <li>{arteest}</li>;
-            })}
-          </ul>
+          {artistResults.map((spotArtist, i) => {
+            return (
+              <SpotArtist
+                key={spotArtist.id}
+                id={spotArtist.id}
+                name={spotArtist.name}
+                externalUrl={spotArtist.external_urls.spotify}
+                genres={spotArtist.genres}
+              ></SpotArtist>
+            );
+          })}
         </section>
         <h2>{artistName}</h2>
+        {/* <button
+          className="albsearch-button"
+          onClick={returnedAlbums("79es50rjZ8DktsXcyeT592")}
+        >
+          see albums
+        </button> */}
         <section className="album-section">
           {albums.map((album, i) => {
             return (

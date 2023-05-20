@@ -1,3 +1,4 @@
+import { Await } from "react-router-dom";
 import "../css/spotify.css";
 import { useState, useEffect } from "react";
 
@@ -7,6 +8,7 @@ const CLIENT_SECRET = "37d17a81bf0548a287403f1e9d3c8036";
 function Spotify() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
+  const [returnedArtists, setReturnedArtists] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artistName, setArtistName] = useState("");
 
@@ -51,7 +53,24 @@ function Spotify() {
       .then((response) => response.json())
       .then((data) => {
         console.log("artist data");
-        console.log(data);
+        console.log(data.artists);
+
+        function collectNames() {
+          var theNames = [];
+          for (let i = 0; i < data.artists.items.length; i++) {
+            const nm = data.artists.items[i].name;
+            theNames.push(nm);
+          }
+          console.log(theNames);
+          setReturnedArtists(theNames);
+          return theNames;
+        }
+
+        collectNames();
+
+        console.log("returned artists");
+        console.log(returnedArtists);
+
         setArtistName(data.artists.items[0].name);
         console.log(artistName);
 
@@ -68,7 +87,8 @@ function Spotify() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log("albums data dot items");
+        console.log(data.items);
         setAlbums(data.items);
       });
 
@@ -79,15 +99,14 @@ function Spotify() {
 
   return (
     <div className="spotify-comp">
-      <container>
+      <div>
         <input-group>
           <form className="search-form">
             <input
               placeholder="Search for Artist"
               type="text"
-              onKeyPress={(event) => {
-                if (event.key == "Enter") {
-                  console.log("pressed enter");
+              handleKeyDown={(event) => {
+                if (event.key === "Enter") {
                   search();
                 }
               }}
@@ -98,15 +117,23 @@ function Spotify() {
             Search
           </button>
         </input-group>
-      </container>
+      </div>
       <div>
         <h3>{searchInput}</h3>
         <button className="favorite-button" onClick={addToFavorites}>
           add to favorites
         </button>
       </div>
-      <container className="spotify-data">
+      <div className="spotify-data">
         <h3>Closest match on Spotify:</h3>
+        <h3>top 20 matches from spotify</h3>
+        <section className="artists-section">
+          <ul>
+            {returnedArtists.map((arteest, i) => {
+              return <li>{arteest}</li>;
+            })}
+          </ul>
+        </section>
         <h2>{artistName}</h2>
         <section className="album-section">
           {albums.map((album, i) => {
@@ -124,7 +151,7 @@ function Spotify() {
             );
           })}
         </section>
-      </container>
+      </div>
     </div>
   );
 }

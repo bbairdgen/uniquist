@@ -35,8 +35,8 @@ const SignUp = () => {
       console.log(formState);
       console.error(err);
     }
+    
   };
-
   return (
     <main>
       <div className="card">

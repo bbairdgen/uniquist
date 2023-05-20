@@ -44,7 +44,7 @@ const Login = (props) => {
     return(
         <main>
             <div className="card">
-                <h3>Login</h3>
+                <h3>Login Page</h3>
                 <div className='card-body'>
                     {data ? (
                         // <Link to="User"/>

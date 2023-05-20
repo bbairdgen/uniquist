@@ -71,7 +71,7 @@ const resolvers = {
 
     // USER ROUTES
 
-    createUserAndLogIn: async (parent, args) => {
+    createUser: async (parent, args) => {
       const user = await User.create(args);
       if (!user) {
         throw new Error('Failed to create user');

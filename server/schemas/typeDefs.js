@@ -18,7 +18,7 @@ const typeDefs = gql`
     username: String!
     password: String!
     dateJoined: String!
-    favorites: [Favorite]
+    favorites: [String]
     friends: [User]
     bands: [Band]
   }
@@ -28,11 +28,6 @@ const typeDefs = gql`
     bandname: String!
     members: [User]
     stream_links: [String]
-  }
-
-  type Favorite {
-    _id: ID!
-    text: String!
   }
 
   type Auth {
@@ -61,8 +56,8 @@ const typeDefs = gql`
       updatePassword(userID: ID!, oldPassword: String!, newPassword: String!): User
       addFriend(userID: ID!, friendID: ID!): User
       removeFriend(userID: ID!, friendID: ID!): User
-      addFavorite(userID: ID!, text: String!): User
-      removeFavorite(userID: ID!, favoriteID: ID!): User
+      addFavorite(userID: ID!, favorite: String!): User
+      removeFavorite(userID: ID!, favorite: String!): User
       addBandToUser(userID: ID!, bandID: ID!): User
       removeBandFromUser(userID: ID!, bandID: ID!): User
 

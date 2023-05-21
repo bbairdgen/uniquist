@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Band, favoriteSchema } = require('../models');
+const { User, Band } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -150,13 +150,13 @@ const resolvers = {
       } else return user;
     },
 
-    addFavorite: async (parent, { text }, context) => {
+    addFavorite: async (parent, { favorite }, context) => {
       if (!context.user) {
         throw new AuthenticationError('Authentication required');
       }
       const user = await User.findOneAndUpdate(
         { _id: context.user_id },
-        { $addToSet: { favorites: text } },
+        { $addToSet: { favorites: favorite } },
         { new: true }
       );
       if (!user) {
@@ -164,19 +164,14 @@ const resolvers = {
       } else return user;
     },
 
-    removeFavorite: async (parent, { favoriteID }, context) => {
+    removeFavorite: async (parent, { favorite }, context) => {
       if (!context.user) {
         throw new AuthenticationError('Authentication required');
       }
 
-      const favoriteExists = await User.exists({ _id: favoriteID });
-      if (!favoriteExists) {
-        throw new Error('User has no favorites with that ID');
-      }
-
       const user = await User.findOneAndUpdate(
         { _id: context.user_id },
-        { $pull: { favorites: favoriteID } },
+        { $pull: { favorites: favorite } },
         { new: true }
       );
       if (!user) {

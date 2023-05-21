@@ -35,7 +35,6 @@ const typeDefs = gql`
     user: User
   }
 
-
   type Query {
     users: [User]
     user(_id: ID!): User
@@ -51,7 +50,7 @@ const typeDefs = gql`
       logout(userID: ID!): Auth
 
     # USER ROUTES
-      createUserAndLogIn(username: String!, password: String!): Auth
+      createUser(username: String!, password: String!): Auth
       updateUsername(userID: ID!, username: String!): User
       updatePassword(userID: ID!, oldPassword: String!, newPassword: String!): User
       addFriend(userID: ID!, friendID: ID!): User

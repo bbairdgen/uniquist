@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Home from "./pages/Home";
+import AddFavorite from "./components/AddFavorite";
 
 // import Matchup from "./pages/Matchup";
 // import Vote from "./pages/Vote";
@@ -23,6 +24,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
+      <AddFavorite />
+
       {/* <Navbar /> */}
       <Router>
         <Navbar />

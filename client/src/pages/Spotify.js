@@ -2,6 +2,8 @@ import { Await } from "react-router-dom";
 import "../css/spotify.css";
 import { useState, useEffect } from "react";
 import SpotArtist from "../components/SpotArtist";
+import { useQuery, useMutation } from "@apollo/client";
+import { ADD_FAVORITE } from "../utils/mutations";
 
 const CLIENT_ID = "009b187e349649059f1e99553e63cc23";
 const CLIENT_SECRET = "37d17a81bf0548a287403f1e9d3c8036";
@@ -14,11 +16,6 @@ function Spotify() {
   const [albums, setAlbums] = useState([]);
   const [artistName, setArtistName] = useState("");
   const [artistID, setArtistID] = useState("");
-
-  async function addToFavorites() {
-    const faveName = searchInput;
-    console.log("you added " + faveName + " to your favorite band names");
-  }
 
   useEffect(() => {
     var authParameters = {
@@ -130,9 +127,6 @@ function Spotify() {
       </div>
       <div>
         <h3>{searchInput}</h3>
-        <button className="favorite-button" onClick={addToFavorites}>
-          add to favorites
-        </button>
       </div>
       <div className="spotify-data">
         <h3>Closest match on Spotify:</h3>

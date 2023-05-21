@@ -37,7 +37,6 @@ export const CREATE_USER = gql`
   }
 `;
 
-
 // NOAH'S NOTE 5/19 4:42PM: I'm still not sure I understand the syntax
 // of mutations, so I'm putting these here because I think they should
 // work, but there's no way to test them on the frontend yet, so I wasn't
@@ -57,8 +56,16 @@ export const UPDATE_USERNAME = gql`
 `;
 
 export const UPDATE_PASSWORD = gql`
-  mutation UpdatePassword($userId: ID!, $oldPassword: String!, $newPassword: String!) {
-    updatePassword(userID: $userId, oldPassword: $oldPassword, newPassword: $newPassword) {
+  mutation UpdatePassword(
+    $userId: ID!
+    $oldPassword: String!
+    $newPassword: String!
+  ) {
+    updatePassword(
+      userID: $userId
+      oldPassword: $oldPassword
+      newPassword: $newPassword
+    ) {
       _id
       password
     }
@@ -96,10 +103,7 @@ export const ADD_FAVORITE = gql`
     addFavorite(userID: $userId, text: $text) {
       _id
       username
-      favorites {
-        _id
-        text
-      }
+      favorites
     }
   }
 `;
@@ -109,10 +113,7 @@ export const REMOVE_FAVORITE = gql`
     removeFavorite(userID: $userId, favoriteID: $favoriteId) {
       _id
       username
-      favorites {
-        _id
-        text
-      }
+      favorites
     }
   }
 `;
@@ -146,13 +147,19 @@ export const REMOVE_BAND_FROM_USER = gql`
   }
 `;
 
-
-
 // BAND ROUTES
 
 export const CREATE_BAND = gql`
-  mutation CreateBand($bandname: String!, $members: [ID], $streamLinks: [String]) {
-    createBand(bandname: $bandname, members: $members, stream_links: $streamLinks) {
+  mutation CreateBand(
+    $bandname: String!
+    $members: [ID]
+    $streamLinks: [String]
+  ) {
+    createBand(
+      bandname: $bandname
+      members: $members
+      stream_links: $streamLinks
+    ) {
       _id
       bandname
       members {
@@ -206,7 +213,7 @@ export const REMOVE_BAND_MEMBER = gql`
   }
 `;
 
-export const ADD_STREAM_LINK = gql `
+export const ADD_STREAM_LINK = gql`
   mutation AddStreamLink($bandId: ID!, $streamLink: String!) {
     addStreamLink(bandID: $bandId, streamLink: $streamLink) {
       _id

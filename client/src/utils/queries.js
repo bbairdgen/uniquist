@@ -6,10 +6,7 @@ export const QUERY_ALL_USERS = gql`
       _id
       username
       dateJoined
-      favorites {
-        _id
-        text
-      }
+      favorites
       friends {
         _id
         username
@@ -17,6 +14,10 @@ export const QUERY_ALL_USERS = gql`
       bands {
         _id
         bandname
+        members {
+          _id
+          username
+        }
       }
     }
   }
@@ -27,18 +28,19 @@ export const QUERY_ONE_USER = gql`
     user(_id: $id) {
       _id
       username
-      bands {
-        _id
-        bandname
-      }
       dateJoined
-      favorites {
-        _id
-        text
-      }
+      favorites
       friends {
         _id
         username
+      }
+      bands {
+        _id
+        bandname
+        members {
+          _id
+          username
+        }
       }
     }
   }
@@ -63,11 +65,11 @@ export const QUERY_ONE_BAND = gql`
     band(_id: $id) {
       _id
       bandname
+      stream_links
       members {
         _id
         username
       }
-      stream_links
     }
   }
 `;

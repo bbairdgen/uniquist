@@ -5,7 +5,7 @@ import "../css/navbar.css";
 
 function Navbar() {
   let navigate = useNavigate();
-  //to do: setContent(About) for default
+
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -28,32 +28,26 @@ function Navbar() {
             See Users
           </p>
         </li>
-        {Auth.loggedIn() ? (
-          <>
-            <li>
-              <p>{Auth.getProfile().data.username}</p>
-            </li>
-            <li>
-              <p className="nav-item" onClick={logout}>
-                Log Out
-              </p>
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
-              <p className="nav-item" onClick={() => navigate("/signup")}>
-                Sign Up
-              </p>
-            </li>
-            <li>
-              <p className="nav-item" onClick={() => navigate("/login")}>
-                Log in
-              </p>
-            </li>
-          </>
-        )}
       </ul>
+      {Auth.loggedIn() ? (
+        <>
+          <p className="nav-item">Hello {Auth.getProfile().data.username}</p>
+
+          <p className="nav-item" onClick={logout}>
+            Log Out
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="nav-item" onClick={() => navigate("/signup")}>
+            Sign Up
+          </p>
+
+          <p className="nav-item" onClick={() => navigate("/login")}>
+            Log in
+          </p>
+        </>
+      )}
     </div>
   );
 }

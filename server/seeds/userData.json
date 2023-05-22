@@ -3,9 +3,9 @@
         "username": "John",
         "password": "12341234",
         "favorites": [
-             "Appalachious 7",
-             "A Flat Miner",
-             "Minion Territory"
+            "Appalachious 7",
+            "A Flat Miner",
+            "Minion Territory"
         ],
         "friends": [],
         "bands": []
@@ -14,9 +14,9 @@
         "username": "Emily",
         "password": "12341234",
         "favorites": [
-             "The Farm",
-             "Blessings from Bookcases",
-             "Stance"
+            "The Farm",
+            "Blessings from Bookcases",
+            "Stance"
         ],
         "friends": [],
         "bands": []
@@ -25,9 +25,9 @@
         "username": "Frida",
         "password": "12341234",
         "favorites": [
-             "Ros3s",
-             "What Patricia Lacks",
-             "Desiree"
+            "Ros3s",
+            "What Patricia Lacks",
+            "Desiree"
         ],
         "friends": [],
         "bands": []
@@ -36,9 +36,9 @@
         "username": "Zhang",
         "password": "12341234",
         "favorites": [
-             "Secret Demise",
-             "Dragon City",
-             "Justice P."
+            "Secret Demise",
+            "Dragon City",
+            "Justice P."
         ],
         "friends": [],
         "bands": []
@@ -47,9 +47,9 @@
         "username": "Ophelia",
         "password": "12341234",
         "favorites": [
-             "Holy Water",
-             "Friendly Neighborhood Idiot",
-             "Lesser"
+            "Holy Water",
+            "Friendly Neighborhood Idiot",
+            "Lesser"
         ],
         "friends": [],
         "bands": []
@@ -58,9 +58,9 @@
         "username": "Eric",
         "password": "12341234",
         "favorites": [
-             "Be This A Warning",
-             "Fullshatter",
-             "Jupiter's Wedding Day"
+            "Be This A Warning",
+            "Fullshatter",
+            "Jupiter's Wedding Day"
         ],
         "friends": [],
         "bands": []
@@ -69,9 +69,9 @@
         "username": "Harold",
         "password": "12341234",
         "favorites": [
-             "Open-Casket Burger",
-             "Crease",
-             "Fortune 700"
+            "Open-Casket Burger",
+            "Crease",
+            "Fortune 700"
         ],
         "friends": [],
         "bands": []
@@ -80,9 +80,9 @@
         "username": "Bingdinger",
         "password": "12341234",
         "favorites": [
-             "Cursed Shadow",
-             "Follower Count",
-             "One And Done"
+            "Cursed Shadow",
+            "Follower Count",
+            "One And Done"
         ],
         "friends": [],
         "bands": []
@@ -91,9 +91,9 @@
         "username": "Alex",
         "password": "12341234",
         "favorites": [
-             "The Carpet Cleaners",
-             "Heavy Eyes",
-             "Terser"
+            "The Carpet Cleaners",
+            "Heavy Eyes",
+            "Terser"
         ],
         "friends": [],
         "bands": []
@@ -102,9 +102,9 @@
         "username": "Priscilla",
         "password": "12341234",
         "favorites": [
-             "Surprise Beach Ball",
-             "Conversationalist",
-             "Pizza Earrings"
+            "Surprise Beach Ball",
+            "Conversationalist",
+            "Pizza Earrings"
         ],
         "friends": [],
         "bands": []
@@ -113,9 +113,9 @@
         "username": "Jelli",
         "password": "12341234",
         "favorites": [
-             "Still Tired",
-             "The Epoch",
-             "History Repeated"
+            "Still Tired",
+            "The Epoch",
+            "History Repeated"
         ],
         "friends": [],
         "bands": []
@@ -123,7 +123,11 @@
     {
         "username": "Hope",
         "password": "12341234",
-
+        "favorites": [
+            "Shingles",
+            "Lighter Day",
+            "Awful Name For A Band"
+        ],
         "friends": [],
         "bands": []
     }

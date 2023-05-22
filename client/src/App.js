@@ -4,9 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Home from "./pages/Home";
 import AddFavorite from "./components/AddFavorite";
-
-// import Matchup from "./pages/Matchup";
-// import Vote from "./pages/Vote";
 import NotFound from "./pages/NotFound";
 import Spotify from "./pages/Spotify";
 import Header from "./components/Header";
@@ -14,6 +11,7 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
+// import Bandcamp from "./components/Bandcamp";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -25,6 +23,7 @@ function App() {
     <ApolloProvider client={client}>
       <Header />
       <AddFavorite />
+      {/* <Bandcamp /> */}
 
       {/* <Navbar /> */}
       <Router>

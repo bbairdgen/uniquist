@@ -11,7 +11,6 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
-// import Bandcamp from "./components/Bandcamp";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -23,7 +22,6 @@ function App() {
     <ApolloProvider client={client}>
       <Header />
       <AddFavorite />
-      {/* <Bandcamp /> */}
 
       {/* <Navbar /> */}
       <Router>

@@ -17,7 +17,7 @@ const AllUsers = () => {
       <h2>check out all these guys</h2>
       {userList.map((user, i) => {
         return (
-          <div className="user-card">
+          <div className="user-card" key={user._id}>
             <h3>{user.username}</h3>
           </div>
         );

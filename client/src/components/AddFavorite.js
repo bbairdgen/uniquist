@@ -40,7 +40,7 @@ const AddFavorite = () => {
           </div>
         ) : (
           <div>
-            <p>auth error</p>
+            <p>Log in to store band names</p>
           </div>
         )}
       </section>

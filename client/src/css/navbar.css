@@ -2,9 +2,10 @@
     display: flex;
     list-style-type: none;
     flex-wrap: wrap;
-    align-content: center;
-    text-align: center;
+    /* align-content: center; */
+    /* text-align: center; */
     justify-content: center;
+    padding-inline-start: 0px;
 
 
 }

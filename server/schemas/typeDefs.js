@@ -19,7 +19,6 @@ const typeDefs = gql`
     password: String!
     dateJoined: String!
     favorites: [String]
-    favorites: [String]
     friends: [User]
     bands: [Band]
   }
@@ -49,15 +48,19 @@ const typeDefs = gql`
     logout(userID: ID!): Auth
 
     # USER ROUTES
-      createUser(username: String!, password: String!): User
-      updateUsername(userID: ID!, username: String!): User
-      updatePassword(userID: ID!, oldPassword: String!, newPassword: String!): User
-      addFriend(userID: ID!, friendID: ID!): User
-      removeFriend(userID: ID!, friendID: ID!): User
-      addFavorite(userID: ID!, text: String!): User
-      removeFavorite(userID: ID!, text: String!): User
-      addBandToUser(userID: ID!, bandID: ID!): User
-      removeBandFromUser(userID: ID!, bandID: ID!): User
+    createUser(username: String!, password: String!): User
+    updateUsername(userID: ID!, username: String!): User
+    updatePassword(
+      userID: ID!
+      oldPassword: String!
+      newPassword: String!
+    ): User
+    addFriend(userID: ID!, friendID: ID!): User
+    removeFriend(userID: ID!, friendID: ID!): User
+    addFavorite(userID: ID!, text: String!): User
+    removeFavorite(userID: ID!, text: String!): User
+    addBandToUser(userID: ID!, bandID: ID!): User
+    removeBandFromUser(userID: ID!, bandID: ID!): User
 
     # BAND ROUTES
     createBand(bandname: String!, members: [ID], stream_links: [String]): Band

@@ -58,6 +58,8 @@ function randomFriends(arr, num, excludeID) {
   }
 
   // check for duplicate friends in the array
+  // FIXME: This isn't done. In the app's current state, this seed script
+  // has a chance of adding duplicate friends to a user. Not urgent.
   const containsDuplicates = friendsArray.some((element, index) => {
     return friendsArray.indexOf(element) !== index;
   });

@@ -1,5 +1,9 @@
+import { Await } from "react-router-dom";
 import "../css/spotify.css";
 import { useState, useEffect } from "react";
+import SpotArtist from "../components/SpotArtist";
+import { useQuery, useMutation } from "@apollo/client";
+import { ADD_FAVORITE } from "../utils/mutations";
 
 const CLIENT_ID = "009b187e349649059f1e99553e63cc23";
 const CLIENT_SECRET = "37d17a81bf0548a287403f1e9d3c8036";
@@ -7,13 +11,11 @@ const CLIENT_SECRET = "37d17a81bf0548a287403f1e9d3c8036";
 function Spotify() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
+  const [returnedArtists, setReturnedArtists] = useState([]);
+  const [artistResults, setArtistResults] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artistName, setArtistName] = useState("");
-
-  async function addToFavorites() {
-    const faveName = searchInput;
-    console.log("you added " + faveName + " to your favorite band names");
-  }
+  const [artistID, setArtistID] = useState("");
 
   useEffect(() => {
     var authParameters = {
@@ -44,32 +46,39 @@ function Spotify() {
         Authorization: "Bearer " + accessToken,
       },
     };
-    var artistID = await fetch(
+    var artistFetch = await fetch(
       "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
       searchParameters
     )
       .then((response) => response.json())
       .then((data) => {
         console.log("artist data");
-        console.log(data);
+        console.log(data.artists);
+
+        function collectNames() {
+          var theNames = [];
+          for (let i = 0; i < data.artists.items.length; i++) {
+            const nm = data.artists.items[i].name;
+            theNames.push(nm);
+          }
+          console.log(theNames);
+          setReturnedArtists(theNames);
+          return theNames;
+        }
+
+        collectNames();
+
+        setArtistResults(data.artists.items);
+        console.log("artist results");
+        console.log(artistResults);
+        // return data.artists.items;
+
         setArtistName(data.artists.items[0].name);
         console.log(artistName);
 
-        return data.artists.items[0].id;
-      });
-    console.log("artist ID is " + artistID);
+        // setArtistID(data.artists.items[0].id);
 
-    var returnedAlbums = await fetch(
-      "https://api.spotify.com/v1/artists/" +
-        artistID +
-        "/albums" +
-        "?include_groups=album,single&market=US&limit=50",
-      searchParameters
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setAlbums(data.items);
+        return data.artists.items[0].id;
       });
 
     // Get request with Artist ID grab all the albums from that artist
@@ -77,20 +86,37 @@ function Spotify() {
     //Display those albums to the user
   }
 
+  const returnedAlbums = async function (aId) {
+    var searchParameters = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    };
+    await fetch(
+      "https://api.spotify.com/v1/artists/" +
+        aId +
+        "/albums" +
+        "?include_groups=album,single&market=US&limit=50",
+      searchParameters
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("albums data dot items");
+        console.log(data.items);
+        setAlbums(data.items);
+      });
+  };
+
   return (
     <div className="spotify-comp">
-      <container>
+      <div>
         <input-group>
           <form className="search-form">
             <input
               placeholder="Search for Artist"
               type="text"
-              onKeyPress={(event) => {
-                if (event.key == "Enter") {
-                  console.log("pressed enter");
-                  search();
-                }
-              }}
               onChange={(event) => setSearchInput(event.target.value)}
             />
           </form>
@@ -98,16 +124,33 @@ function Spotify() {
             Search
           </button>
         </input-group>
-      </container>
+      </div>
       <div>
         <h3>{searchInput}</h3>
-        <button className="favorite-button" onClick={addToFavorites}>
-          add to favorites
-        </button>
       </div>
-      <container className="spotify-data">
+      <div className="spotify-data">
         <h3>Closest match on Spotify:</h3>
+        <h3>top 20 matches from spotify</h3>
+        <section className="artists-section">
+          {artistResults.map((spotArtist, i) => {
+            return (
+              <SpotArtist
+                key={spotArtist.id}
+                id={spotArtist.id}
+                name={spotArtist.name}
+                externalUrl={spotArtist.external_urls.spotify}
+                genres={spotArtist.genres}
+              ></SpotArtist>
+            );
+          })}
+        </section>
         <h2>{artistName}</h2>
+        {/* <button
+          className="albsearch-button"
+          onClick={returnedAlbums("79es50rjZ8DktsXcyeT592")}
+        >
+          see albums
+        </button> */}
         <section className="album-section">
           {albums.map((album, i) => {
             return (
@@ -124,7 +167,7 @@ function Spotify() {
             );
           })}
         </section>
-      </container>
+      </div>
     </div>
   );
 }

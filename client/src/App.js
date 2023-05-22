@@ -9,16 +9,16 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// import Matchup from "./pages/Matchup";
-// import Vote from "./pages/Vote";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Spotify from "./pages/Spotify";
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
+
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import AddFavorite from "./components/AddFavorite";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -45,6 +45,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
+      <AddFavorite />
+
       {/* <Navbar /> */}
       <Router>
         <Navbar />

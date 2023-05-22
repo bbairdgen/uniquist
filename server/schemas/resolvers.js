@@ -7,37 +7,34 @@ const resolvers = {
     users: async () => {
       return User.find({})
         .populate({
-          path: 'friends',
-          populate: 'username'
+          path: "friends",
+          populate: "username",
         })
         .populate({
-          path: 'bands',
-          populate: ['bandname', 'members']
+          path: "bands",
+          populate: ["bandname", "members"],
         });
     },
     user: async (parent, { _id }) => {
       const id = _id ? { _id } : {};
       return User.findById(id)
         .populate({
-          path: 'friends',
-          populate: 'username'
+          path: "friends",
+          populate: "username",
         })
         .populate({
-          path: 'bands',
-          populate: ['bandname', 'members']
+          path: "bands",
+          populate: ["bandname", "members"],
         });
     },
     bands: async () => {
-      return Band.find({})
-        .populate('members');
+      return Band.find({}).populate("members");
     },
     band: async (parent, { _id }) => {
       const id = _id ? { _id } : {};
-      return Band.findById(id)
-        .populate('members');
-    }
+      return Band.findById(id).populate("members");
+    },
   },
-
 
   Mutation: {
 
@@ -49,12 +46,12 @@ const resolvers = {
       const user = await User.findOne({ username });
 
       if (!user) {
-        throw new AuthenticationError('Incorrect username');
+        throw new AuthenticationError("Incorrect username");
       }
       const correctPw = await user.isCorrectPassword(password);
       // console.log(`---\n${password} (entered)\n${user.password} (correct)\ncorrectPw is ${correctPw}\n---`);
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect password');
+        throw new AuthenticationError("Incorrect password");
       }
 
       const token = signToken(user);
@@ -71,7 +68,7 @@ const resolvers = {
     createUser: async (parent, args) => {
       const user = await User.create(args);
       if (!user) {
-        throw new Error('Failed to create user');
+        throw new Error("Failed to create user");
       }
 
       const token = signToken(user);
@@ -174,12 +171,12 @@ const resolvers = {
         }
 
         return User.findOneAndUpdate(
-          { _id: context.user._id },
+          { _id: context.user_id },
           { $addToSet: { bands: bandID } },
           { new: true }
         );
       }
-
+      
       throw new AuthenticationError('Authentication required');
     },
 

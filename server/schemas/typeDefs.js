@@ -19,6 +19,7 @@ const typeDefs = gql`
     password: String!
     dateJoined: String!
     favorites: [String]
+    favorites: [String]
     friends: [User]
     bands: [Band]
   }
@@ -42,12 +43,10 @@ const typeDefs = gql`
     band(_id: ID!): Band
   }
 
-
   type Mutation {
-
     # AUTH ROUTES
-      login(username: String!, password: String!): Auth
-      logout(userID: ID!): Auth
+    login(username: String!, password: String!): Auth
+    logout(userID: ID!): Auth
 
     # USER ROUTES
       createUser(username: String!, password: String!): User
@@ -61,12 +60,12 @@ const typeDefs = gql`
       removeBandFromUser(userID: ID!, bandID: ID!): User
 
     # BAND ROUTES
-      createBand(bandname: String!, members: [ID], stream_links: [String]): Band
-      updateBandname(bandID: ID!, bandname: String): Band
-      addBandMember(bandID: ID!, userID: ID!): Band
-      removeBandMember(bandID: ID!, userID: ID!): Band
-      addStreamLink(bandID: ID!, streamLink: String!): Band
-      removeStreamLink(bandID: ID!, streamLink: String!): Band
+    createBand(bandname: String!, members: [ID], stream_links: [String]): Band
+    updateBandname(bandID: ID!, bandname: String): Band
+    addBandMember(bandID: ID!, userID: ID!): Band
+    removeBandMember(bandID: ID!, userID: ID!): Band
+    addStreamLink(bandID: ID!, streamLink: String!): Band
+    removeStreamLink(bandID: ID!, streamLink: String!): Band
   }
 `;
 

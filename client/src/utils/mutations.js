@@ -80,6 +80,7 @@ export const ADD_FAVORITE = gql`
       _id
       username
       favorites
+      favorites
     }
   }
 `;
@@ -89,7 +90,7 @@ export const REMOVE_FAVORITE = gql`
     addFavorite(userID: $userID, text: $text) {
       _id
       username
-      favorites  
+      favorites
     }
   }
 `;
@@ -123,13 +124,19 @@ export const REMOVE_BAND_FROM_USER = gql`
   }
 `;
 
-
-
 // BAND ROUTES
 
 export const CREATE_BAND = gql`
-  mutation CreateBand($bandname: String!, $members: [ID], $streamLinks: [String]) {
-    createBand(bandname: $bandname, members: $members, stream_links: $streamLinks) {
+  mutation CreateBand(
+    $bandname: String!
+    $members: [ID]
+    $streamLinks: [String]
+  ) {
+    createBand(
+      bandname: $bandname
+      members: $members
+      stream_links: $streamLinks
+    ) {
       _id
       bandname
       members {
@@ -183,7 +190,7 @@ export const REMOVE_BAND_MEMBER = gql`
   }
 `;
 
-export const ADD_STREAM_LINK = gql `
+export const ADD_STREAM_LINK = gql`
   mutation AddStreamLink($bandId: ID!, $streamLink: String!) {
     addStreamLink(bandID: $bandId, streamLink: $streamLink) {
       _id

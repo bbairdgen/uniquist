@@ -1,5 +1,5 @@
 import { ADD_FAVORITE } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 import Auth from "../utils/auth";
 
@@ -10,14 +10,11 @@ const AddFavorite = () => {
 
   const handleAdd = async () => {
     try {
-      console.log("variables to pass");
-      console.log("Auth.getProfile().data._id:", Auth.getProfile().data._id);
-      console.log("faveInput:", faveInput);
       await addFavorite({
         variables: {
-          userID: Auth.getProfile().data._id,
-          text: faveInput
-        }
+          userId: Auth.getProfile().data._id,
+          text: faveInput,
+        },
       });
     } catch (err) {
       console.error(err);

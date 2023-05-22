@@ -1,0 +1,9 @@
+.user-info-card {
+    display:flex;
+    flex-direction: row;
+
+}
+
+.user-info-card h4 {
+    margin-right: 15px;
+}

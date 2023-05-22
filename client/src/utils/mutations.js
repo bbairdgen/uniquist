@@ -3,23 +3,12 @@ import { gql } from "@apollo/client";
 // AUTH ROUTES
 
 export const LOGIN_USER = gql`
-  mutation login($username: String!, $password: String!) {
+  mutation Login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
       token
       user {
         _id
         username
-      }
-    }
-  }
-`;
-
-export const LOGOUT_USER = gql`
-  mutation Logout($userID: ID!) {
-    logout(userID: $userID) {
-      token
-      user {
-        _id
       }
     }
   }
@@ -89,7 +78,8 @@ export const ADD_FAVORITE = gql`
   mutation AddFavorite($userID: ID!, $text: String!) {
     addFavorite(userID: $userID, text: $text) {
       _id
-      favorites  
+      username
+      favorites
     }
   }
 `;
@@ -98,6 +88,7 @@ export const REMOVE_FAVORITE = gql`
   mutation RemoveFavorite($userID: ID!, $text: String!) {
     addFavorite(userID: $userID, text: $text) {
       _id
+      username
       favorites  
     }
   }

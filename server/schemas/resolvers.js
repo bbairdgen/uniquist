@@ -41,9 +41,11 @@ const resolvers = {
 
   Mutation: {
 
-    // AUTH ROUTES
+    ///////////////////////////////////////////////////////////////////
+    /////////////////////////// AUTH ROUTES ///////////////////////////
+    ///////////////////////////////////////////////////////////////////
 
-    login: async (parent, { username, password }) => {
+    login: async (parent, { username, password }, context) => {
       const user = await User.findOne({ username });
 
       if (!user) {
@@ -59,17 +61,12 @@ const resolvers = {
       return { token, user };
     },
 
-    logout: async (parent, args, context) => {
-      if (context.user) {
-        try {
-          await context.session.destroy();
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    },
 
-    // USER ROUTES
+
+
+    ///////////////////////////////////////////////////////////////////
+    /////////////////////////// USER ROUTES ///////////////////////////
+    ///////////////////////////////////////////////////////////////////
 
     createUser: async (parent, args) => {
       const user = await User.create(args);
@@ -82,239 +79,227 @@ const resolvers = {
     },
 
     updateUsername: async (parent, { username }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        return User.findByIdAndUpdate(
+          context.user._id,
+          { username },
+          { new: true }
+        );
       }
-      return User.findByIdAndUpdate(
-        context.user_id,
-        { username },
-        { new: true }
-      );
+
+      throw new AuthenticationError('Authentication required');
     },
 
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id });
+        const correctPw = await user.isCorrectPassword(oldPassword);
+        if (!correctPw) {
+          throw new AuthenticationError('Incorrect password');
+        }
+
+        return User.findByIdAndUpdate(
+          context.user._id,
+          { password: newPassword },
+          { new: true }
+        );
       }
 
-      const user = await User.findOne({ _id: context.user_id });
-      const correctPw = await user.isCorrectPassword(oldPassword);
-      if (!correctPw) {
-        throw new AuthenticationError('Incorrect password');
-      }
-
-      return User.findByIdAndUpdate(
-        context.user_id,
-        { password: newPassword },
-        { new: true }
-      );
+      throw new AuthenticationError('Authentication required');
     },
 
     addFriend: async (parent, { friendID }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const friendExists = await User.exists({ _id: friendID });
+        if (!friendExists) {
+          throw new Error('No user found with that friendID');
+        }
+
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { friends: friendID } },
+          { new: true }
+        );
       }
 
-      const friendExists = await User.exists({ _id: friendID });
-      if (!friendExists) {
-        throw new Error('Friend does not exist');
-      }
-
-      const user = await User.findOneAndUpdate(
-        { _id: context.user_id },
-        { $addToSet: { friends: friendID } },
-        { new: true }
-      );
-      if (!user) {
-        throw new Error('No user found with that ID');
-      } else return user;
+      throw new AuthenticationError('Authentication required');
     },
 
     removeFriend: async (parent, { friendID }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const friendExists = await User.exists({ _id: friendID });
+        if (!friendExists) {
+          throw new Error('No user found with that friendID');
+        }
+
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { friends: friendID } },
+          { new: true }
+        );
       }
 
-      const friendExists = await User.exists({ _id: friendID });
-      if (!friendExists) {
-        throw new Error('No user found with that friendID');
-      }
-
-      const user = await User.findOneAndUpdate(
-        { _id: context.user_id },
-        { $pull: { friends: friendID } },
-        { new: true }
-      );
-      if (!user) {
-        throw new Error('No user found with that ID');
-      } else return user;
+      throw new AuthenticationError('Authentication required');
     },
 
-    addFavorite: async (parent, { favorite }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+    addFavorite: async (parent, { text }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { favorites: text } },
+          { new: true }
+        );
       }
-      const user = await User.findOneAndUpdate(
-        { _id: context.user_id },
-        { $addToSet: { favorites: favorite } },
-        { new: true }
-      );
-      if (!user) {
-        throw new Error('No user found with that ID');
-      } else return user;
+
+      throw new AuthenticationError('Authentication required');
     },
 
-    removeFavorite: async (parent, { favorite }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+    removeFavorite: async (parent, { text }, context) => {
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { favorites: text } },
+          { new: true }
+        );
       }
 
-      const user = await User.findOneAndUpdate(
-        { _id: context.user_id },
-        { $pull: { favorites: favorite } },
-        { new: true }
-      );
-      if (!user) {
-        throw new Error('No user found with that ID');
-      } else return user;
+      throw new AuthenticationError('Authentication required');
     },
 
     addBandToUser: async (parent, { bandID }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const bandExists = await Band.exists({ _id: bandID });
+        if (!bandExists) {
+          throw new Error('No band found with that bandID');
+        }
+
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { bands: bandID } },
+          { new: true }
+        );
       }
 
-      const bandExists = await Band.exists({ _id: bandID });
-      if (!bandExists) {
-        throw new Error('No band found with that ID');
-      }
-
-      const user = await User.findOneAndUpdate(
-        { _id: context.user_id },
-        { $addToSet: { bands: bandID } },
-        { new: true }
-      );
-      return user;
+      throw new AuthenticationError('Authentication required');
     },
 
     removeBandFromUser: async (parent, { bandID }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const bandExists = await Band.exists({ _id: bandID });
+        if (!bandExists) {
+          throw new Error('No band found with that bandID');
+        }
+
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { bands: bandID } },
+          { new: true }
+        );
       }
 
-      const bandExists = await Band.exists({ _id: bandID });
-      if (!bandExists) {
-        throw new Error('No band found with that ID');
-      }
-
-      const user = await User.findOneAndUpdate(
-        { _id: context.user_id },
-        { $pull: { bands: bandID } },
-        { new: true }
-      );
-      return user;
+      throw new AuthenticationError('Authentication required');
     },
 
-    // BAND ROUTES
+
+
+
+    ///////////////////////////////////////////////////////////////////
+    /////////////////////////// BAND ROUTES ///////////////////////////
+    ///////////////////////////////////////////////////////////////////
 
     createBand: async (parent, args, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const band = await Band.create(args);
+        if (!band) {
+          throw new Error('Failed to create band');
+        } else return band;
       }
 
-      const band = await Band.create(args);
-      if (!band) {
-        throw new Error('Failed to create band');
-      } else return band;
+      throw new AuthenticationError('Authentication required');
     },
 
     updateBandname: async (parent, { bandID, bandname }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const bandExists = await Band.exists({ _id: bandID });
+        if (!bandExists) {
+          throw new Error('No band found with that bandID');
+        }
+
+        return Band.findOneAndUpdate(
+          { _id: bandID },
+          { bandname },
+          { new: true }
+        );
       }
 
-      const bandExists = await Band.exists({ _id: bandID });
-      if (!bandExists) {
-        throw new Error('No band found with that ID');
-      }
-
-      const updatedBand = await Band.findOneAndUpdate(
-        { _id: bandID },
-        { bandname },
-        { new: true }
-      );
+      throw new AuthenticationError('Authentication required');
     },
 
     addBandMember: async (parent, { bandID, userID }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const bandExists = await Band.exists({ _id: bandID });
+        if (!bandExists) {
+          throw new Error('No band found with that bandID');
+        }
+
+        return Band.findOneAndUpdate(
+          { _id: bandID },
+          { $addToSet: { members: userID } },
+          { new: true }
+        );
       }
 
-      const bandExists = await Band.exists({ _id: bandID });
-      if (!bandExists) {
-        throw new Error('No band found with that ID');
-      }
-
-      const band = await Band.findOneAndUpdate(
-        { _id: bandID },
-        { $addToSet: { members: userID } },
-        { new: true }
-      );
-      return band;
+      throw new AuthenticationError('Authentication required');
     },
 
     removeBandMember: async (parent, { bandID, userID }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const bandExists = await Band.exists({ _id: bandID });
+        if (!bandExists) {
+          throw new Error('No band found with that bandID');
+        }
+        return Band.findOneAndUpdate(
+          { _id: bandID },
+          { $pull: { members: userID } },
+          { new: true }
+        );
       }
 
-      const bandExists = await Band.exists({ _id: bandID });
-      if (!bandExists) {
-        throw new Error('No band found with that ID');
-      }
-
-      const band = await Band.findOneAndUpdate(
-        { _id: bandID },
-        { $pull: { members: userID } },
-        { new: true }
-      );
-      return band;
+      throw new AuthenticationError('Authentication required');
     },
 
     addStreamLink: async (parent, { bandID, streamLink }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const bandExists = await Band.exists({ _id: bandID });
+        if (!bandExists) {
+          throw new Error('No band found with that bandID');
+        }
+
+        return Band.findOneAndUpdate(
+          { _id: bandID },
+          { $addToSet: { stream_links: streamLink } },
+          { new: true }
+        );
       }
 
-      const bandExists = await Band.exists({ _id: bandID });
-      if (!bandExists) {
-        throw new Error('No band found with that ID');
-      }
-
-      const band = await Band.findOneAndUpdate(
-        { _id: bandID },
-        { $addToSet: { stream_links: streamLink } },
-        { new: true }
-      );
-      return band;
+      throw new AuthenticationError('Authentication required');
     },
 
     removeStreamLink: async (parent, { bandID, streamLink }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('Authentication required');
+      if (context.user) {
+        const bandExists = await Band.exists({ _id: bandID });
+        if (!bandExists) {
+          throw new Error('No band found with that bandID');
+        }
+
+        return Band.findOneAndUpdate(
+          { _id: bandID },
+          { $pull: { stream_links: streamLink } },
+          { new: true }
+        );
       }
 
-      const bandExists = await Band.exists({ _id: bandID });
-      if (!bandExists) {
-        throw new Error('No band found with that ID');
-      }
-
-      const band = await Band.findOneAndUpdate(
-        { _id: bandID },
-        { $pull: { stream_links: streamLink } },
-        { new: true }
-      );
-      return band;
+      throw new AuthenticationError('Authentication required');
     }
   }
 };

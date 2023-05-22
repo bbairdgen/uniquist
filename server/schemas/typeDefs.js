@@ -50,13 +50,13 @@ const typeDefs = gql`
       logout(userID: ID!): Auth
 
     # USER ROUTES
-      createUser(username: String!, password: String!): Auth
+      createUser(username: String!, password: String!): User
       updateUsername(userID: ID!, username: String!): User
       updatePassword(userID: ID!, oldPassword: String!, newPassword: String!): User
       addFriend(userID: ID!, friendID: ID!): User
       removeFriend(userID: ID!, friendID: ID!): User
-      addFavorite(userID: ID!, favorite: String!): User
-      removeFavorite(userID: ID!, favorite: String!): User
+      addFavorite(userID: ID!, text: String!): User
+      removeFavorite(userID: ID!, text: String!): User
       addBandToUser(userID: ID!, bandID: ID!): User
       removeBandFromUser(userID: ID!, bandID: ID!): User
 

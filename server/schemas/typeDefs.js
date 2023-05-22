@@ -18,7 +18,7 @@ const typeDefs = gql`
     username: String!
     password: String!
     dateJoined: String!
-    favorites: [Favorite]
+    favorites: [String]
     friends: [User]
     bands: [Band]
   }
@@ -28,11 +28,6 @@ const typeDefs = gql`
     bandname: String!
     members: [User]
     stream_links: [String]
-  }
-
-  type Favorite {
-    _id: ID!
-    text: String!
   }
 
   type Auth {
@@ -47,31 +42,33 @@ const typeDefs = gql`
     band(_id: ID!): Band
   }
 
-
   type Mutation {
-
     # AUTH ROUTES
-      login(username: String!, password: String!): Auth
-      logout(userID: ID!): Auth
+    login(username: String!, password: String!): Auth
+    logout(userID: ID!): Auth
 
     # USER ROUTES
-      createUser(username: String!, password: String!): Auth
-      updateUsername(userID: ID!, username: String!): User
-      updatePassword(userID: ID!, oldPassword: String!, newPassword: String!): User
-      addFriend(userID: ID!, friendID: ID!): User
-      removeFriend(userID: ID!, friendID: ID!): User
-      addFavorite(userID: ID!, text: String!): User
-      removeFavorite(userID: ID!, favoriteID: ID!): User
-      addBandToUser(userID: ID!, bandID: ID!): User
-      removeBandFromUser(userID: ID!, bandID: ID!): User
+    createUser(username: String!, password: String!): Auth
+    updateUsername(userID: ID!, username: String!): User
+    updatePassword(
+      userID: ID!
+      oldPassword: String!
+      newPassword: String!
+    ): User
+    addFriend(userID: ID!, friendID: ID!): User
+    removeFriend(userID: ID!, friendID: ID!): User
+    addFavorite(userID: ID!, text: String!): User
+    removeFavorite(userID: ID!, text: String!): User
+    addBandToUser(userID: ID!, bandID: ID!): User
+    removeBandFromUser(userID: ID!, bandID: ID!): User
 
     # BAND ROUTES
-      createBand(bandname: String!, members: [ID], stream_links: [String]): Band
-      updateBandname(bandID: ID!, bandname: String): Band
-      addBandMember(bandID: ID!, userID: ID!): Band
-      removeBandMember(bandID: ID!, userID: ID!): Band
-      addStreamLink(bandID: ID!, streamLink: String!): Band
-      removeStreamLink(bandID: ID!, streamLink: String!): Band
+    createBand(bandname: String!, members: [ID], stream_links: [String]): Band
+    updateBandname(bandID: ID!, bandname: String): Band
+    addBandMember(bandID: ID!, userID: ID!): Band
+    removeBandMember(bandID: ID!, userID: ID!): Band
+    addStreamLink(bandID: ID!, streamLink: String!): Band
+    removeStreamLink(bandID: ID!, streamLink: String!): Band
   }
 `;
 

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_ALL_USERS } from "../utils/queries";
 import React, { useState } from "react";
+import AddFavorite from '../components/AddFavorite';
 
 const Home = () => {
   const [prompt, setPrompt] = useState("");
@@ -97,6 +98,7 @@ const Home = () => {
 
   return (
     <div className="card bg-white card-rounded w-50">
+      <AddFavorite />
       {/* <div className="card-header bg-dark text-center">
         <h1>Band Name Generator</h1>
       </div>

@@ -1,12 +1,28 @@
+import { redirect } from "react-router-dom";
 import "../css/spotArtist.css";
 
 function SpotArtist(props) {
+  console.log("props image url " + props.name + " " + props.imageURL);
   return (
-    <section className="spotify-artist-card">
-      <h4>{props.name}</h4>
-      <h4>{props.id}</h4>
-      <h4>{props.externalUrl}</h4>
-    </section>
+    <div className="spotify-artist-card">
+      <h4 className="artist-title">{props.name}</h4>
+      <a
+        className="spotty-link"
+        href={props.externalUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
+        visit on spotify
+      </a>
+      <div className="img-box">
+        <img
+          className="artist-image"
+          src={props.imageURL}
+          alt="artist"
+          {...props.name}
+        />
+      </div>
+    </div>
   );
 }
 

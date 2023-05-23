@@ -31,19 +31,23 @@ function Navbar() {
       </ul>
       {Auth.loggedIn() ? (
         <>
-          <p className="nav-item">Hello {Auth.getProfile().data.username}</p>
-
+          <p className="nav-item" onClick={() => navigate("/profile")}>
+            Hello {Auth.getProfile().data.username}
+          </p>
+          <p className="nav-item" onClick={() => navigate("/settings")}>
+            Settings
+           </p>
           <p className="nav-item" onClick={logout}>
             Log Out
           </p>
         </>
       ) : (
         <>
-          <p className="nav-item" onClick={() => navigate("/signup")}>
+          <p className="stuff" onClick={() => navigate("/signup")}>
             Sign Up
           </p>
 
-          <p className="nav-item" onClick={() => navigate("/login")}>
+          <p className="stuff" onClick={() => navigate("/login")}>
             Log in
           </p>
         </>

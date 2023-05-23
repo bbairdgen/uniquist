@@ -1,11 +1,12 @@
-import React from "react";
-import '../css/profile.css';
+import "../css/spotify.css";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
-import { useQuery, useMutation } from "@apollo/client";
+
+import { useQuery, useMutation } from '@apollo/client';
+import { ADD_FRIEND, REMOVE_FRIEND, ADD_FAVORITE, REMOVE_FAVORITE } from '../utils/mutations';
 import { QUERY_ONE_USER, QUERY_ALL_USERS } from "../utils/queries";
 
 import Auth from '../utils/auth';
-import { ADD_FRIEND } from "../utils/mutations";
 
 const Profile = () => {
     const { profileID } = useParams();
@@ -74,5 +75,3 @@ const Profile = () => {
     )
     
 }
-
-export default Profile;

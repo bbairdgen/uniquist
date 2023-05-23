@@ -1,0 +1,33 @@
+.profile-page {
+    padding-left: 200px;
+}
+
+.profile-page .left-sidebar {
+    position: fixed;
+    left: 0;
+    width: 200px;
+}
+
+.profile-page .right-sidebar {
+    position: fixed;
+    right: 0;
+    width: 400px;
+}
+
+a,
+a:visited {
+    display: block;
+    text-decoration: none;
+    background-color: blanchedalmond;
+    padding: 10px;
+}
+
+.user {
+    display: flex;
+    background-color: navy;
+    padding: 10px;
+}
+
+.user button {
+    justify-self: flex-end;
+}

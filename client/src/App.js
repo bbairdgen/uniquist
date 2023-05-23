@@ -14,10 +14,10 @@ import Spotify from "./pages/Spotify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
+import Profile from "./pages/Profile";
 
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import AddFavorite from "./components/AddFavorite";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -44,7 +44,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <AddFavorite />
 
       {/* <Navbar /> */}
       <Router>
@@ -56,8 +55,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
-            {/* <Route path="/matchup" element={<Matchup />} /> */}
-            {/* <Route path="/matchup/:id" element={<Vote />} /> */}
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:profileID" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

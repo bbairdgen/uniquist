@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_ALL_USERS } from "../utils/queries";
 import React, { useState } from "react";
 import AddFavorite from '../components/AddFavorite';
+import "../css/home.css";
 
 const Home = () => {
   const [prompt, setPrompt] = useState("");

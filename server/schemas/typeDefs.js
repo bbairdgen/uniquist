@@ -48,7 +48,7 @@ const typeDefs = gql`
     logout(userID: ID!): Auth
 
     # USER ROUTES
-    createUser(username: String!, password: String!): User
+    createUser(username: String!, password: String!): Auth
     updateUsername(userID: ID!, username: String!): User
     updatePassword(
       userID: ID!

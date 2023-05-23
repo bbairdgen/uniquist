@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import AddFavorite from "./components/AddFavorite";
+import BandNames from "./pages/BandNames";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -60,6 +61,7 @@ function App() {
             <Route path="/allusers" element={<AllUsers />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/bandnames" element={<BandNames />} />
             {/* <Route path="/matchup" element={<Matchup />} /> */}
             {/* <Route path="/matchup/:id" element={<Vote />} /> */}
             <Route path="*" element={<NotFound />} />

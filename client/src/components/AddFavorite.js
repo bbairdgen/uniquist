@@ -12,7 +12,7 @@ const AddFavorite = () => {
     try {
       await addFavorite({
         variables: {
-          userId: Auth.getProfile().data._id,
+          userID: Auth.getProfile().data._id,
           text: faveInput,
         },
       });

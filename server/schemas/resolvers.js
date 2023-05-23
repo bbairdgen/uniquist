@@ -1,6 +1,6 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Band } = require('../models');
-const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require("apollo-server-express");
+const { User, Band } = require("../models");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -37,7 +37,6 @@ const resolvers = {
   },
 
   Mutation: {
-
     ///////////////////////////////////////////////////////////////////
     /////////////////////////// AUTH ROUTES ///////////////////////////
     ///////////////////////////////////////////////////////////////////
@@ -57,9 +56,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-
-
-
 
     ///////////////////////////////////////////////////////////////////
     /////////////////////////// USER ROUTES ///////////////////////////
@@ -84,7 +80,7 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     updatePassword: async (parent, { oldPassword, newPassword }, context) => {
@@ -92,7 +88,7 @@ const resolvers = {
         const user = await User.findOne({ _id: context.user._id });
         const correctPw = await user.isCorrectPassword(oldPassword);
         if (!correctPw) {
-          throw new AuthenticationError('Incorrect password');
+          throw new AuthenticationError("Incorrect password");
         }
 
         return User.findByIdAndUpdate(
@@ -102,14 +98,14 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     addFriend: async (parent, { friendID }, context) => {
       if (context.user) {
         const friendExists = await User.exists({ _id: friendID });
         if (!friendExists) {
-          throw new Error('No user found with that friendID');
+          throw new Error("No user found with that friendID");
         }
 
         return User.findOneAndUpdate(
@@ -119,14 +115,14 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     removeFriend: async (parent, { friendID }, context) => {
       if (context.user) {
         const friendExists = await User.exists({ _id: friendID });
         if (!friendExists) {
-          throw new Error('No user found with that friendID');
+          throw new Error("No user found with that friendID");
         }
 
         return User.findOneAndUpdate(
@@ -136,7 +132,7 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     addFavorite: async (parent, { text }, context) => {
@@ -148,7 +144,7 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     removeFavorite: async (parent, { text }, context) => {
@@ -160,14 +156,14 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     addBandToUser: async (parent, { bandID }, context) => {
       if (context.user) {
         const bandExists = await Band.exists({ _id: bandID });
         if (!bandExists) {
-          throw new Error('No band found with that bandID');
+          throw new Error("No band found with that bandID");
         }
 
         return User.findOneAndUpdate(
@@ -176,15 +172,15 @@ const resolvers = {
           { new: true }
         );
       }
-      
-      throw new AuthenticationError('Authentication required');
+
+      throw new AuthenticationError("Authentication required");
     },
 
     removeBandFromUser: async (parent, { bandID }, context) => {
       if (context.user) {
         const bandExists = await Band.exists({ _id: bandID });
         if (!bandExists) {
-          throw new Error('No band found with that bandID');
+          throw new Error("No band found with that bandID");
         }
 
         return User.findOneAndUpdate(
@@ -194,11 +190,8 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
-
-
-
 
     ///////////////////////////////////////////////////////////////////
     /////////////////////////// BAND ROUTES ///////////////////////////
@@ -208,18 +201,18 @@ const resolvers = {
       if (context.user) {
         const band = await Band.create(args);
         if (!band) {
-          throw new Error('Failed to create band');
+          throw new Error("Failed to create band");
         } else return band;
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     updateBandname: async (parent, { bandID, bandname }, context) => {
       if (context.user) {
         const bandExists = await Band.exists({ _id: bandID });
         if (!bandExists) {
-          throw new Error('No band found with that bandID');
+          throw new Error("No band found with that bandID");
         }
 
         return Band.findOneAndUpdate(
@@ -229,14 +222,14 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     addBandMember: async (parent, { bandID, userID }, context) => {
       if (context.user) {
         const bandExists = await Band.exists({ _id: bandID });
         if (!bandExists) {
-          throw new Error('No band found with that bandID');
+          throw new Error("No band found with that bandID");
         }
 
         return Band.findOneAndUpdate(
@@ -246,14 +239,14 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     removeBandMember: async (parent, { bandID, userID }, context) => {
       if (context.user) {
         const bandExists = await Band.exists({ _id: bandID });
         if (!bandExists) {
-          throw new Error('No band found with that bandID');
+          throw new Error("No band found with that bandID");
         }
         return Band.findOneAndUpdate(
           { _id: bandID },
@@ -262,14 +255,14 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     addStreamLink: async (parent, { bandID, streamLink }, context) => {
       if (context.user) {
         const bandExists = await Band.exists({ _id: bandID });
         if (!bandExists) {
-          throw new Error('No band found with that bandID');
+          throw new Error("No band found with that bandID");
         }
 
         return Band.findOneAndUpdate(
@@ -279,14 +272,14 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
+      throw new AuthenticationError("Authentication required");
     },
 
     removeStreamLink: async (parent, { bandID, streamLink }, context) => {
       if (context.user) {
         const bandExists = await Band.exists({ _id: bandID });
         if (!bandExists) {
-          throw new Error('No band found with that bandID');
+          throw new Error("No band found with that bandID");
         }
 
         return Band.findOneAndUpdate(
@@ -296,9 +289,9 @@ const resolvers = {
         );
       }
 
-      throw new AuthenticationError('Authentication required');
-    }
-  }
+      throw new AuthenticationError("Authentication required");
+    },
+  },
 };
 
 module.exports = resolvers;

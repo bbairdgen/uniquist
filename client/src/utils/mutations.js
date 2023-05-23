@@ -26,8 +26,6 @@ export const CREATE_USER = gql`
   }
 `;
 
-
-
 // USER ROUTES
 
 export const UPDATE_USERNAME = gql`
@@ -40,8 +38,16 @@ export const UPDATE_USERNAME = gql`
 `;
 
 export const UPDATE_PASSWORD = gql`
-  mutation UpdatePassword($userID: ID!, $oldPassword: String!, $newPassword: String!) {
-    updatePassword(userID: $userID, oldPassword: $oldPassword, newPassword: $newPassword) {
+  mutation UpdatePassword(
+    $userID: ID!
+    $oldPassword: String!
+    $newPassword: String!
+  ) {
+    updatePassword(
+      userID: $userID
+      oldPassword: $oldPassword
+      newPassword: $newPassword
+    ) {
       _id
       password
     }
@@ -79,7 +85,6 @@ export const ADD_FAVORITE = gql`
     addFavorite(userID: $userID, text: $text) {
       _id
       username
-      favorites
       favorites
     }
   }

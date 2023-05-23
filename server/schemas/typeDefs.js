@@ -52,8 +52,7 @@ const typeDefs = gql`
     updateUsername(userID: ID!, username: String!): User
     updatePassword(
       userID: ID!
-      oldPassword: String!
-      newPassword: String!
+      password: String!
     ): User
     addFriend(userID: ID!, friendID: ID!): User
     removeFriend(userID: ID!, friendID: ID!): User

@@ -29,29 +29,36 @@ function Navbar() {
             See Users
           </p>
         </li>
-          {Auth.loggedIn() ? ( 
-            <>
+        {Auth.loggedIn() ? ( 
+          <>
             <li>
-            <p>{Auth.getProfile().data.username}</p>
+              <p className="nav-item" onClick={() => navigate("/profile")}>
+                {Auth.getProfile().data.username}'s Profile
+              </p>
+            </li>
+            <li>
+              <p className="nav-item" onClick={() => navigate("/settings")}>
+                Settings
+              </p>
             </li>
             <li>
               <p className="nav-item" onClick={logout}>Log Out</p>
             </li>
-            </>
-          ) : (
-            <>
-        <li>
-          <p className="nav-item" onClick={() => navigate("/signup")}>
-            Sign Up
-          </p>
-        </li>
-        <li>
-          <p className="nav-item" onClick={() => navigate("/login")}>
-            Log in
-          </p>
+          </>
+        ) : (
+          <>
+            <li>
+              <p className="nav-item" onClick={() => navigate("/signup")}>
+                Sign Up
+              </p>
             </li>
-            </>
-          )}
+            <li>
+              <p className="nav-item" onClick={() => navigate("/login")}>
+                Log in
+              </p>
+            </li>
+          </>
+        )}
       </ul>
     </div>
   );

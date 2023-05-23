@@ -13,6 +13,8 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -33,6 +35,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
             {/* <Route path="/matchup" element={<Matchup />} /> */}
             {/* <Route path="/matchup/:id" element={<Vote />} /> */}
             <Route path="*" element={<NotFound />} />

@@ -31,8 +31,12 @@ function Navbar() {
       </ul>
       {Auth.loggedIn() ? (
         <>
-          <p className="nav-item">Hello {Auth.getProfile().data.username}</p>
-
+          <p className="nav-item" onClick={() => navigate("/profile")>
+            Hello {Auth.getProfile().data.username}
+          </p>
+          <p className="nav-item" onClick={() => navigate("/settings")}>
+            Settings
+           </p>
           <p className="nav-item" onClick={logout}>
             Log Out
           </p>

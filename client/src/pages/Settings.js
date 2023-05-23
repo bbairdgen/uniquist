@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../utils/mutations';
 import { UPDATE_USERNAME ,UPDATE_PASSWORD } from '../utils/mutations';
 
 import Auth from "../utils/auth";
@@ -12,9 +11,9 @@ const Settings = () => {
     username: "",
     password: "",
   });
-//   const [addUser, { error }] = useMutation(CREATE_USER);
+
   const [updateUsername, { error }] = useMutation(UPDATE_USERNAME);
-//   const [updatePassword, { error }] = useMutation(UPDATE_PASSWORD);
+  const [updatePassword] = useMutation(UPDATE_PASSWORD);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,7 +23,7 @@ const Settings = () => {
     });
   };
 
-  const handleFormSubmit = async (event) => {
+  const handleUsernameSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
 
@@ -40,6 +39,24 @@ const Settings = () => {
     }
     
   };
+
+  const handlePasswordSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+
+    try {
+        const { data } = await updatePassword({
+          variables: { userID: Auth.getProfile().data._id, password: formState.password },
+        });
+        
+        console.log("1.2", data);
+      } catch (err) {
+        console.log(formState);
+        console.error(err);
+      }
+        
+  };
+
   return (
     <main>
       <div className="card">
@@ -48,7 +65,8 @@ const Settings = () => {
           {false ? (
             <p>Welcome</p>
           ) : (
-            <form onSubmit={handleFormSubmit}>
+            <>
+            <form onSubmit={handleUsernameSubmit}>
               <input
                 className="form-input"
                 placeholder="New Username:"
@@ -57,6 +75,15 @@ const Settings = () => {
                 value={formState.username}
                 onChange={handleChange}
               />
+              <button
+                className="btn"
+                style={{ cursor: "pointer" }}
+                type="submit"
+              >
+                Update Username
+              </button>
+            </form>
+            <form onSubmit={handlePasswordSubmit}>
               <input
                 className="form-input"
                 placeholder="New Password:"
@@ -70,9 +97,10 @@ const Settings = () => {
                 style={{ cursor: "pointer" }}
                 type="submit"
               >
-                Update
+                Update Password
               </button>
             </form>
+            </>
           )}
 
           {error && <div>{error.message}</div>}

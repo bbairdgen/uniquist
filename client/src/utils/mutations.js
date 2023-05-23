@@ -40,13 +40,11 @@ export const UPDATE_USERNAME = gql`
 export const UPDATE_PASSWORD = gql`
   mutation UpdatePassword(
     $userID: ID!
-    $oldPassword: String!
-    $newPassword: String!
+    $password: String!
   ) {
     updatePassword(
       userID: $userID
-      oldPassword: $oldPassword
-      newPassword: $newPassword
+      password: $password
     ) {
       _id
       password

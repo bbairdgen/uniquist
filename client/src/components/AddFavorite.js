@@ -2,6 +2,7 @@ import { ADD_FAVORITE } from "../utils/mutations";
 import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 import Auth from "../utils/auth";
+import "../css/addFavorites.css";
 
 const AddFavorite = () => {
   const [faveInput, setFaveInput] = useState("");
@@ -40,7 +41,7 @@ const AddFavorite = () => {
           </div>
         ) : (
           <div>
-            <p>Log in to store band names</p>
+            <p className="storeBand">Log in to store band names</p>
           </div>
         )}
       </section>

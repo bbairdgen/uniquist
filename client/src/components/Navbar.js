@@ -31,7 +31,7 @@ function Navbar() {
       </ul>
       {Auth.loggedIn() ? (
         <>
-          <p className="nav-item" onClick={() => navigate("/profile")>
+          <p className="nav-item" onClick={() => navigate("/profile")}>
             Hello {Auth.getProfile().data.username}
           </p>
           <p className="nav-item" onClick={() => navigate("/settings")}>

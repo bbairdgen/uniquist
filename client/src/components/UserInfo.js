@@ -1,14 +1,14 @@
 import AllUsers from "../pages/AllUsers";
 import { userParams } from 'react-router-dom';
 
-function Profile(props) {
+function UserInfo(props) {
   return (
     <div className="user-info-card">
       <h4>{props.name}</h4>
       <section className="band-names">
         {props.bandNames.map((band, i) => {
           if (!null) {
-            return <h5 key={band.text}>{band}</h5>;
+            return <h5 key={band}>{band}</h5>;
           } else {
             return <p>no band names</p>;
           }
@@ -18,4 +18,4 @@ function Profile(props) {
   );
 }
 
-export default Profile;
+export default UserInfo;

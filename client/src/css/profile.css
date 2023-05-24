@@ -18,6 +18,7 @@ a,
 a:visited {
     display: block;
     text-decoration: none;
+    color: aqua;
     background-color: blanchedalmond;
     padding: 10px;
 }

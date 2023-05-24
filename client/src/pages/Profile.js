@@ -21,8 +21,10 @@ const Profile = () => {
     // so we grab it from there and compare it to our JWT.
     const { profileID } = useParams();
     let onMyProfile = false;
+    let MY = "";
     if (Auth.getProfile().data._id === profileID) {
         onMyProfile = true;
+        MY = "My ";
     }
     // No matter what user's page we're on, be it the currently signed-in one
     // or some other user, we use profileID to query them.
@@ -78,12 +80,16 @@ const Profile = () => {
     return (
         <div className="profile-page">
             <aside className="left-sidebar">
-                <a href="#settings">Settings</a>
-                <a href="#bands">Bands</a>
-                <a href="#saved-names">Saved Band Names</a>
+                {onMyProfile ? <a href="#settings">Settings</a> : null}
+                {/* `MY` renders "My " if viewing your own profile */}
+                <a href="#bands">{MY}Bands</a>
+                <a href="#saved-names">{MY}Saved Band Names</a>
                 <a href="#following">Following</a>
             </aside>
-            {/* <h2>{oneUser.data.user.username}</h2> */}
+            <section className="profile-body">
+                <h2>{oneUser.data.user.username}</h2>
+
+            </section>
             <aside className="right-sidebar">
                 <h4>Follow people!</h4>
                 {
@@ -94,7 +100,7 @@ const Profile = () => {
                             if (i < 20) {
                                 return (
                                     <div key={user._id} userid={user._id} className="user">
-                                        <p>{user.username}</p>
+                                        <a href={user._id}>{user.username}</a>
                                         <button
                                             type="button"
                                             onClick={handleFollowButton}

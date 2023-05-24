@@ -1,8 +1,21 @@
+.header-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
 header {
+    background-color: #f0f8ff1b;
     text-align: Center;
+    align-content: center;
+    justify-content: center;
     font-size: larger;
     border: solid black 3.5px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.8);
+    max-width: 600px;
+    position: relative;
+    padding-left: 90px;
+    padding-right: 90px;
 }
 
 header:hover {

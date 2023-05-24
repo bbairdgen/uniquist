@@ -2,9 +2,11 @@ import "../css/header.css";
 
 const Header = () => {
   return (
-    <header>
-      <h1> UNIQUIST </h1>
-    </header>
+    <div className="header-container">
+      <header>
+        <h1> UNIQUIST </h1>
+      </header>
+    </div>
   );
 };
 

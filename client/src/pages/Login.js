@@ -4,11 +4,12 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
 import Auth from '../utils/auth';
+import '../css/login.css'
 // import reportWebVitals from '../reportWebVitals';
 
 const Login = (props) => {
-    const [formState, setFormState] = useState({ username: '', password: ''});
-    const [login, {error, data}] = useMutation(LOGIN_USER);
+    const [formState, setFormState] = useState({ username: '', password: '' });
+    const [login, { error, data }] = useMutation(LOGIN_USER);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -20,18 +21,18 @@ const Login = (props) => {
     };
 
     const handleFormSubmit = async (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         console.log(formState);
         try {
             console.log("Goodbye");
             const { data } = await login({
-                variables: { ...formState}
+                variables: { ...formState }
             });
             console.log(formState);
             console.log(data, "Hello");
             Auth.login(data.login.token)
         } catch (err) {
-           
+
             console.error(err);
         }
 
@@ -41,41 +42,41 @@ const Login = (props) => {
         })
     };
 
-    return(
+    return (
         <main>
             <div className="card">
-                <h3>Login Page</h3>
+                <h2>Login Page</h2>
                 <div className='card-body'>
                     {data ? (
                         // <Link to="User"/>
                         <p>Success!</p>
-                    ): (
+                    ) : (
                         <form onSubmit={handleFormSubmit}>
                             <input
-                            className="form-input"
-                            placeholder="Username:"
-                            name="username"
-                            type="username"
-                            value={formState.username}
-                            onChange={handleChange}
+                                className="form-input"
+                                placeholder="Username:"
+                                name="username"
+                                type="username"
+                                value={formState.username}
+                                onChange={handleChange}
                             />
                             <input
-                            className="form-input"
-                            placeholder="Password:"
-                            name="password"
-                            type="password"
-                            value={formState.password}
-                            onChange={handleChange}
+                                className="form-input"
+                                placeholder="Password:"
+                                name="password"
+                                type="password"
+                                value={formState.password}
+                                onChange={handleChange}
                             />
                             <button
-                              className="btn"
-                              style={{ cursor: 'pointer'}}
-                              type="submit"
-                              >
-                            Submit
+                                className="btn1"
+                                style={{ cursor: 'pointer' }}
+                                type="submit"
+                            >
+                                Submit
                             </button>
                             <Link to="/SignUp">
-                                <button className="btn" style={{ cursor: 'pointer' }}>Sign Up</button>
+                                <button className="btn2" style={{ cursor: 'pointer' }}>Create New Account</button>
                             </Link>
                         </form>
                     )}

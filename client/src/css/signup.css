@@ -1,0 +1,24 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 25%;
+    font-size: 1em;
+    margin: .25em;
+    border-radius: 5px;
+}
+
+button {
+    width: 25%;
+    height: 2em;
+    font-size: 1em;
+    border-radius: 5px;
+    margin: .25em;
+    background-color: #f0f8ff1b;
+    color: #73a3be;
+    border: solid black 3.5px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.8);
+}

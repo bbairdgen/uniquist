@@ -45,10 +45,9 @@ const typeDefs = gql`
   type Mutation {
     # AUTH ROUTES
     login(username: String!, password: String!): Auth
-    logout(userID: ID!): Auth
+    createUser(username: String!, password: String!): Auth
 
     # USER ROUTES
-    createUser(username: String!, password: String!): Auth
     updateUsername(userID: ID!, username: String!): User
     updatePassword(
       userID: ID!

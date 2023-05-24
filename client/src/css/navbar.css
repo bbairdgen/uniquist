@@ -28,6 +28,33 @@
     font-size: 22px;
 }
 
+.login-btn {
+    display: block;
+    width: 175px;
+    padding: 15px;
+    margin: 0 auto;
+    border: 1px solid #949494;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.login-btn:hover {
+    color: #e0e0e0;
+    border-color: rgb(212, 212, 212);
+    box-shadow: 0px 0px 5px rgb(151, 151, 151);
+}
+
+.logout-btn {
+    background-color: #111111;
+    width: 100px;
+    padding: 10px;
+    margin: 0 auto;
+    /* border: 1px solid white; */
+    border-radius: 5px;
+}
+.logout-btn:hover {
+    background-color: #1f1f1f;
+}
+
 /* TODO add background or just more flavor to sign up and login.
 Add hover effect to them as well */
 

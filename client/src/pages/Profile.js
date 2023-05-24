@@ -1,4 +1,4 @@
-import "../css/spotify.css";
+import "../css/profile.css";
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ import { QUERY_ONE_USER, QUERY_ALL_USERS } from "../utils/queries";
 import Auth from '../utils/auth';
 
 import NotFound from "./NotFound";
+import Settings from "../components/ProfileSettings";
 
 const Profile = () => {
     const allUsers = useQuery(QUERY_ALL_USERS);
@@ -20,6 +21,7 @@ const Profile = () => {
     // User ID will always be in the URL bar when rendering this page,
     // so we grab it from there and compare it to our JWT.
     const { profileID } = useParams();
+    // console.log("profileID:", profileID); // debug
     let onMyProfile = false;
     let MY = "";
     if (Auth.getProfile().data._id === profileID) {
@@ -32,13 +34,16 @@ const Profile = () => {
         QUERY_ONE_USER,
         { variables: { id: profileID } }
     );
+    // Extract all the user ID's from all this user's friends.
+    // This is used in the renderIfFollowing function below.
+    const oneUserFriends = oneUser.data?.user.friends.map((friend) => friend._id);
 
     // If our query.data returns empty, then that user doesn't exist
     // and the app navigates to the NotFound page.
-    if (!oneUser.data) {
-        console.error("Error: no user found with that profileID");
-        return <NotFound />
-    }
+    // if (!oneUser.data) {
+    //     console.error("Error: no user found with that profileID");
+    //     return <NotFound />
+    // }
 
 
     function handleFollowButton(e) {
@@ -67,6 +72,12 @@ const Profile = () => {
         }
     }
 
+    function renderIfFollowing(id) {
+        // Informs the user if they are already following a user
+        // on the right side panel.
+        return oneUserFriends.includes(id) ? "FOLLOWING" : "FOLLOW";
+    }
+
     function handleAddFavorite(e) {
 
     }
@@ -75,44 +86,70 @@ const Profile = () => {
 
     }
 
-    
-
     return (
-        <div className="profile-page">
-            <aside className="left-sidebar">
-                {onMyProfile ? <a href="#settings">Settings</a> : null}
-                {/* `MY` renders "My " if viewing your own profile */}
-                <a href="#bands">{MY}Bands</a>
-                <a href="#saved-names">{MY}Saved Band Names</a>
-                <a href="#following">Following</a>
-            </aside>
-            <section className="profile-body">
-                <h2>{oneUser.data.user.username}</h2>
-
-            </section>
-            <aside className="right-sidebar">
-                <h4>Follow people!</h4>
-                {
-                    allUsers.loading
-                    ? ( <p>loading...</p> )
-                    : ( 
-                        allUsers.data.users.map((user, i) => {
-                            if (i < 20) {
-                                return (
-                                    <div key={user._id} userid={user._id} className="user">
-                                        <a href={user._id}>{user.username}</a>
-                                        <button
-                                            type="button"
-                                            onClick={handleFollowButton}
-                                        >FOLLOW</button>
-                                    </div>
+        <>
+        {oneUser.loading ? <p>Loading...</p> : (
+            <>
+            {!oneUser.data ? <NotFound /> : (
+                <div className="profile-page">
+                    <aside className="left-sidebar">
+                        {onMyProfile ? <a href="#settings">Settings</a> : null}
+                        {/* `MY` renders "My " if viewing your own profile */}
+                        <a href="#bands">{MY}Bands</a>
+                        <a href="#saved-names">{MY}Saved Band Names</a>
+                        <a href="#following">Following</a>
+                    </aside>
+                    <section className="profile-body">
+                        <div userid={oneUser.data?.user._id}>
+                            <h2>{oneUser.data?.user.username}</h2>
+                            {!onMyProfile
+                                ? (
+                                    <button
+                                        type="button"
+                                        onClick={handleFollowButton}
+                                    >{renderIfFollowing(oneUser.data?.user._id)}</button>
                                 )
-                            } else return null;
-                        })
-                      )
-                }
-            </aside>
-        </div>
+                                : ( null )
+                            }
+                        </div>
+                        {onMyProfile ? <Settings /> : null}
+                    </section>
+                    <aside className="right-sidebar">
+                        {
+                            allUsers.loading
+                            ? (<p>loading...</p> )
+                            : (
+                                profileID === Auth.getProfile().data._id
+                                ? (
+                                    <>
+                                    <h4>Follow people!</h4>
+                                    {allUsers.data?.users.map((user, i) => {
+                                        if (i <= 20 && user._id !== Auth.getProfile().data._id) {
+                                            return (
+                                                <div key={user._id} userid={user._id} className="user">
+                                                    <a href={user._id}>{user.username}</a>
+                                                    <button
+                                                        type="button"
+                                                        onClick={handleFollowButton}
+                                                    >{renderIfFollowing(user._id)}</button>
+                                                </div>
+                                            )
+                                        } else return null;
+                                    })}
+                                    </>
+                                )
+                                : (
+                                    <div className="empty-right-sidebar"></div>
+                                )
+                                
+                            )
+                        }
+                    </aside>
+                </div>
+            )}
+            </>
+        )}
+        </>
     )
     
 }

@@ -1,34 +1,50 @@
-.profile-page {
-    padding-left: 200px;
-}
-
-.profile-page .left-sidebar {
+.left-sidebar {
     position: fixed;
+    top: 100px;
     left: 0;
+    background-color: #040336;
     width: 200px;
 }
 
-.profile-page .right-sidebar {
+.right-sidebar,
+.empty-right-sidebar {
     position: fixed;
+    top: 0;
     right: 0;
-    width: 400px;
+    bottom: 0;
+    width: 300px;
 }
 
 a,
 a:visited {
     display: block;
     text-decoration: none;
-    color: aqua;
-    background-color: blanchedalmond;
+    color: whitesmoke;
     padding: 10px;
 }
 
 .user {
     display: flex;
-    background-color: navy;
+    position: relative;
     padding: 10px;
+    margin: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
 }
 
 .user button {
-    justify-self: flex-end;
+    position: absolute;
+    right: 10px;
+    top: 20%;
+    color: whitesmoke;
+    background-color: var(--waikawa-gray);
+    border: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.user button:hover {
+    background-color: var(--au-chico);
 }

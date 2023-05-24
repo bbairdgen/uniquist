@@ -56,9 +56,11 @@ function Spotify() {
         searchParameters
       )
         .then((response) => response.json())
+
         .then((data) => {
           console.log("artist data");
-          console.log(data.artists);
+          console.log(data);
+          // console.log(data.artists);
 
           function collectNames() {
             var theNames = [];
@@ -140,13 +142,22 @@ function Spotify() {
         <h3>Close matches on Spotify:</h3>
         <section className="artists-section">
           {artistResults.map((spotArtist, i) => {
+            var artistImage = () => {
+              if (!spotArtist.images[0]?.url) {
+                return "https://pbs.twimg.com/media/CAtcT4NWgAAgUtA.jpg";
+              } else {
+                return spotArtist.images[0].url;
+              }
+            };
+            console.log("artist image");
+            console.log(artistImage());
             return (
               <SpotArtist
                 key={spotArtist.id}
                 id={spotArtist.id}
                 name={spotArtist.name}
                 externalUrl={spotArtist.external_urls.spotify}
-                imageURL={spotArtist.images[0].url}
+                imageURL={artistImage()}
                 genres={spotArtist.genres}
               ></SpotArtist>
             );

@@ -29,7 +29,7 @@ function Navbar() {
           </p>
         </li>
         <li>
-          <p className="stuff" onClick={() => navigate("/bandnames")}>
+          <p className="nav-item" onClick={() => navigate("/bandnames")}>
             Band Names
           </p>
         </li>
@@ -41,7 +41,7 @@ function Navbar() {
           </p>
           <p className="nav-item" onClick={() => navigate("/settings")}>
             Settings
-           </p>
+          </p>
           <p className="nav-item" onClick={logout}>
             Log Out
           </p>

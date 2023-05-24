@@ -24,8 +24,8 @@ export const QUERY_ALL_USERS = gql`
 `;
 
 export const QUERY_ONE_USER = gql`
-  query oneUser($id: ID!) {
-    user(_id: $id) {
+  query oneUser($userID: ID!) {
+    user(_id: $userID) {
       _id
       username
       dateJoined

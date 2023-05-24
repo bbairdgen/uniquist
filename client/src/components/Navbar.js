@@ -47,6 +47,11 @@ const Navbar = () => {
             See Users
           </p>
         </li>
+        <li>
+          <p className="stuff" onClick={() => navigate("/bandnames")}>
+            Band Names
+          </p>
+        </li>
         {Auth.loggedIn() ? (
           <li>
             <p className="nav-item" onClick={() => navigate(`/profile/${userID}`)}>

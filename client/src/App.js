@@ -18,6 +18,8 @@ import Profile from "./pages/Profile";
 
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
+import AddFavorite from "./components/AddFavorite";
+import BandNames from "./pages/BandNames";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -56,6 +58,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
             <Route path="/profile/:profileID" element={<Profile />} />
+            <Route path="/bandnames" element={<BandNames />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

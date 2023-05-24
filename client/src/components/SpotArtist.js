@@ -2,7 +2,6 @@ import { redirect } from "react-router-dom";
 import "../css/spotArtist.css";
 
 function SpotArtist(props) {
-  console.log("props image url " + props.name + " " + props.imageURL);
   return (
     <div className="spotify-artist-card">
       <h4 className="artist-title">{props.name}</h4>

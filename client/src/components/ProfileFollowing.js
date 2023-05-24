@@ -25,7 +25,7 @@ const ProfileFollowing = ({ user, onMyProfile }) => {
     }
     
     return (
-        <div className="profile-following">
+        <div id="following" className="profile-following">
             <h3>Following</h3>
             {!user.friends.length ? (
                 <h4>Not following anyone yet!</h4>

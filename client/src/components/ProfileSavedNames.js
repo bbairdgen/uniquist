@@ -48,8 +48,8 @@ const ProfileSavedNames = ({ user, onMyProfile }) => {
 
 
     return (
-        <div>
-            <h3 id="saved-names">{mineOrTheir}Saved Band Names</h3>
+        <div id="saved-names">
+            <h3>{mineOrTheir}Saved Band Names</h3>
             {onMyProfile ? (
                 <form className="favorite-form">
                     <input

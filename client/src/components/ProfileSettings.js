@@ -58,9 +58,9 @@ const ProfileSettings = () => {
   };
 
   return (
-    <main>
+    <main id="settings">
       <div className="card">
-        <h3 id="settings">Settings</h3>
+        <h3>Settings</h3>
         <div className="card-body">
           {false ? (
             <p>Welcome</p>

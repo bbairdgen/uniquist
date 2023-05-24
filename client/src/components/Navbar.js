@@ -6,19 +6,14 @@ import "../css/navbar.css";
 const Navbar = () => {
   let navigate = useNavigate();
 
-
-
-  // const [userID, setUserID] = useState("");
-
-  // if (Auth.loggedIn()) {
-  //   setUserID(Auth.getProfile().data._id);
-  // }
-
-
   // NOAH'S NOTE 5/23/2023 9:52 PM MDT
   // This is here so that clicking "My Profile" will send you to `profile/${userID}`
   // It's initialized empty because it doesn't assume you're logged in and authorized.
-  // However, 
+  // However, at least once in the past it did not update this string for some reason.
+  // I couldn't figure out why, and then it just started working as expected.
+  // So just warning y'all, if the "My Profile" button doesn't take you anywhere,
+  // then that means this code is inconsistent and we'll probably need to
+  // implement global state.
   let userID = "";
   if (Auth.loggedIn()) {
     userID = Auth.getProfile().data._id;

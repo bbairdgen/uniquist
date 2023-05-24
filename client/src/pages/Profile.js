@@ -8,37 +8,72 @@ import { QUERY_ONE_USER, QUERY_ALL_USERS } from "../utils/queries";
 
 import Auth from '../utils/auth';
 
+import NotFound from "./NotFound";
+
 const Profile = () => {
+    const allUsers = useQuery(QUERY_ALL_USERS);
+    const [addFriend] = useMutation(ADD_FRIEND);
+    const [removeFriend] = useMutation(REMOVE_FRIEND);
+    
+    // Check if we're on the profile page of the currently logged-in user.
+    // If not, we are not 'on my profile'.
+    // User ID will always be in the URL bar when rendering this page,
+    // so we grab it from there and compare it to our JWT.
     const { profileID } = useParams();
-
-    // TODO: If no params and user is not logged in, prompt to sign in / up with links
-
-    if (Auth.loggedIn() && !profileID) {
-        
+    let onMyProfile = false;
+    if (Auth.getProfile().data._id === profileID) {
+        onMyProfile = true;
     }
-
+    // No matter what user's page we're on, be it the currently signed-in one
+    // or some other user, we use profileID to query them.
     const oneUser = useQuery(
         QUERY_ONE_USER,
         { variables: { id: profileID } }
     );
 
-    const allUsers = useQuery(QUERY_ALL_USERS);
-    // console.log("all users:", allUsers);
+    // If our query.data returns empty, then that user doesn't exist
+    // and the app navigates to the NotFound page.
+    if (!oneUser.data) {
+        console.error("Error: no user found with that profileID");
+        return <NotFound />
+    }
 
-    const addFriend = useMutation(ADD_FRIEND);
 
-    function handleAddFriend(e) {
+    function handleFollowButton(e) {
+        // Use e.target to extract our custom `userid` attribute,
+        // which has the userID of the friend the user elected to follow
         let friendID = e.target.parentElement.getAttribute("userid");
+
+        // If the button said "FOLLOW" when clicked, execute addFriend mutation.
+        // Else execute removeFriend mutation.
         if (e.target.textContent === "FOLLOW") {
             addFriend({
                 variables: { 
                     userID: Auth.getProfile().data._id,
-                    friendID
+                    friendID: friendID
                 }
-            })
+            });
             e.target.textContent = "FOLLOWING"
-        } else e.target.textContent = "FOLLOW"
+        } else {
+            removeFriend({
+                variables: {
+                    userID: Auth.getProfile().data._id,
+                    friendID: friendID
+                }
+            });
+            e.target.textContent = "FOLLOW"
+        }
     }
+
+    function handleAddFavorite(e) {
+
+    }
+
+    function handleRemoveFavorite(e) {
+
+    }
+
+    
 
     return (
         <div className="profile-page">
@@ -62,7 +97,7 @@ const Profile = () => {
                                         <p>{user.username}</p>
                                         <button
                                             type="button"
-                                            onClick={handleAddFriend}
+                                            onClick={handleFollowButton}
                                         >FOLLOW</button>
                                     </div>
                                 )
@@ -75,3 +110,5 @@ const Profile = () => {
     )
     
 }
+
+export default Profile;

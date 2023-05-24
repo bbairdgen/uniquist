@@ -53,26 +53,24 @@ export const UPDATE_PASSWORD = gql`
 `;
 
 export const ADD_FRIEND = gql`
-  mutation AddFriend($userID: ID!, $friendId: ID!) {
-    addFriend(userID: $userID, friendID: $friendId) {
+  mutation AddFriend($userID: ID!, $friendID: ID!) {
+    addFriend(userID: $userID, friendID: $friendID) {
       _id
       username
       friends {
         _id
-        username
       }
     }
   }
 `;
 
 export const REMOVE_FRIEND = gql`
-  mutation RemoveFriend($userID: ID!, $friendId: ID!) {
-    removeFriend(userID: $userID, friendID: $friendId) {
+  mutation RemoveFriend($userID: ID!, $friendID: ID!) {
+    removeFriend(userID: $userID, friendID: $friendID) {
       _id
       username
       friends {
         _id
-        username
       }
     }
   }
@@ -99,8 +97,8 @@ export const REMOVE_FAVORITE = gql`
 `;
 
 export const ADD_BAND_TO_USER = gql`
-  mutation AddBandToUser($userID: ID!, $bandId: ID!) {
-    addBandToUser(userID: $userID, bandID: $bandId) {
+  mutation AddBandToUser($userID: ID!, $bandID: ID!) {
+    addBandToUser(userID: $userID, bandID: $bandID) {
       _id
       username
       bands {
@@ -112,15 +110,14 @@ export const ADD_BAND_TO_USER = gql`
 `;
 
 export const REMOVE_BAND_FROM_USER = gql`
-  mutation RemoveBandFromUser($userID: ID!, $bandId: ID!) {
-    removeBandFromUser(userID: $userID, bandID: $bandId) {
+  mutation RemoveBandFromUser($userID: ID!, $bandID: ID!) {
+    removeBandFromUser(userID: $userID, bandID: $bandID) {
       _id
       username
       bands {
         bandname
         members {
           _id
-          username
         }
       }
     }
@@ -144,7 +141,6 @@ export const CREATE_BAND = gql`
       bandname
       members {
         _id
-        username
       }
       stream_links
     }
@@ -152,13 +148,12 @@ export const CREATE_BAND = gql`
 `;
 
 export const UPDATE_BANDNAME = gql`
-  mutation UpdateBandName($bandId: ID!, $bandname: String) {
-    updateBandName(bandID: $bandId, bandname: $bandname) {
+  mutation UpdateBandName($bandID: ID!, $bandname: String) {
+    updateBandName(bandID: $bandID, bandname: $bandname) {
       _id
       bandname
       members {
         _id
-        username
       }
       stream_links
     }
@@ -166,13 +161,12 @@ export const UPDATE_BANDNAME = gql`
 `;
 
 export const ADD_BAND_MEMBER = gql`
-  mutation AddBandMember($bandId: ID!, $userID: ID!) {
-    addBandMember(bandID: $bandId, userID: $userID) {
+  mutation AddBandMember($bandID: ID!, $userID: ID!) {
+    addBandMember(bandID: $bandID, userID: $userID) {
       _id
       bandname
       members {
         _id
-        username
       }
       stream_links
     }
@@ -180,13 +174,12 @@ export const ADD_BAND_MEMBER = gql`
 `;
 
 export const REMOVE_BAND_MEMBER = gql`
-  mutation RemoveBandMember($bandId: ID!, $userID: ID!) {
-    removeBandMember(bandID: $bandId, userID: $userID) {
+  mutation RemoveBandMember($bandID: ID!, $userID: ID!) {
+    removeBandMember(bandID: $bandID, userID: $userID) {
       _id
       bandname
       members {
         _id
-        username
       }
       stream_links
     }
@@ -194,8 +187,8 @@ export const REMOVE_BAND_MEMBER = gql`
 `;
 
 export const ADD_STREAM_LINK = gql`
-  mutation AddStreamLink($bandId: ID!, $streamLink: String!) {
-    addStreamLink(bandID: $bandId, streamLink: $streamLink) {
+  mutation AddStreamLink($bandID: ID!, $streamLink: String!) {
+    addStreamLink(bandID: $bandID, streamLink: $streamLink) {
       _id
       bandname
       stream_links
@@ -204,8 +197,8 @@ export const ADD_STREAM_LINK = gql`
 `;
 
 export const REMOVE_STREAM_LINK = gql`
-  mutation RemoveStreamLink($bandId: ID!, $streamLink: String!) {
-    removeStreamLink(bandID: $bandId, streamLink: $streamLink) {
+  mutation RemoveStreamLink($bandID: ID!, $streamLink: String!) {
+    removeStreamLink(bandID: $bandID, streamLink: $streamLink) {
       _id
       bandname
       stream_links

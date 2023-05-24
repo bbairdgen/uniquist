@@ -6,7 +6,7 @@ import { UPDATE_USERNAME ,UPDATE_PASSWORD } from '../utils/mutations';
 
 import Auth from "../utils/auth";
 
-const Settings = () => {
+const ProfileSettings = () => {
   const [formState, setFormState] = useState({
     username: "",
     password: "",
@@ -60,7 +60,7 @@ const Settings = () => {
   return (
     <main>
       <div className="card">
-        <h3>Settings</h3>
+        <h3 id="settings">Settings</h3>
         <div className="card-body">
           {false ? (
             <p>Welcome</p>
@@ -110,4 +110,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default ProfileSettings;

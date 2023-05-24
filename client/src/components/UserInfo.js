@@ -1,6 +1,7 @@
 import AllUsers from "../pages/AllUsers";
+import { userParams } from 'react-router-dom';
 
-function UserInfo(props) {
+function Profile(props) {
   return (
     <div className="user-info-card">
       <h4>{props.name}</h4>
@@ -17,4 +18,4 @@ function UserInfo(props) {
   );
 }
 
-export default UserInfo;
+export default Profile;

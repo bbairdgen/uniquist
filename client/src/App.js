@@ -14,7 +14,6 @@ import Spotify from "./pages/Spotify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
-import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 
 import Header from "./components/Header";
@@ -47,7 +46,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <AddFavorite />
 
       {/* <Navbar /> */}
       <Router>
@@ -59,11 +57,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:profileID" element={<Profile />} />
             <Route path="/bandnames" element={<BandNames />} />
-            {/* <Route path="/matchup" element={<Matchup />} /> */}
-            {/* <Route path="/matchup/:id" element={<Vote />} /> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

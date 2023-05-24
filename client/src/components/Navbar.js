@@ -6,6 +6,8 @@ import "../css/navbar.css";
 function Navbar() {
   let navigate = useNavigate();
 
+  const userID = Auth.getProfile().data._id;
+
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
@@ -31,7 +33,7 @@ function Navbar() {
       </ul>
       {Auth.loggedIn() ? (
         <>
-          <p className="nav-item" onClick={() => navigate("/profile")}>
+          <p className="nav-item" onClick={() => navigate(`/profile/${userID}`)}>
             Hello {Auth.getProfile().data.username}
           </p>
           <p className="nav-item" onClick={() => navigate("/settings")}>

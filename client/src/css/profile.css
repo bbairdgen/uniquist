@@ -1,19 +1,28 @@
+.profile-page {
+    display: flex;
+    justify-content: space-between;
+    /* width: 100%; */
+}
+
 .left-sidebar {
-    position: fixed;
-    top: 100px;
+    /* position: fixed;
+    top: 0;
     left: 0;
-    background-color: #040336;
-    width: 200px;
+    bottom: 0; */
+    text-align: left;
+    /* background-color: #040336; */
+    width: 400px;
+    padding: 20px;
 }
 
 .right-sidebar,
 .empty-right-sidebar {
-    position: fixed;
+    /* position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 300px;
-    overflow-y: auto;
+    overflow-y: auto; */
+    width: 400px;
 }
 
 a,
@@ -24,28 +33,143 @@ a:visited {
     padding: 10px;
 }
 
-.user {
+.left-sidebar a {
+    position: relative;
+    background-color: #222;
+    padding: 20px;
+    border-bottom: 1px solid #111;
+}
+
+.left-sidebar a::after {
+    position: absolute;
+    right: 7%;
+    bottom: 25%;
+    content: ">";
+    font-size: 28pt;
+    font-weight: bold;
+    filter: opacity(0%);
+    transition: all 0.05s ease;
+}
+.left-sidebar a:hover::after {
+    filter: opacity(100%);
+    margin-left: 20px;
+}
+
+
+
+.user-card {
     display: flex;
     position: relative;
+    background-color: #1a1a1a65;
     padding: 10px;
     margin: 5px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 5px;
 }
 
-.user button {
+.follow-btn {
     position: absolute;
     right: 10px;
     top: 20%;
     color: whitesmoke;
     background-color: var(--waikawa-gray);
-    border: none;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
+    font-size: 12pt;
     padding: 10px;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.user button:hover {
+.follow-btn:hover {
     background-color: var(--au-chico);
+}
+
+hr {
+    border: 1px solid #dddddd4f;
+    margin: 40px 0;
+}
+
+.favorite-form {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.favorite-form input {
+    padding-left: 7px;
+    flex-grow: 1;
+}
+
+.favorite-form button {
+    color: whitesmoke;
+    background-color: var(--scampi);
+    font-size: 18pt;
+    font-weight: bold;
+    width: 5vw;
+    padding: 10px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.favorite-form button:hover {
+    background-color: #2fa377;
+}
+
+.favorite-card p {
+    margin: 0 5px 0 0;
+}
+
+.favorite-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: whitesmoke;
+    background-color: #222222;
+    padding: 10px 10px 10px 20px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.favorite-card .delete-icon {
+    font-family: inherit;
+    font-size: 24pt;
+    font-weight: bolder;
+    color: whitesmoke;
+    background-color: var(--au-chico);
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.favorite-card .delete-icon:hover {
+    /* transform: scale(1.12); */
+    color: black;
+    background-color: var(--glacier);
+}
+
+
+
+
+.friend-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* border-bottom: 1px solid #ffffff2c; */
+}
+.friend-card:not(:last-child) {
+    border-bottom: 1px solid #ffffff2c;
+}
+
+
+.center-names {
+    justify-content: center;
+}
+
+.unfollow-btn {
+    position: static;
 }

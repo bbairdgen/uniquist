@@ -6,7 +6,10 @@ import "../css/navbar.css";
 function Navbar() {
   let navigate = useNavigate();
 
-  const userID = Auth.getProfile().data._id;
+  let userID = "";
+  if (Auth.getProfile()) {
+    userID = Auth.getProfile().data._id;
+  }
 
   const logout = (event) => {
     event.preventDefault();

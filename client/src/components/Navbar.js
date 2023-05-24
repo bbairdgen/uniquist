@@ -69,12 +69,8 @@ const Navbar = () => {
         </>
       ) : (
         <>
-          <p className="stuff nav-item" onClick={() => navigate("/signup")}>
-            Sign Up
-          </p>
-
-          <p className="stuff nav-item" onClick={() => navigate("/login")}>
-            Log in
+          <p className="stuff" onClick={() => navigate("/login")}>
+            Login/Sign Up
           </p>
         </>
       )}

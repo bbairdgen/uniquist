@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../utils/mutations';
-
+import "../css/signup.css"
 import Auth from "../utils/auth";
 
 const SignUp = () => {
@@ -40,7 +40,7 @@ const SignUp = () => {
   return (
     <main>
       <div className="card">
-        <h3>Sign Up</h3>
+        <h2>Sign Up</h2>
         <div className="card-body">
           {false ? (
             <p>Welcome</p>

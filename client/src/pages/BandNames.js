@@ -17,6 +17,7 @@ const BandNames = () => {
     
   }
 
+  console.log('Hello guys');
   return (
     <section className="user-info">
       <h2>check out all these guys</h2>

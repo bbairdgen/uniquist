@@ -48,7 +48,7 @@ const Navbar = () => {
           </p>
         </li>
         <li>
-          <p className="stuff" onClick={() => navigate("/bandnames")}>
+          <p className="nav-item" onClick={() => navigate("/bandnames")}>
             Band Names
           </p>
         </li>

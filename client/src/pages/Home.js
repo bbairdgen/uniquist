@@ -88,8 +88,33 @@ const Home = () => {
 
       // Randomly select 1-3 words, return them
     }
-    const bandName =
+    let bandName =
       bandNameArray[Math.floor(Math.random() * bandNameArray.length)];
+
+    // Randomly add an extra word
+    const randChance = Math.floor(Math.random() * 10);
+
+    if (randChance > 5) {
+      const url = 'https://random-words5.p.rapidapi.com/getMultipleRandom?count=1';
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '2b2680de1emshab268001c35cf4ap1ccbf9jsn13714f7ac882',
+          'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+        }
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.text();
+        const randWordResult = JSON.parse(result);
+        console.log(randWordResult[0]);
+
+        bandName = bandName + " " + randWordResult[0]
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
     bandName ? setBandNameHeader(bandName) : setBandNameHeader("Prompt not descriptive enough");
     // console.log(bandName)

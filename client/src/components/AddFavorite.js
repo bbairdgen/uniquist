@@ -29,20 +29,21 @@ const AddFavorite = () => {
           <div>
             <form className="fave-box">
               <input
-                placeholder="add band name"
+                placeholder="Enter cool band name idea"
                 type="text"
                 onChange={(event) => setFaveInput(event.target.value)}
               />
             </form>
 
-            <button className="fave-button" onClick={handleAdd}>
-              add band name
+            <button className="btn fave-button" onClick={handleAdd}>
+              Add Band Name
             </button>
           </div>
         ) : (
-          <div>
-            <p className="storeBand">Log in to store band names</p>
-          </div>
+          <></>
+          // <div>
+          //   <p className="storeBand">Log in to store band names</p>
+          // </div>
         )}
       </section>
     </div>

@@ -58,13 +58,13 @@ const Navbar = () => {
       {Auth.loggedIn() ? (
         <>
           <p>Logged in as {Auth.getProfile().data.username}</p>
-          <p className="nav-item" onClick={logout}>
+          <p className="nav-item logout-btn" onClick={logout}>
             Log Out
           </p>
         </>
       ) : (
         <>
-          <p className="stuff" onClick={() => navigate("/login")}>
+          <p className="stuff login-btn" onClick={() => navigate("/login")}>
             Login/Sign Up
           </p>
         </>

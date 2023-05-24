@@ -3,11 +3,24 @@ import { useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 import "../css/navbar.css";
 
-function Navbar() {
+const Navbar = () => {
   let navigate = useNavigate();
 
+
+
+  // const [userID, setUserID] = useState("");
+
+  // if (Auth.loggedIn()) {
+  //   setUserID(Auth.getProfile().data._id);
+  // }
+
+
+  // NOAH'S NOTE 5/23/2023 9:52 PM MDT
+  // This is here so that clicking "My Profile" will send you to `profile/${userID}`
+  // It's initialized empty because it doesn't assume you're logged in and authorized.
+  // However, 
   let userID = "";
-  if (Auth.getProfile()) {
+  if (Auth.loggedIn()) {
     userID = Auth.getProfile().data._id;
   }
 
@@ -15,6 +28,7 @@ function Navbar() {
     event.preventDefault();
     Auth.logout();
   };
+
   return (
     <div>
       <ul className="nav-list">
@@ -33,26 +47,28 @@ function Navbar() {
             See Users
           </p>
         </li>
+        {Auth.loggedIn() ? (
+          <li>
+            <p className="nav-item" onClick={() => navigate(`/profile/${userID}`)}>
+              My Profile
+            </p>
+          </li>
+        ) : <></>}
       </ul>
       {Auth.loggedIn() ? (
         <>
-          <p className="nav-item" onClick={() => navigate(`/profile/${userID}`)}>
-            Hello {Auth.getProfile().data.username}
-          </p>
-          <p className="nav-item" onClick={() => navigate("/settings")}>
-            Settings
-           </p>
+          <p>Logged in as {Auth.getProfile().data.username}</p>
           <p className="nav-item" onClick={logout}>
             Log Out
           </p>
         </>
       ) : (
         <>
-          <p className="stuff" onClick={() => navigate("/signup")}>
+          <p className="stuff nav-item" onClick={() => navigate("/signup")}>
             Sign Up
           </p>
 
-          <p className="stuff" onClick={() => navigate("/login")}>
+          <p className="stuff nav-item" onClick={() => navigate("/login")}>
             Log in
           </p>
         </>

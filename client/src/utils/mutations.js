@@ -90,7 +90,7 @@ export const ADD_FAVORITE = gql`
 
 export const REMOVE_FAVORITE = gql`
   mutation RemoveFavorite($userID: ID!, $text: String!) {
-    addFavorite(userID: $userID, text: $text) {
+    removeFavorite(userID: $userID, text: $text) {
       _id
       username
       favorites

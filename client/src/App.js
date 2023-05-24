@@ -57,9 +57,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/profile" element={<Profile />} />
-            {/* <Route path="/matchup" element={<Matchup />} /> */}
-            {/* <Route path="/matchup/:id" element={<Vote />} /> */}
+            <Route path="/profile/:profileID" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

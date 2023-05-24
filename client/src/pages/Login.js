@@ -69,14 +69,14 @@ const Login = (props) => {
                                 onChange={handleChange}
                             />
                             <button
-                                className="btn1"
+                                className="btn btn1"
                                 style={{ cursor: 'pointer' }}
                                 type="submit"
                             >
                                 Submit
                             </button>
                             <Link to="/SignUp">
-                                <button className="btn2" style={{ cursor: 'pointer' }}>Create New Account</button>
+                                <button className="btn btn2" style={{ cursor: 'pointer' }}>Create New Account</button>
                             </Link>
                         </form>
                     )}

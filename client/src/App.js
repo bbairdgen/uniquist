@@ -21,6 +21,18 @@ import Navbar from "./components/Navbar";
 import AddFavorite from "./components/AddFavorite";
 import BandNames from "./pages/BandNames";
 
+import { onError } from 'apollo-link-error';
+import { ApolloLink } from 'apollo-link';
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    console.log('graphQLErrors', graphQLErrors);
+  }
+  if (networkError) {
+    console.log('networkError', networkError);
+  }
+});
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -37,9 +49,11 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const link = ApolloLink.from([errorLink, httpLink]);
+
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  link: authLink.concat(link),
+  cache: new InMemoryCache()
 });
 
 function App() {

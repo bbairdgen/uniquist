@@ -40,50 +40,54 @@ function Spotify() {
   }, []);
 
   async function search() {
-    console.log("searching for " + searchInput);
+    try {
+      console.log("searching for " + searchInput);
 
-    //Get request using search to get the Artist ID
-    var searchParameters = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + accessToken,
-      },
-    };
-    var artistFetch = await fetch(
-      "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
-      searchParameters
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("artist data");
-        console.log(data.artists);
+      //Get request using search to get the Artist ID
+      var searchParameters = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      };
+      var artistFetch = await fetch(
+        "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
+        searchParameters
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("artist data");
+          console.log(data.artists);
 
-        function collectNames() {
-          var theNames = [];
-          for (let i = 0; i < data.artists.items.length; i++) {
-            const nm = data.artists.items[i].name;
-            theNames.push(nm);
+          function collectNames() {
+            var theNames = [];
+            for (let i = 0; i < data.artists.items.length; i++) {
+              const nm = data.artists.items[i].name;
+              theNames.push(nm);
+            }
+            console.log(theNames);
+            setReturnedArtists(theNames);
+            return theNames;
           }
-          console.log(theNames);
-          setReturnedArtists(theNames);
-          return theNames;
-        }
 
-        collectNames();
+          collectNames();
 
-        setArtistResults(data.artists.items);
-        console.log("artist results");
-        console.log(artistResults);
-        // return data.artists.items;
+          setArtistResults(data.artists.items);
+          console.log("artist results");
+          console.log(artistResults);
+          // return data.artists.items;
 
-        setArtistName(data.artists.items[0].name);
-        console.log(artistName);
+          setArtistName(data.artists.items[0].name);
+          console.log(artistName);
 
-        // setArtistID(data.artists.items[0].id);
+          // setArtistID(data.artists.items[0].id);
 
-        return data.artists.items[0].id;
-      });
+          return data.artists.items[0].id;
+        });
+    } catch (error) {
+      console.log(error);
+    }
 
     // Get request with Artist ID grab all the albums from that artist
 

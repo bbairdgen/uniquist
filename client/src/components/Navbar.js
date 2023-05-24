@@ -28,6 +28,11 @@ function Navbar() {
             See Users
           </p>
         </li>
+        <li>
+          <p className="stuff" onClick={() => navigate("/bandnames")}>
+            Band Names
+          </p>
+        </li>
       </ul>
       {Auth.loggedIn() ? (
         <>

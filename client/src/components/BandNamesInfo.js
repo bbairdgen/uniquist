@@ -32,9 +32,13 @@ const BandNamesInfo = (props) => {
             return (
               <div key={band} bandname={band}>
                 <h5>{band}</h5>
-                <button className="fave-button" onClick={handleDelete}>
+                {/* {Auth.loggedIn() ? (
+                  <button className="fave-button" onClick={handleDelete}>
                     Delete Band Name
                 </button>
+                  ) : (
+                    <></>
+                  )} */}
               </div>
             )
           } else {

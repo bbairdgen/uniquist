@@ -48,12 +48,8 @@ function Navbar() {
         </>
       ) : (
         <>
-          <p className="stuff" onClick={() => navigate("/signup")}>
-            Sign Up
-          </p>
-
           <p className="stuff" onClick={() => navigate("/login")}>
-            Log in
+            Login/Sign Up
           </p>
         </>
       )}

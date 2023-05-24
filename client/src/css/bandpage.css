@@ -1,0 +1,18 @@
+.band-members {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.bandmember-card a {
+    display: inline-block;
+    width: 10vw;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+.bandmember-card a:hover {
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px white;
+}
+

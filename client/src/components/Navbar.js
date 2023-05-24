@@ -14,10 +14,12 @@ const Navbar = () => {
   // So just warning y'all, if the "My Profile" button doesn't take you anywhere,
   // then that means this code is inconsistent and we'll probably need to
   // implement global state.
-  let userID = "";
-  if (Auth.loggedIn()) {
-    userID = Auth.getProfile().data._id;
-  }
+  let __USERID = "";
+  let __USERNAME = "";
+    if (Auth.loggedIn()) {
+        __USERID = Auth.getProfile().data?._id;
+        __USERNAME = Auth.getProfile().data?.username;
+    }
 
   const logout = (event) => {
     event.preventDefault();
@@ -49,7 +51,7 @@ const Navbar = () => {
         </li>
         {Auth.loggedIn() ? (
           <li>
-            <p className="nav-item" onClick={() => navigate(`/profile/${userID}`)}>
+            <p className="nav-item" onClick={() => navigate(`/profile/${__USERID}`)}>
               My Profile
             </p>
           </li>
@@ -57,7 +59,7 @@ const Navbar = () => {
       </ul>
       {Auth.loggedIn() ? (
         <>
-          <p>Logged in as {Auth.getProfile().data.username}</p>
+          <p>Logged in as {__USERNAME}</p>
           <p className="nav-item logout-btn" onClick={logout}>
             Log Out
           </p>

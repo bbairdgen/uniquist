@@ -1,7 +1,12 @@
+.error-msg {
+    color: rgb(255, 91, 91);
+}
+
 .profile-page {
     display: flex;
     justify-content: space-between;
     /* width: 100%; */
+    padding-bottom: 100px;
 }
 
 .left-sidebar {
@@ -67,6 +72,10 @@ a:visited {
     border-radius: 5px;
 }
 
+.profile-body .follow-btn {
+    position: static;
+}
+
 .follow-btn {
     position: absolute;
     right: 10px;
@@ -90,6 +99,35 @@ hr {
     border: 1px solid #dddddd4f;
     margin: 40px 0;
 }
+
+
+
+  /************************************/
+ /********** BANDS SECTION ***********/
+/************************************/
+
+.band-link {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.create-band-link,
+a.create-band-link {
+    color: whitesmoke;
+    background-color: var(--pickled-bluewood);
+    margin-top: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.356);
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.5s ease;
+}
+a.create-band-link:hover {
+    filter: hue-rotate(75deg);
+    box-shadow: 0 0 10px rgba(207, 207, 207, 0.4);
+}
+
 
 .favorite-form {
     display: flex;

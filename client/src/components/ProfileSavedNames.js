@@ -7,6 +7,11 @@ import { ADD_FAVORITE, REMOVE_FAVORITE } from '../utils/mutations';
 
 import Auth from '../utils/auth';
 
+let __USERID = "";
+if (Auth.loggedIn()) {
+    __USERID = Auth.getProfile().data?._id;
+}
+
 const ProfileSavedNames = ({ user, onMyProfile }) => {
     // STATE FIRST
     const [newFaveInput, setNewFaveInput] = useState("");
@@ -27,7 +32,7 @@ const ProfileSavedNames = ({ user, onMyProfile }) => {
         if (newFaveInput) {
             addFavorite({
                 variables: {
-                    userID: Auth.getProfile().data._id,
+                    userID: __USERID,
                     text: newFaveInput
                 },
                 onCompleted: () => setNewFaveInput("")
@@ -40,7 +45,7 @@ const ProfileSavedNames = ({ user, onMyProfile }) => {
 
         removeFavorite({
             variables: {
-                userID: Auth.getProfile().data._id,
+                userID: __USERID,
                 text: favoriteText
             }
         });

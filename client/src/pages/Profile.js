@@ -26,6 +26,11 @@ const Profile = () => {
     const { profileID } = useParams();
     // console.log("profileID:", profileID); // debug
 
+    let __USERID = "";
+    if (Auth.loggedIn()) {
+        __USERID = Auth.getProfile().data?._id;
+    }
+
     // If you're viewing your profile, some text elements should be different.
     // You shouldn't be "Welcome,"d on another user's page.
     // These special strings will be set according to whether the param
@@ -34,7 +39,7 @@ const Profile = () => {
     let MY = "";
     let WELCOME = "";
     let S_PAGE = "'s Page";
-    if (Auth.getProfile().data._id === profileID) {
+    if (__USERID === profileID) {
         onMyProfile = true;
         MY = "My ";
         WELCOME = "Welcome, ";
@@ -60,7 +65,7 @@ const Profile = () => {
         if (e.target.textContent === "FOLLOW") {
             addFriend({
                 variables: { 
-                    userID: Auth.getProfile().data._id,
+                    userID: __USERID,
                     friendID: friendID
                 },
                 onCompleted: () => e.target.textContent = "FOLLOWING"
@@ -68,7 +73,7 @@ const Profile = () => {
         } else {
             removeFriend({
                 variables: {
-                    userID: Auth.getProfile().data._id,
+                    userID: __USERID,
                     friendID: friendID
                 },
                 onCompleted: () => e.target.textContent = "FOLLOW"
@@ -107,6 +112,7 @@ const Profile = () => {
                                 ? (
                                     <button
                                         type="button"
+                                        className="follow-btn"
                                         onClick={handleFollowButton}
                                     >{renderIfFollowing(oneUser.data?.user._id)}</button>
                                 )
@@ -131,12 +137,12 @@ const Profile = () => {
                             allUsers.loading
                             ? (<p>loading...</p> )
                             : (
-                                profileID === Auth.getProfile().data._id
+                                profileID === __USERID
                                 ? (
                                     <>
                                     <h4>Follow people!</h4>
                                     {allUsers.data?.users.map((user, i) => {
-                                        if (i <= 20 && user._id !== Auth.getProfile().data._id) {
+                                        if (i <= 20 && user._id !== __USERID) {
                                             return (
                                                 <div key={user._id} userid={user._id} className="user-card">
                                                     <a href={user._id}>{user.username}</a>

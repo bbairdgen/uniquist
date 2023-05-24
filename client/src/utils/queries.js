@@ -61,8 +61,8 @@ export const QUERY_ALL_BANDS = gql`
 `;
 
 export const QUERY_ONE_BAND = gql`
-  query OneBand($id: ID!) {
-    band(_id: $id) {
+  query OneBand($bandID: ID!) {
+    band(_id: $bandID) {
       _id
       bandname
       stream_links

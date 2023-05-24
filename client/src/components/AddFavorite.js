@@ -11,9 +11,13 @@ const AddFavorite = () => {
 
   const handleAdd = async () => {
     try {
+      let userID;
+      if (Auth.loggedIn()) {
+        userID = Auth.getProfile().data._id
+      }
       await addFavorite({
         variables: {
-          userID: Auth.getProfile().data._id,
+          userID: userID,
           text: faveInput,
         },
       });

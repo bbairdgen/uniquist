@@ -6,6 +6,11 @@ import { UPDATE_USERNAME ,UPDATE_PASSWORD } from '../utils/mutations';
 
 import Auth from "../utils/auth";
 
+let __USERID = "";
+  if (Auth.loggedIn()) {
+      __USERID = Auth.getProfile().data?._id;
+  }
+
 const ProfileSettings = () => {
   const [formState, setFormState] = useState({
     username: "",
@@ -29,7 +34,7 @@ const ProfileSettings = () => {
 
     try {
       const { data } = await updateUsername({
-        variables: { userID: Auth.getProfile().data._id, username: formState.username },
+        variables: { userID: __USERID, username: formState.username },
       });
       
       console.log("1.2", data);
@@ -46,7 +51,7 @@ const ProfileSettings = () => {
 
     try {
         const { data } = await updatePassword({
-          variables: { userID: Auth.getProfile().data._id, password: formState.password },
+          variables: { userID: __USERID, password: formState.password },
         });
         
         console.log("1.2", data);

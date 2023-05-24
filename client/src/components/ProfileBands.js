@@ -1,3 +1,5 @@
+import '../css/profile.css';
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -13,6 +15,16 @@ const ProfileBands = ({ user, onMyProfile }) => {
     return (
         <div>
             <h3>{mineOrTheir}Bands</h3>
+            <div className="user-bands">
+                {user.bands.map((band) => {
+                    return (
+                        <div key={band._id} className="band-card">
+                            <Link to={`../bands/${band._id}`} className="band-link">{band.bandname}</Link>
+                        </div>
+                    )
+                })}
+            </div>
+            <Link to="./new-band" className='create-band-link'>+ CREATE NEW BAND</Link>
         </div>
     )
 }

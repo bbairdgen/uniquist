@@ -1,15 +1,79 @@
 import "../css/profile.css";
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom';
+import React, { useState } from "react";
 
-import { useQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { ADD_FAVORITE, REMOVE_FAVORITE } from '../utils/mutations';
-import { QUERY_ONE_USER, QUERY_ALL_USERS } from "../utils/queries";
+// import { QUERY_ONE_USER } from "../utils/queries";
 
 import Auth from '../utils/auth';
 
-const ProfileSavedNames = () => {
+const ProfileSavedNames = ({ user, onMyProfile }) => {
+    // STATE FIRST
+    const [newFaveInput, setNewFaveInput] = useState("");
+    
+    // QUERIES AND MUTATIONS
+    const [addFavorite] = useMutation(ADD_FAVORITE);
+    const [removeFavorite] = useMutation(REMOVE_FAVORITE);
 
+
+    // Special UX string which changes based on whether you're viewing
+    // your own profile or someone else's.
+    const mineOrTheir = onMyProfile ? "My " : `${user.username}'s `;
+
+    function handleAdd(e) {
+        e.preventDefault();
+
+        // disallow saving empty favorites
+        if (newFaveInput) {
+            addFavorite({
+                variables: {
+                    userID: Auth.getProfile().data._id,
+                    text: newFaveInput
+                },
+                onCompleted: () => setNewFaveInput("")
+            });
+        }
+    }
+
+    function handleDelete(e) {
+        let favoriteText = e.target.parentElement.getAttribute("favorite");
+
+        removeFavorite({
+            variables: {
+                userID: Auth.getProfile().data._id,
+                text: favoriteText
+            }
+        });
+    }
+
+
+    return (
+        <div>
+            <h3 id="saved-names">{mineOrTheir}Saved Band Names</h3>
+            {onMyProfile ? (
+                <form className="favorite-form">
+                    <input
+                        placeholder="New band name idea"
+                        type="text"
+                        value={newFaveInput}
+                        onChange={(e) => setNewFaveInput(e.target.value)}
+                    />
+                    <button onClick={handleAdd}>ADD</button>
+                </form>
+            ) : null}
+
+            {user.favorites.map((favorite) => {
+                return (
+                    <div key={favorite} favorite={favorite} className="favorite-card">
+                        <p className="favorite-text">{favorite}</p>
+                        {onMyProfile
+                        ? <button className="delete-icon" onClick={handleDelete}>X</button>
+                        : null}
+                    </div>
+                )
+            })}
+        </div>
+    )
 }
 
 export default ProfileSavedNames;

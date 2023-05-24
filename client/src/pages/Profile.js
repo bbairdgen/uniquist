@@ -9,7 +9,10 @@ import { QUERY_ONE_USER, QUERY_ALL_USERS } from "../utils/queries";
 import Auth from '../utils/auth';
 
 import NotFound from "./NotFound";
-import Settings from "../components/ProfileSettings";
+import ProfileSettings from "../components/ProfileSettings";
+import ProfileBands from "../components/ProfileBands";
+import ProfileSavedNames from "../components/ProfileSavedNames";
+import ProfileFollowing from "../components/ProfileFollowing";
 
 const Profile = () => {
     const allUsers = useQuery(QUERY_ALL_USERS);
@@ -22,31 +25,32 @@ const Profile = () => {
     // so we grab it from there and compare it to our JWT.
     const { profileID } = useParams();
     // console.log("profileID:", profileID); // debug
+
+    // If you're viewing your profile, some text elements should be different.
+    // You shouldn't be "Welcome,"d on another user's page.
+    // These special strings will be set according to whether the param
+    // in the URL matches the currently logged in user's ID or not.
     let onMyProfile = false;
     let MY = "";
+    let WELCOME = "";
+    let S_PAGE = "'s Page";
     if (Auth.getProfile().data._id === profileID) {
         onMyProfile = true;
         MY = "My ";
+        WELCOME = "Welcome, ";
+        S_PAGE = "";
     }
-    // No matter what user's page we're on, be it the currently signed-in one
-    // or some other user, we use profileID to query them.
+    // No matter which user's page we're on, use profileID to query that user.
     const oneUser = useQuery(
         QUERY_ONE_USER,
-        { variables: { id: profileID } }
+        { variables: { userID: profileID } }
     );
     // Extract all the user ID's from all this user's friends.
     // This is used in the renderIfFollowing function below.
-    const oneUserFriends = oneUser.data?.user.friends.map((friend) => friend._id);
-
-    // If our query.data returns empty, then that user doesn't exist
-    // and the app navigates to the NotFound page.
-    // if (!oneUser.data) {
-    //     console.error("Error: no user found with that profileID");
-    //     return <NotFound />
-    // }
+    const oneUserFriendIDs = oneUser.data?.user.friends.map((friend) => friend._id);
 
 
-    async function handleFollowButton(e) {
+    function handleFollowButton(e) {
         // Use e.target to extract our custom `userid` attribute,
         // which has the userID of the friend the user elected to follow
         let friendID = e.target.parentElement.getAttribute("userid");
@@ -54,28 +58,28 @@ const Profile = () => {
         // If the button said "FOLLOW" when clicked, execute addFriend mutation.
         // Else execute removeFriend mutation.
         if (e.target.textContent === "FOLLOW") {
-            await addFriend({
+            addFriend({
                 variables: { 
                     userID: Auth.getProfile().data._id,
                     friendID: friendID
-                }
+                },
+                onCompleted: () => e.target.textContent = "FOLLOWING"
             });
-            e.target.textContent = "FOLLOWING"
         } else {
-            await removeFriend({
+            removeFriend({
                 variables: {
                     userID: Auth.getProfile().data._id,
                     friendID: friendID
-                }
+                },
+                onCompleted: () => e.target.textContent = "FOLLOW"
             });
-            e.target.textContent = "FOLLOW"
         }
     }
 
-    async function renderIfFollowing(id) {
+    function renderIfFollowing(id) {
         // Informs the user if they are already following a user
         // on the right side panel.
-        return oneUserFriends.includes(id) ? "FOLLOWING" : "FOLLOW";
+        return oneUserFriendIDs.includes(id) ? "FOLLOWING" : "FOLLOW";
     }
 
 
@@ -85,6 +89,8 @@ const Profile = () => {
             <>
             {!oneUser.data ? <NotFound /> : (
                 <div className="profile-page">
+
+
                     <aside className="left-sidebar">
                         {onMyProfile ? <a href="#settings">Settings</a> : null}
                         {/* `MY` renders "My " if viewing your own profile */}
@@ -92,9 +98,11 @@ const Profile = () => {
                         <a href="#saved-names">{MY}Saved Band Names</a>
                         <a href="#following">Following</a>
                     </aside>
+
+
                     <section className="profile-body">
                         <div userid={oneUser.data?.user._id}>
-                            <h2>{oneUser.data?.user.username}</h2>
+                            <h2>{WELCOME}{oneUser.data?.user.username}{S_PAGE}</h2>
                             {!onMyProfile
                                 ? (
                                     <button
@@ -105,8 +113,19 @@ const Profile = () => {
                                 : ( null )
                             }
                         </div>
-                        {onMyProfile ? <Settings /> : null}
+                        {onMyProfile ? (<> <hr/> <ProfileSettings /> </>) : null}
+                        <hr/>
+                        <ProfileBands user={oneUser.data?.user} onMyProfile={onMyProfile} />
+                        <hr/>
+                        <ProfileSavedNames user={oneUser.data?.user} onMyProfile={onMyProfile} />
+                        <hr/>
+                        <ProfileFollowing
+                            user={oneUser.data?.user}
+                            onMyProfile={onMyProfile}
+                        />
                     </section>
+
+
                     <aside className="right-sidebar">
                         {
                             allUsers.loading
@@ -119,10 +138,11 @@ const Profile = () => {
                                     {allUsers.data?.users.map((user, i) => {
                                         if (i <= 20 && user._id !== Auth.getProfile().data._id) {
                                             return (
-                                                <div key={user._id} userid={user._id} className="user">
+                                                <div key={user._id} userid={user._id} className="user-card">
                                                     <a href={user._id}>{user.username}</a>
                                                     <button
                                                         type="button"
+                                                        className="follow-btn"
                                                         onClick={handleFollowButton}
                                                     >{renderIfFollowing(user._id)}</button>
                                                 </div>

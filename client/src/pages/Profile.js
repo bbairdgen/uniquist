@@ -46,7 +46,7 @@ const Profile = () => {
     // }
 
 
-    function handleFollowButton(e) {
+    async function handleFollowButton(e) {
         // Use e.target to extract our custom `userid` attribute,
         // which has the userID of the friend the user elected to follow
         let friendID = e.target.parentElement.getAttribute("userid");
@@ -54,7 +54,7 @@ const Profile = () => {
         // If the button said "FOLLOW" when clicked, execute addFriend mutation.
         // Else execute removeFriend mutation.
         if (e.target.textContent === "FOLLOW") {
-            addFriend({
+            await addFriend({
                 variables: { 
                     userID: Auth.getProfile().data._id,
                     friendID: friendID
@@ -62,7 +62,7 @@ const Profile = () => {
             });
             e.target.textContent = "FOLLOWING"
         } else {
-            removeFriend({
+            await removeFriend({
                 variables: {
                     userID: Auth.getProfile().data._id,
                     friendID: friendID
@@ -72,19 +72,12 @@ const Profile = () => {
         }
     }
 
-    function renderIfFollowing(id) {
+    async function renderIfFollowing(id) {
         // Informs the user if they are already following a user
         // on the right side panel.
         return oneUserFriends.includes(id) ? "FOLLOWING" : "FOLLOW";
     }
 
-    function handleAddFavorite(e) {
-
-    }
-
-    function handleRemoveFavorite(e) {
-
-    }
 
     return (
         <>

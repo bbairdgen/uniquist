@@ -17,25 +17,26 @@ const AllUsers = () => {
   }
 
   return (
-    <section className="user-info">
-      <h2>check out all these guys</h2>
-      {userList.map((user) => {
-        // console.log(user);
-        // console.log(user.username);
-        // if (user.favorites[0].text) {
-        //   console.log(user.favorites[0].text);
-        // }
-
-        return (
-          <UserInfo
-            key={user._id}
-            id={user._id}
-            name={user.username}
-            bandNames={user.favorites}
-          ></UserInfo>
-        );
-      })}
-    </section>
+    <>
+      <h2>SCLOPE THIS</h2>
+      <section className="user-info">
+        {userList.map((user) => {
+          // console.log(user);
+          // console.log(user.username);
+          // if (user.favorites[0].text) {
+          //   console.log(user.favorites[0].text);
+          // }
+          return (
+            <UserInfo
+              key={user._id}
+              id={user._id}
+              name={user.username}
+              bandNames={user.favorites}
+            ></UserInfo>
+          );
+        })}
+      </section>
+    </>
   );
 };
 

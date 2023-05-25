@@ -16,3 +16,20 @@
     box-shadow: 0 0 10px white;
 }
 
+.stream-links {
+    display: flex;
+    font-family: 'orbitron';
+    margin: 50px;
+    justify-content: center;
+}
+
+.links-container {
+    font-family: 'orbitron';
+    margin: 50px;
+    background-color: #f0f8ff26;
+}
+
+.stream-link:hover {
+    color:#f0f8ffb8
+}
+

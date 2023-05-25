@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import AddFavorite from '../components/AddFavorite';
 import "../css/home.css";
 // import { rapidApiKey, randomApiKey } from '/utils/keys'
-require('dotenv').config()
+// require('dotenv').config()
 
 const Home = () => {
   const [prompt, setPrompt] = useState("");

@@ -14,7 +14,7 @@ if (Auth.loggedIn()) {
 
 const CreateBand = () => {
     
-    const { loading, data, error } = useQuery(QUERY_ALL_USERS);
+    const { loading, data } = useQuery(QUERY_ALL_USERS);
     const [createBand] = useMutation(CREATE_BAND);
 
     const [newBandName, setNewBandName] = useState("");
@@ -78,20 +78,15 @@ const CreateBand = () => {
                 members: memberIDs,
                 streamLinks,
             },
-            onCompleted: (data) => {
-                // setNewBandName("");
-                // setMembersToAdd([]);
-                // setStreamLinks([]);
-                // setUserSearchInput("");
-                // setUserResults("");
+            onCompleted: (bandData) => {
 
                 // remove button so it can't be clicked again during timeout
                 e.target.remove();
                 setSuccessMsg("Band created successfully!");
 
-                console.log("data:", data);
+                // console.log("bandData:", bandData);
 
-                setTimeout(window.location.assign(`/bands/${data.createBand._id}`), 20000);
+                setTimeout(window.location.assign(`/bands/${bandData.createBand._id}`), 20000);
             }
         })
 
@@ -179,26 +174,30 @@ const CreateBand = () => {
                     <p>Loading...</p>
                 ) : (
                     <>
-                    {userResults.map((user) => {
-                        return (
-                            <div key={user._id} className="user-search-card">
-                                <Link to={`/profile/${user._id}`}>{user.username}</Link>
-                                <button
-                                    type="button"
-                                    className="add-remove"
-                                    onClick={() => {
-                                        // 'push' to membersToAdd to render it in MEMBERS list
-                                        setMembersToAdd([...membersToAdd, user]);
-                                        // safecopy search results, splice added member
-                                        // ensures immediate removal of added member from search results
-                                        let newResultsList = [...userResults];
-                                        newResultsList.splice(newResultsList.indexOf(user), 1);
-                                        setUserResults([...newResultsList]);
-                                    }}
-                                >ADD</button>
-                            </div>
-                        )   
-                    })}
+                    {userResults.length ? (
+                        <>
+                        {userResults.map((user) => {
+                            return (
+                                <div key={user._id} className="user-search-card">
+                                    <Link to={`/profile/${user._id}`}>{user.username}</Link>
+                                    <button
+                                        type="button"
+                                        className="add-remove"
+                                        onClick={() => {
+                                            // 'push' to membersToAdd to render it in MEMBERS list
+                                            setMembersToAdd([...membersToAdd, user]);
+                                            // safecopy search results, splice added member
+                                            // ensures immediate removal of added member from search results
+                                            let newResultsList = [...userResults];
+                                            newResultsList.splice(newResultsList.indexOf(user), 1);
+                                            setUserResults([...newResultsList]);
+                                        }}
+                                    >ADD</button>
+                                </div>
+                            )   
+                        })}
+                        </>
+                    ) : null}
                     </>
                 )}
             </div>

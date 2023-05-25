@@ -17,7 +17,6 @@ import AllUsers from "./pages/AllUsers";
 import Profile from "./pages/Profile";
 import Band from "./pages/BandPage";
 import CreateBand from './pages/CreateBand';
-import BandNames from "./pages/BandNames";
 
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -76,7 +75,6 @@ function App() {
             <Route path="/profile/:profileID" element={<Profile />} />
             <Route path="/profile/:profileID/new-band" element={<CreateBand />} />
             <Route path="/bands/:bandID" element={<Band />} />
-            <Route path="/bandnames" element={<BandNames />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

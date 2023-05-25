@@ -4,9 +4,9 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink
+  createHttpLink,
 } from "@apollo/client";
-import { setContext } from '@apollo/client/link/context';
+import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -16,10 +16,12 @@ import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
 import Profile from "./pages/Profile";
 import Band from "./pages/BandPage";
-import CreateBand from './pages/CreateBand';
+import CreateBand from "./pages/CreateBand";
+import Footer from "./components/Footer";
 
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
+
 
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
@@ -29,26 +31,26 @@ import { ApolloLink } from 'apollo-link';
 // if any GraphQL stuff fails, rather than a vague "400 error".
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
-    console.log('graphQLErrors', graphQLErrors);
+    console.log("graphQLErrors", graphQLErrors);
   }
   if (networkError) {
-    console.log('networkError', networkError);
+    console.log("networkError", networkError);
   }
 });
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 // This enables header forwarding when any request is made to the backend.
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -57,7 +59,7 @@ const link = ApolloLink.from([errorLink, httpLink]);
 
 const client = new ApolloClient({
   link: authLink.concat(link),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 function App() {
@@ -82,6 +84,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      <Footer />
     </ApolloProvider>
   );
 }

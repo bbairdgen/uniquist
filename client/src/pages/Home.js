@@ -39,13 +39,13 @@ const Home = () => {
 
     let bandNameArray = [];
 
-    const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY
     for (let i = 0; i < promptArray.length; i++) {
       const word = promptArray[i].toLowerCase();
 
       const wordTypes = ["synonyms", "hypernyms", "hyponyms"];
       const currentWordType = wordTypes[Math.floor(Math.random() * 3)];
 
+      const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY
       const url = `https://languagetools.p.rapidapi.com/${currentWordType}/${word}`;
       const options = {
         method: "GET",
@@ -99,11 +99,11 @@ const Home = () => {
 
     if (randChance > 5) {
       const url = 'https://random-words5.p.rapidapi.com/getMultipleRandom?count=1';
-      // const randomApiKey = process.env.REACT_APP_RANDOM_API_KEY
+      const randomApiKey = process.env.REACT_APP_RANDOM_API_KEY
       const options = {
         method: 'GET',
         headers: {
-          'X-RapidAPI-Key': rapidApiKey,
+          'X-RapidAPI-Key': randomApiKey,
           'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
         }
       };

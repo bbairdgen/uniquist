@@ -72,7 +72,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
-            <Route path="/profile/:profileID" element={<Profile />} />
+            <Route exact path="/profile/:profileID" element={<Profile />} />
             <Route path="/profile/:profileID/new-band" element={<CreateBand />} />
             <Route path="/bands/:bandID" element={<Band />} />
             <Route path="*" element={<NotFound />} />

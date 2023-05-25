@@ -1,10 +1,10 @@
 import AllUsers from "../pages/AllUsers";
-import { userParams } from 'react-router-dom';
+import { userParams } from "react-router-dom";
 
 function UserInfo(props) {
   return (
     <div className="user-info-card">
-      <h4>{props.name}</h4>
+      <h4>{props.name} 's band names</h4>
       <section className="band-names">
         {props.bandNames.map((band, i) => {
           if (!null) {

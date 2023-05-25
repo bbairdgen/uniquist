@@ -1,9 +1,35 @@
+.user-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .user-info-card {
+    margin: 20px;
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
+    border-style: solid;
+    border-color: #f0f8ff0f;
+    max-width: 350px;
+    padding: 10px;
+    background: linear-gradient(to top,#90549c50, #9c546000 );
 
 }
 
 .user-info-card h4 {
-    margin-right: 15px;
+    border-style: solid;
+    border-color: #f0f8ff11;
+    background-color: #f0f8ff11;
+    font-family: 'orbitron' , sans-serif;
+    box-shadow: #f0f8ff6d 0px 0px 10px;
+    padding: 3px;
+
+}
+
+.user-info {
+    display: flex;
+}
+
+.band-names {
+    background-color: #90549c00;
 }

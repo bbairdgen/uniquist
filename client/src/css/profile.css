@@ -211,3 +211,9 @@ a.create-band-link:hover {
 .unfollow-btn {
     position: static;
 }
+
+@media screen and (max-width: 800px) {
+    .profile-page {
+        flex-direction: column;
+    }
+}

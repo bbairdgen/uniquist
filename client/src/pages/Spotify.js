@@ -5,9 +5,7 @@ import SpotArtist from "../components/SpotArtist";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_FAVORITE } from "../utils/mutations";
 import "dotenv/config"
-
-const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+import { CLIENT_ID, CLIENT_SECRET } from "../../../server/utils/keys"
 
 function Spotify() {
   const [searchInput, setSearchInput] = useState("");

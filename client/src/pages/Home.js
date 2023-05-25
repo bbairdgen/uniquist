@@ -4,7 +4,8 @@ import { QUERY_ALL_USERS } from "../utils/queries";
 import React, { useState } from "react";
 import AddFavorite from '../components/AddFavorite';
 import "../css/home.css";
-import "dotenv/config"
+import { rapidApiKey, randomApiKey } from '../../../server/utils/keys'
+
 
 const Home = () => {
   const [prompt, setPrompt] = useState("");
@@ -44,7 +45,7 @@ const Home = () => {
       const wordTypes = ["synonyms", "hypernyms", "hyponyms"];
       const currentWordType = wordTypes[Math.floor(Math.random() * 3)];
 
-      const rapidApiKey = process.env.RAPID_API_KEY
+      // const rapidApiKey = process.env.RAPID_API_KEY
       const url = `https://languagetools.p.rapidapi.com/${currentWordType}/${word}`;
       const options = {
         method: "GET",
@@ -98,7 +99,7 @@ const Home = () => {
 
     if (randChance > 5) {
       const url = 'https://random-words5.p.rapidapi.com/getMultipleRandom?count=1';
-      const randomApiKey = process.env.RANDOM_API_KEY
+      // const randomApiKey = process.env.RANDOM_API_KEY
       const options = {
         method: 'GET',
         headers: {

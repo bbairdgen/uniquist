@@ -17,6 +17,7 @@ const Navbar = () => {
   let __USERID = "";
   let __USERNAME = "";
     if (Auth.loggedIn()) {
+      //console.log("AUTH SAYS:", Auth.getProfile());
         __USERID = Auth.getProfile().data?._id;
         __USERNAME = Auth.getProfile().data?.username;
     }

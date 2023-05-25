@@ -4,13 +4,10 @@ import { useState, useEffect } from "react";
 import SpotArtist from "../components/SpotArtist";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_FAVORITE } from "../utils/mutations";
-// require("dotenv").config();
+require("dotenv").config();
 
-// const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-// const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-
-const CLIENT_ID = "009b187e349649059f1e99553e63cc23";
-const CLIENT_SECRET = "37d17a81bf0548a287403f1e9d3c8036";
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
 function Spotify() {
   const [searchInput, setSearchInput] = useState("");

@@ -39,30 +39,36 @@ connection.once('open', async () => {
 // I made the function below just to avoid cluttering up that `for` loop above
 
 /**
- * Selects a number of random elements from a given array
- * @param {Array} arr The array to pick random elements from
- * @param {Number} num The number of elements to return
+ * Selects a number of random elements from a given array, ensuring there are no
+ * duplicates in the returned array.
+ * @param {Array} arr The array to pick random elements from.
+ * @param {Number} num The number of elements to return.
  * @param {ObjectID} excludeID This ObjectID will not be present in the returned array.
- * @returns {Array} One element from the array, or an array of random elements.
+ * @returns {Array} An array of elements randomly selected from `arr`.
  */
 function randomFriends(arr, num, excludeID) {
+  // this is the array we will return
   let friendsArray = [];
 
-  // `While` loop ensures we get `num` elements pushed to friendsArray
-  // AND that excludeID is still excluded
-  while (friendsArray.length < num) {
-    randomEl = arr[Math.floor(Math.random() * arr.length)];
-    if (randomEl._id !== excludeID) {
-      friendsArray.push(randomEl);
-    } else continue
+  // Safe copy of given array. At any point, represents the only elements
+  // that the algorithm can push to friendsArray.
+  let chooseables = [...arr];
+
+  // exclude the excludeID
+  // user IDs are always unique so `indexOf` is reliable
+  chooseables.splice(chooseables.indexOf(excludeID), 1)
+
+  for (let i = 0; i < num; i++) {
+    // get random element from chooseable elements array
+    randomEl = chooseables[Math.floor(Math.random() * chooseables.length)];
+    // push this element to friendsArray
+    friendsArray.push(randomEl);
+    // exclude the random element from future runs
+    chooseables.splice(chooseables.indexOf(randomEl), 1);
   }
 
-  // check for duplicate friends in the array
-  // FIXME: This isn't done. In the app's current state, this seed script
-  // has a chance of adding duplicate friends to a user. Not urgent.
-  const containsDuplicates = friendsArray.some((element, index) => {
-    return friendsArray.indexOf(element) !== index;
-  });
-
+  // uncomment this to manually check if duplicates exist
+  // friendsArray.forEach((friend) => console.log("friend: ", friend._id))
+  // console.log("\n")
   return friendsArray;
 }

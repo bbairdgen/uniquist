@@ -4,6 +4,11 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
 import Auth from "../utils/auth";
 
+let __USERID = "";
+    if (Auth.loggedIn()) {
+        __USERID = Auth.getProfile().data?._id;
+    }
+
 const BandNamesInfo = (props) => {
   const [faveInput, setFaveInput] = useState("");
   const [removeFavorite, { error }] = useMutation(REMOVE_FAVORITE);
@@ -14,7 +19,7 @@ const BandNamesInfo = (props) => {
     try {
       await removeFavorite({
         variables: {
-          userID: Auth.getProfile().data._id,
+          userID: __USERID,
           text: bandName,
         },
       });

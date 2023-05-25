@@ -15,11 +15,25 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
 import Profile from "./pages/Profile";
+import Band from "./pages/BandPage";
+import CreateBand from './pages/CreateBand';
+import BandNames from "./pages/BandNames";
 
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
-import AddFavorite from "./components/AddFavorite";
-import BandNames from "./pages/BandNames";
+
+import { onError } from 'apollo-link-error';
+import { ApolloLink } from 'apollo-link';
+import { Token } from "graphql";
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    console.log('graphQLErrors', graphQLErrors);
+  }
+  if (networkError) {
+    console.log('networkError', networkError);
+  }
+});
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -37,9 +51,11 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const link = ApolloLink.from([errorLink, httpLink]);
+
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  link: authLink.concat(link),
+  cache: new InMemoryCache()
 });
 
 function App() {
@@ -58,6 +74,8 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
             <Route path="/profile/:profileID" element={<Profile />} />
+            <Route path="/profile/:profileID/new-band" element={<CreateBand />} />
+            <Route path="/bands/:bandID" element={<Band />} />
             <Route path="/bandnames" element={<BandNames />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

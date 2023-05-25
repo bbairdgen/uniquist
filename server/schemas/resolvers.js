@@ -167,39 +167,56 @@ const resolvers = {
       throw new AuthenticationError("Authentication required");
     },
 
-    addBandToUser: async (parent, { bandID }, context) => {
-      if (context.user) {
-        const bandExists = await Band.exists({ _id: bandID });
-        if (!bandExists) {
-          throw new Error("No band found with that bandID");
-        }
 
-        return User.findOneAndUpdate(
-          { _id: context.user_id },
-          { $addToSet: { bands: bandID } },
-          { new: true }
-        );
-      }
+    //// NOAH'S NOTE 5/24/2023 9:15PM MDT
+    //// The two resolvers below were proving problematic. You can't just
+    //// add bands to any user without authentication. So until we can
+    //// implement a "join band request" feature, the `Bands` field on the
+    //// User model is effectively useless.
+    //// So now, when rendering a user's profile, All Bands will be queried
+    //// to find any that have the user, rather than querying the User and
+    //// mapping through their `bands` field.
 
-      throw new AuthenticationError("Authentication required");
-    },
 
-    removeBandFromUser: async (parent, { bandID }, context) => {
-      if (context.user) {
-        const bandExists = await Band.exists({ _id: bandID });
-        if (!bandExists) {
-          throw new Error("No band found with that bandID");
-        }
+    // addBandToUsers: async (parent, { userIDs, bandID }, context) => {
+    //   if (context.user) {
+    //     const bandExists = await Band.exists({ _id: bandID });
+    //     if (!bandExists) {
+    //       throw new Error("No band found with that bandID");
+    //     }
 
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { bands: bandID } },
-          { new: true }
-        );
-      }
+    //     userIDs.forEach((userID) => {
+    //       return User.findOneAndUpdate(
+    //         { _id: userID },
+    //         { $addToSet: { bands: bandID } },
+    //         { new: true }
+    //       );
+    //     });
+    //   }
 
-      throw new AuthenticationError("Authentication required");
-    },
+    //   throw new AuthenticationError("Authentication required");
+    // },
+
+    // removeBandFromUsers: async (parent, { userIDs, bandID }) => {
+    //   if (context.user) {
+    //     const bandExists = await Band.exists({ _id: bandID });
+    //     if (!bandExists) {
+    //       throw new Error("No band found with that bandID");
+    //     }
+
+    //     return User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $pull: { bands: bandID } },
+    //       { new: true }
+    //     );
+    //   }
+
+    //   throw new AuthenticationError("Authentication required");
+    // },
+
+
+
+
 
     ///////////////////////////////////////////////////////////////////
     /////////////////////////// BAND ROUTES ///////////////////////////

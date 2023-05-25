@@ -1,30 +1,50 @@
 import '../css/profile.css';
 
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-import { useMutation } from '@apollo/client';
-import { UPDATE_USERNAME ,UPDATE_PASSWORD } from '../utils/mutations';
+import { useQuery } from '@apollo/client';
+import { QUERY_ALL_BANDS } from '../utils/queries';
 
-import Auth from "../utils/auth";
+// import Auth from "../utils/auth";
 
 const ProfileBands = ({ user, onMyProfile }) => {
 
+    const allBands = useQuery(QUERY_ALL_BANDS);
+    // if (!allBands.loading) console.log("allBands:", allBands); // debug
+
+    // UX enhancement. Display `My ` when on your own profile.
     const mineOrTheir = onMyProfile ? "My " : `${user.username}'s `;
 
     return (
         <div>
             <h3>{mineOrTheir}Bands</h3>
             <div className="user-bands">
-                {user.bands.map((band) => {
-                    return (
-                        <div key={band._id} className="band-card">
-                            <Link to={`../bands/${band._id}`} className="band-link">{band.bandname}</Link>
-                        </div>
-                    )
-                })}
+                {allBands.loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <>
+                    {allBands.data?.bands.map((band) => {
+                        return (
+                            <div key={band._id} className='user-band'>
+                                {band.members.map((member) => {
+                                    if (member.username === user.username) {
+                                        return (
+                                            <div key={band._id}>
+                                                <Link to={`/bands/${band._id}`}>{band.bandname}</Link>
+                                            </div>
+                                        )
+                                    } else return null;
+                                })}
+                            </div>
+                        )
+                    })}
+                    </>
+                )}
             </div>
-            <Link to="./new-band" className='create-band-link'>+ CREATE NEW BAND</Link>
+            {onMyProfile ? (
+                <Link to="./new-band" className='create-band-link'>+ CREATE NEW BAND</Link>
+            ) : null}
         </div>
     )
 }

@@ -22,10 +22,13 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 
-import { onError } from "apollo-link-error";
-import { ApolloLink } from "apollo-link";
-import { Token } from "graphql";
 
+import { onError } from 'apollo-link-error';
+import { ApolloLink } from 'apollo-link';
+//import { Token } from "graphql"; // noah says: idk what this is or where it came from
+
+// This stuff will print helpful error messages to the console
+// if any GraphQL stuff fails, rather than a vague "400 error".
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     console.log("graphQLErrors", graphQLErrors);
@@ -39,6 +42,7 @@ const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
+// This enables header forwarding when any request is made to the backend.
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem("id_token");
@@ -73,11 +77,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
-            <Route path="/profile/:profileID" element={<Profile />} />
-            <Route
-              path="/profile/:profileID/new-band"
-              element={<CreateBand />}
-            />
+            <Route exact path="/profile/:profileID" element={<Profile />} />
+            <Route path="/profile/:profileID/new-band" element={<CreateBand />} />
             <Route path="/bands/:bandID" element={<Band />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

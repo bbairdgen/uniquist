@@ -96,33 +96,33 @@ export const REMOVE_FAVORITE = gql`
   }
 `;
 
-export const ADD_BAND_TO_USER = gql`
-  mutation AddBandToUser($userID: ID!, $bandID: ID!) {
-    addBandToUser(userID: $userID, bandID: $bandID) {
-      _id
-      username
-      bands {
-        _id
-        bandname
-      }
-    }
-  }
-`;
+// export const ADD_BAND_TO_USERS = gql`
+//   mutation AddBandToUsers($userIDs: [ID]!, $bandID: ID!) {
+//     addBandToUsers(userIDs: $userIDs, bandID: $bandID) {
+//       _id
+//       username
+//       bands {
+//         _id
+//         bandname
+//       }
+//     }
+//   }
+// `;
 
-export const REMOVE_BAND_FROM_USER = gql`
-  mutation RemoveBandFromUser($userID: ID!, $bandID: ID!) {
-    removeBandFromUser(userID: $userID, bandID: $bandID) {
-      _id
-      username
-      bands {
-        bandname
-        members {
-          _id
-        }
-      }
-    }
-  }
-`;
+// export const REMOVE_BAND_FROM_USERS = gql`
+//   mutation RemoveBandFromUser($userIDs: ID!, $bandID: ID!) {
+//     removeBandFromUser(userIDs: $userIDs, bandID: $bandID) {
+//       _id
+//       username
+//       bands {
+//         bandname
+//         members {
+//           _id
+//         }
+//       }
+//     }
+//   }
+// `;
 
 // BAND ROUTES
 

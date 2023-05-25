@@ -23,8 +23,10 @@ import Navbar from "./components/Navbar";
 
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
-import { Token } from "graphql";
+//import { Token } from "graphql"; // noah says: idk what this is or where it came from
 
+// This stuff will print helpful error messages to the console
+// if any GraphQL stuff fails, rather than a vague "400 error".
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     console.log('graphQLErrors', graphQLErrors);
@@ -38,6 +40,7 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
+// This enables header forwarding when any request is made to the backend.
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');

@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 .error-msg {
     color: rgb(255, 91, 91);
 }
@@ -5,8 +9,7 @@
 .profile-page {
     display: flex;
     justify-content: space-between;
-    /* width: 100%; */
-    padding-bottom: 100px;
+    padding-bottom: 75px;
 }
 
 .left-sidebar {
@@ -17,7 +20,7 @@
     text-align: left;
     /* background-color: #040336; */
     width: 400px;
-    padding: 20px;
+    margin: 20px;
 }
 
 .right-sidebar,
@@ -145,7 +148,7 @@ a.create-band-link:hover {
     background-color: var(--scampi);
     font-size: 18pt;
     font-weight: bold;
-    width: 5vw;
+    width: 25%;
     padding: 10px;
     margin-left: 5px;
     border: none;
@@ -212,8 +215,24 @@ a.create-band-link:hover {
     position: static;
 }
 
+
+
 @media screen and (max-width: 800px) {
     .profile-page {
         flex-direction: column;
+        align-items: center;
+    }
+
+    .right-sidebar {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .user-card {
+        width: 90%;
+    }
+
+    input, button.btn {
+        width: 100%;
     }
 }

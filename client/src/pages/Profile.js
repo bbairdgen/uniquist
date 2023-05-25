@@ -26,38 +26,52 @@ const Profile = () => {
     const { profileID } = useParams();
     // console.log("profileID:", profileID); // debug
 
+    // Special variable `__USERID` is the _id of the currently
+    // logged-in user, if there is one. If not, __USERID is blank.
     let __USERID = "";
     if (Auth.loggedIn()) {
         __USERID = Auth.getProfile().data?._id;
     }
 
+    // Special UX strings.
     // If you're viewing your profile, some text elements should be different.
-    // You shouldn't be "Welcome,"d on another user's page.
+    // For example, you shouldn't see "Welcome, John" if you're not John.
     // These special strings will be set according to whether the param
-    // in the URL matches the currently logged in user's ID or not.
+    // in the URL matches the currently logged in user's _id.
     let onMyProfile = false;
     let MY = "";
     let WELCOME = "";
     let S_PAGE = "'s Page";
-    if (__USERID === profileID) {
+    if (__USERID === profileID) { // if URL param :profileID matches current user
         onMyProfile = true;
         MY = "My ";
         WELCOME = "Welcome, ";
         S_PAGE = "";
     }
+
     // No matter which user's page we're on, use profileID to query that user.
     const oneUser = useQuery(
         QUERY_ONE_USER,
         { variables: { userID: profileID } }
     );
-    // Extract all the user ID's from all this user's friends.
+
+    // Extract all the _id's from this user's friends.
     // This is used in the renderIfFollowing function below.
     const oneUserFriendIDs = oneUser.data?.user.friends.map((friend) => friend._id);
+    
+    // debug
+    // if (!oneUser.loading) {
+    //     console.log("oneUser:", oneUser);
+    // }
 
 
+
+    /**
+     * Executes when FOLLOW or UNFOLLOW button is clicked
+     */
     function handleFollowButton(e) {
-        // Use e.target to extract our custom `userid` attribute,
-        // which has the userID of the friend the user elected to follow
+        // Use e.target to extract our custom `userid` attribute from parent,
+        // which has the _id of the friend the user elected to follow/unfollow.
         let friendID = e.target.parentElement.getAttribute("userid");
 
         // If the button said "FOLLOW" when clicked, execute addFriend mutation.
@@ -66,7 +80,7 @@ const Profile = () => {
             addFriend({
                 variables: { 
                     userID: __USERID,
-                    friendID: friendID
+                    friendID
                 },
                 onCompleted: () => e.target.textContent = "FOLLOWING"
             });
@@ -74,7 +88,7 @@ const Profile = () => {
             removeFriend({
                 variables: {
                     userID: __USERID,
-                    friendID: friendID
+                    friendID
                 },
                 onCompleted: () => e.target.textContent = "FOLLOW"
             });
@@ -82,8 +96,7 @@ const Profile = () => {
     }
 
     function renderIfFollowing(id) {
-        // Informs the user if they are already following a user
-        // on the right side panel.
+        // Informs the user if they are already following someone.
         return oneUserFriendIDs.includes(id) ? "FOLLOWING" : "FOLLOW";
     }
 

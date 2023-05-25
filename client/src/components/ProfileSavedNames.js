@@ -63,7 +63,7 @@ const ProfileSavedNames = ({ user, onMyProfile }) => {
                         value={newFaveInput}
                         onChange={(e) => setNewFaveInput(e.target.value)}
                     />
-                    <button onClick={handleAdd}>ADD</button>
+                    <button type="button" onClick={handleAdd}>ADD</button>
                 </form>
             ) : null}
 
@@ -72,7 +72,10 @@ const ProfileSavedNames = ({ user, onMyProfile }) => {
                     <div key={favorite} favorite={favorite} className="favorite-card">
                         <p className="favorite-text">{favorite}</p>
                         {onMyProfile
-                        ? <button className="delete-icon" onClick={handleDelete}>X</button>
+                        ? <button
+                            type="button"
+                            className="delete-icon"
+                            onClick={handleDelete}>X</button>
                         : null}
                     </div>
                 )

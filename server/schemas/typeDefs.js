@@ -57,8 +57,8 @@ const typeDefs = gql`
     removeFriend(userID: ID!, friendID: ID!): User
     addFavorite(userID: ID!, text: String!): User
     removeFavorite(userID: ID!, text: String!): User
-    addBandToUser(userID: ID!, bandID: ID!): User
-    removeBandFromUser(userID: ID!, bandID: ID!): User
+    # addBandToUser(userID: ID!, bandID: ID!): User
+    # removeBandFromUser(userID: ID!, bandID: ID!): User
 
     # BAND ROUTES
     createBand(bandname: String!, members: [ID], stream_links: [String]): Band

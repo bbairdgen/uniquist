@@ -45,13 +45,13 @@ const Home = () => {
       const wordTypes = ["synonyms", "hypernyms", "hyponyms"];
       const currentWordType = wordTypes[Math.floor(Math.random() * 3)];
 
-      const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY
+      // const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY
       const url = `https://languagetools.p.rapidapi.com/${currentWordType}/${word}`;
       const options = {
         method: "GET",
         headers: {
           "X-RapidAPI-Key":
-            rapidApiKey,
+            '2b2680de1emshab268001c35cf4ap1ccbf9jsn13714f7ac882',
           "X-RapidAPI-Host": "languagetools.p.rapidapi.com",
         },
       };
@@ -99,11 +99,11 @@ const Home = () => {
 
     if (randChance > 5) {
       const url = 'https://random-words5.p.rapidapi.com/getMultipleRandom?count=1';
-      const randomApiKey = process.env.REACT_APP_RANDOM_API_KEY
+      // const randomApiKey = process.env.REACT_APP_RANDOM_API_KEY
       const options = {
         method: 'GET',
         headers: {
-          'X-RapidAPI-Key': randomApiKey,
+          'X-RapidAPI-Key': '2b2680de1emshab268001c35cf4ap1ccbf9jsn13714f7ac882',
           'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
         }
       };

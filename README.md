@@ -3,8 +3,6 @@
 ## URL
 https://immense-earth-43761.herokuapp.com/
 
-for uniquist-jerk-fork:  https://uniquist-test.herokuapp.com/
-
 ## Description
 
 This project is where a musical artist can choose a fitting unique band name so that they can express their band's style. The musical artist can manage their bands, band names, and people they follow after signing up. The musical artist can find potential band names and save them to their profile. The musical artist can follow other people and see their profiles. The musical artist can create new bands and add others to the band. The musical artist can search for other musical artists from spotify.

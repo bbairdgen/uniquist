@@ -70,21 +70,19 @@ const Login = (props) => {
                             />
                             <button
                                 className="btn btn1"
-                                style={{ cursor: 'pointer' }}
                                 type="submit"
                             >
                                 Submit
                             </button>
+                            {error && (
+                                <div>
+                                    {error.message}
+                                </div>
+                            )}
                             <Link to="/SignUp">
-                                <button className="btn btn2" style={{ cursor: 'pointer' }}>Create New Account</button>
+                                <button type="button" className="btn btn2">Create New Account</button>
                             </Link>
                         </form>
-                    )}
-
-                    {error && (
-                        <div>
-                            {error.message}
-                        </div>
                     )}
                 </div>
             </div>

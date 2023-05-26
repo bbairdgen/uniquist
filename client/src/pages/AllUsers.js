@@ -18,7 +18,7 @@ const AllUsers = () => {
 
   return (
     <>
-      <h2>SCLOPE THIS</h2>
+      <h2>OUR UNIQUISTS</h2>
       <section className="user-info">
         {userList.map((user) => {
           // console.log(user);

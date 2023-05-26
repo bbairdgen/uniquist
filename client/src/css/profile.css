@@ -10,6 +10,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     padding-bottom: 75px;
+    margin-top: 30px;
 }
 
 .left-sidebar {
@@ -20,7 +21,7 @@ html, body {
     text-align: left;
     /* background-color: #040336; */
     width: 400px;
-    margin: 20px;
+    /* margin: 20px; */
 }
 
 .right-sidebar,

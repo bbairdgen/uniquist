@@ -63,7 +63,7 @@ const ProfileSavedNames = ({ user, onMyProfile }) => {
                         value={newFaveInput}
                         onChange={(e) => setNewFaveInput(e.target.value)}
                     />
-                    <button type="button" onClick={handleAdd}>ADD</button>
+                    <button type="submit" onClick={handleAdd}>ADD</button>
                 </form>
             ) : null}
 

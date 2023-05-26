@@ -35,7 +35,9 @@ function Spotify() {
       .then((data) => setAccessToken(data.access_token));
   }, []);
 
-  async function search() {
+  async function search(e) {
+    e.preventDefault();
+
     try {
       console.log("searching for " + searchInput);
 
@@ -125,10 +127,13 @@ function Spotify() {
               type="text"
               onChange={(event) => setSearchInput(event.target.value)}
             />
+            <button
+              type="submit"
+              className="search-button"
+              onClick={search}>
+              Search
+            </button>
           </form>
-          <button className="search-button" onClick={search}>
-            Search
-          </button>
         </input-group>
       </div>
       <div>

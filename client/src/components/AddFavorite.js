@@ -1,9 +1,10 @@
-import { ADD_FAVORITE } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Auth from "../utils/auth";
 import "../css/addFavorites.css";
+import React, { useState } from "react";
+import { HashLink } from "react-router-hash-link";
+import { useMutation } from "@apollo/client";
+import { ADD_FAVORITE } from "../utils/mutations";
+
+import Auth from "../utils/auth";
 
 const AddFavorite = () => {
   const [faveInput, setFaveInput] = useState("");
@@ -44,7 +45,7 @@ const AddFavorite = () => {
   };
 
   return (
-    <div>
+    <div className="add-favorite">
       <section>
         {Auth.loggedIn() ? (
           <div>
@@ -64,7 +65,7 @@ const AddFavorite = () => {
               ? (
                   <p>
                     {successMsg}
-                    <Link to={`/profile/${__USERID}#saved-names`} style={{display: 'inline'}}>view all</Link>
+                    <HashLink to={`/profile/${__USERID}#saved-names`} style={{display: 'inline'}}>view all</HashLink>
                   </p>
                 )
               : null}

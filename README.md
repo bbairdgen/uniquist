@@ -70,6 +70,8 @@ This is a book search engine that allows users to signup and/or login to save th
 
 ![Uniquist-Spotify-Search](assets/demo/uniquist-spotify-search.JPG)
 
+![Uniquist-See-Users](assets/demo/uniquist-see-users.JPG)
+
 ![Uniquist-Signup](assets/demo/uniquist-signup.JPG)
 
 ![Uniquist-Login](assets/demo/uniquist-login.JPG)

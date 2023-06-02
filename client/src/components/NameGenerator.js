@@ -46,14 +46,14 @@ const NameGenerator = () => {
 
     // Create array with words in prompt
 
-    const promptArray = prompt.split(" ");
+    const promptArray = prompt.trim().toLowerCase().split(" ");
 
     // Make API calls with words in array
 
     let bandNameArray = [];
 
     for (let i = 0; i < promptArray.length; i++) {
-      const word = promptArray[i].toLowerCase();
+      const word = promptArray[i];
 
       const wordTypes = ["synonyms", "hypernyms", "hyponyms"];
       const currentWordType = wordTypes[Math.floor(Math.random() * 3)];
@@ -147,7 +147,7 @@ const NameGenerator = () => {
     try {
       // prevent submission if text box is empty
       if (bandNameHeader) {
-        console.log("bandNameHeader:", bandNameHeader); // debug
+        // console.log("bandNameHeader:", bandNameHeader); // debug
         // initiate mutation
         addFavorite({
           variables: {
@@ -155,7 +155,6 @@ const NameGenerator = () => {
             text: bandNameHeader,
           },
           onCompleted: () => {
-            // setSuccessMsg(`${faveInput} added to saved band names •`);
             e.target.classList.toggle("btn-favorited");
             e.target.textContent = "Favorited!";
             setViewAllSavedHeader("view all saved names")
@@ -168,66 +167,42 @@ const NameGenerator = () => {
   };
 
   return (
-    <div className="card bg-white card-rounded w-50">
-      {/* <div className="card-header bg-dark text-center">
-        <h1>Band Name Generator</h1>
-      </div>
-      <div className="card-body m-5">
-        <h2>Here is a list of matchups you can vote on:</h2>
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <ul className="square">
-            {matchupList.map((matchup) => {
-              return (
-                <li key={matchup._id}>
-                  <Link to={{ pathname: `/matchup/${matchup._id}` }}>
-                    {matchup.tech1} vs. {matchup.tech2}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div> */}
-      <div className="card-footer text-center">
-        <h2>Band Name Generator</h2>
-        <form>
-          {/* <Link to="/matchup"> */}
-          <input
-            // style={styles.inputStyles}
-            value={[prompt]}
-            name="prompt"
-            onChange={handleInputChange}
-            type="prompt"
-            placeholder="Prompt (genre, style, etc.)"
-          />
-          <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>
-            Generate Name!
-          </button>
-          {/* </Link> */}
-        </form>
-        <h2 id="band-name">{bandNameHeader}</h2>
-        {Auth.loggedIn()
-          && bandNameHeader
-          && bandNameHeader !== "Prompt not descriptive enough"
-          && bandNameHeader !== "No prompt entered"
-          ? (
-            <>
-            <button
-              id="fave-btn"
-              type="button"
-              className="btn"
-              onClick={handleSaveName}
-            >♥ Favorite</button>
-            {viewAllSavedHeader ? (
-              <HashLink to={`/profile/${__USERID}#saved-names`} id="view-all-saved">{viewAllSavedHeader}</HashLink>
-            ) : null}
-            </>
-        ) : (
-          null
-        )}
-      </div>
+    <div className="name-generator">
+      <h2>Band Name Generator</h2>
+      <form>
+        <input
+          value={[prompt]}
+          name="prompt"
+          onChange={handleInputChange}
+          type="prompt"
+          placeholder="Prompt (genre, style, etc.)"
+        />
+        <button className="btn btn-lg btn-danger" onClick={handleFormSubmit}>
+          Generate Name!
+        </button>
+      </form>
+      <h2 id="band-name">{bandNameHeader}</h2>
+      {Auth.loggedIn()
+        && bandNameHeader
+        && bandNameHeader !== "Prompt not descriptive enough"
+        && bandNameHeader !== "No prompt entered"
+        ? (
+          <>
+          <button
+            id="fave-btn"
+            type="button"
+            className="btn"
+            onClick={handleSaveName}
+          >♥ Favorite</button>
+          {viewAllSavedHeader ? (
+            <HashLink to={`/profile/${__USERID}#saved-names`} id="view-all-saved">{viewAllSavedHeader}</HashLink>
+          ) : null}
+          </>
+      ) : (
+        <>
+        {errorMessage}
+        </>
+      )}
     </div>
   );
 };

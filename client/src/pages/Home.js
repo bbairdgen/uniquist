@@ -16,13 +16,13 @@ const Home = () => {
     <div className="homepage">
       <section className="home-about">
         <hr/>
-        <h2 className="home-welcome">Welcome to Uniquist</h2>
+        <h2 className="home-welcome">Welcome to Uniqist</h2>
         <p>
-          UNIQUIST is an effort to create a worldwide community of musical artists,
+          UNIQIST is an effort to create a worldwide community of musical artists,
           and to empower upcoming artists with the art of uniqueness. In an era
           defined by the democratization and unprecedented accessibility of music
           making tools, everyone deserves an opportunity to set themselves apart
-          from their musical peers. UNIQUIST aims to help you get there.
+          from their musical peers. UNIQIST aims to help you get there.
         </p>
         <br/>
         <p>

@@ -67,19 +67,26 @@ const ProfileSavedNames = ({ user, onMyProfile }) => {
                 </form>
             ) : null}
 
-            {user.favorites.map((favorite) => {
-                return (
-                    <div key={favorite} favorite={favorite} className="favorite-card">
-                        <p className="favorite-text">{favorite}</p>
-                        {onMyProfile
-                        ? <button
-                            type="button"
-                            className="delete-icon"
-                            onClick={handleDelete}>X</button>
-                        : null}
-                    </div>
-                )
-            })}
+            {user.favorites.length ? (
+                <>
+                {user.favorites.map((favorite) => {
+                    return (
+                        <div key={favorite} favorite={favorite} className="favorite-card">
+                            <p className="favorite-text">{favorite}</p>
+                            {onMyProfile
+                            ? <button
+                                type="button"
+                                className="delete-icon"
+                                onClick={handleDelete}>X</button>
+                            : null}
+                        </div>
+                    )
+                })}
+                </>
+            ) : (
+                <p>No saved names yet!</p>
+            )}
+            
         </div>
     )
 }

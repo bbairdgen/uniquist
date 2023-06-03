@@ -1,18 +1,27 @@
-import AllUsers from "../pages/AllUsers";
-import { userParams } from "react-router-dom";
+import React from "react";
+import '../css/allUsers.css';
+import { Link } from 'react-router-dom';
 
 function UserInfo(props) {
   return (
     <div className="user-info-card">
-      <h4>{props.name} 's band names</h4>
+      <Link to={`/profile/${props.id}`}>{props.name}</Link>
+      <h3>Saved band names</h3>
       <section className="band-names">
-        {props.bandNames.map((band, i) => {
-          if (!null) {
-            return <h5 key={band}>{band}</h5>;
-          } else {
-            return <p>no band names</p>;
-          }
-        })}
+        {props.bandNames.length ? (
+          <>
+          {props.bandNames.map((band) => {
+            if (!null) {
+              return <h5 key={band}>{band}</h5>;
+            } else {
+              return <p>no band names</p>;
+            }
+          })}
+          </>
+        ) : (
+          <p>(no saved names yet)</p>
+        )}
+        
       </section>
     </div>
   );

@@ -1,1 +1,34 @@
-/* style input field and button */
+.homepage {
+    padding-bottom: 75px;
+}
+
+h2.home-welcome {
+    font-size: 40pt;
+    text-decoration: underline;
+}
+
+.home-about p {
+    color: whitesmoke;
+    line-height: 35px;
+    width: 40vw;
+    margin: 0 auto;
+}
+
+.btn-favorited {
+    color: rgb(26, 34, 146) !important;
+    background-color: rgb(230, 230, 230) !important;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+#view-all-saved {
+    width: 20vw;
+    margin: 0 auto;
+    border: 1px solid white;
+}
+
+@media screen and (max-width: 800px) {
+    .home-about p {
+        width: 90%;
+    }
+}

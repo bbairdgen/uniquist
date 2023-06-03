@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className="header-container">
       <header>
-        <h1> UNIQUIST </h1>
+        <h1> UNIQIST </h1>
       </header>
     </div>
   );

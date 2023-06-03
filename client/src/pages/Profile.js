@@ -110,7 +110,7 @@ const Profile = () => {
 
 
                     <aside className="left-sidebar">
-                        {onMyProfile ? <a href="#settings">Settings</a> : null}
+                        {onMyProfile && Auth.loggedIn() ? <a href="#settings">Settings</a> : null}
                         {/* `MY` renders "My " if viewing your own profile */}
                         <a href="#bands">{MY}Bands</a>
                         <a href="#saved-names">{MY}Saved Band Names</a>
@@ -121,7 +121,7 @@ const Profile = () => {
                     <section className="profile-body">
                         <div userid={oneUser.data?.user._id}>
                             <h2>{WELCOME}{oneUser.data?.user.username}{S_PAGE}</h2>
-                            {!onMyProfile
+                            {!onMyProfile && Auth.loggedIn()
                                 ? (
                                     <button
                                         type="button"
@@ -132,7 +132,7 @@ const Profile = () => {
                                 : ( null )
                             }
                         </div>
-                        {onMyProfile ? (<> <hr/> <ProfileSettings /> </>) : null}
+                        {onMyProfile && Auth.loggedIn() ? (<> <hr/> <ProfileSettings /> </>) : null}
                         <hr/>
                         <ProfileBands user={oneUser.data?.user} onMyProfile={onMyProfile} />
                         <hr/>

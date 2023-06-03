@@ -16,13 +16,14 @@
 
 }
 
-.user-info-card h4 {
+.user-info-card a {
+    font-family: 'orbitron' , sans-serif;
+    color: whitesmoke;
+    background-color: #f0f8ff11;
+    box-shadow: #f0f8ff6d 0px 0px 10px;
+    padding: 10px;
     border-style: solid;
     border-color: #f0f8ff11;
-    background-color: #f0f8ff11;
-    font-family: 'orbitron' , sans-serif;
-    box-shadow: #f0f8ff6d 0px 0px 10px;
-    padding: 3px;
 
 }
 
@@ -31,5 +32,6 @@
 }
 
 .band-names {
+    color: rgb(224, 224, 224);
     background-color: #90549c00;
 }

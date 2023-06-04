@@ -2,12 +2,17 @@ import { Await } from "react-router-dom";
 import "../css/spotify.css";
 import { useState, useEffect } from "react";
 import SpotArtist from "../components/SpotArtist";
+import Discogs from "../components/Discogs";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_FAVORITE } from "../utils/mutations";
 // require('dotenv').config()
 // import { CLIENT_ID, CLIENT_SECRET } from "/utils/keys"
-const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
-const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
+// const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
+// const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
+
+const CLIENT_ID = "f5de3e2e93b2497a99d948722d38f58f";
+const CLIENT_SECRET = "8a8d597f57214a25873bb057c7d41702";
+
 function Spotify() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
@@ -127,11 +132,8 @@ function Spotify() {
               type="text"
               onChange={(event) => setSearchInput(event.target.value)}
             />
-            <button
-              type="submit"
-              className="search-button"
-              onClick={search}>
-              Search
+            <button type="submit" className="search-button" onClick={search}>
+              Search Spotify
             </button>
           </form>
         </input-group>
@@ -164,6 +166,9 @@ function Spotify() {
             );
           })}
         </section>
+        <div>
+          <Discogs />
+        </div>
 
         {/* <button
           className="albsearch-button"

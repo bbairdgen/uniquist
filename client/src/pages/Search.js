@@ -118,10 +118,7 @@ function Search() {
               console.log(discoArtist);
               var discoLink = "https://discogs.com" + discoArtist.uri;
               var coverImage = () => {
-                if (
-                  discoArtist.cover_image ===
-                  "https://st.discogs.com/8424523600871c268a39a3a33554c4bf8d711a7a/images/spacer.gif"
-                ) {
+                if (discoArtist.cover_image.includes("spacer.gif")) {
                   return "https://pbs.twimg.com/media/CAtcT4NWgAAgUtA.jpg";
                 } else {
                   return discoArtist.cover_image;

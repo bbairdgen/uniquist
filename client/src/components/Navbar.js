@@ -16,11 +16,11 @@ const Navbar = () => {
   // implement global state.
   let __USERID = "";
   let __USERNAME = "";
-    if (Auth.loggedIn()) {
-      //console.log("AUTH SAYS:", Auth.getProfile());
-        __USERID = Auth.getProfile().data?._id;
-        __USERNAME = Auth.getProfile().data?.username;
-    }
+  if (Auth.loggedIn()) {
+    //console.log("AUTH SAYS:", Auth.getProfile());
+    __USERID = Auth.getProfile().data?._id;
+    __USERNAME = Auth.getProfile().data?.username;
+  }
 
   const logout = (event) => {
     event.preventDefault();
@@ -36,8 +36,13 @@ const Navbar = () => {
           </p>
         </li>
         <li>
-          <p className="nav-item" onClick={() => navigate("/search")}>
+          <p className="nav-item" onClick={() => navigate("/spotify")}>
             Spotify Search
+          </p>
+        </li>
+        <li>
+          <p className="nav-item" onClick={() => navigate("/search")}>
+            Search
           </p>
         </li>
         <li>
@@ -47,11 +52,16 @@ const Navbar = () => {
         </li>
         {Auth.loggedIn() ? (
           <li>
-            <p className="nav-item" onClick={() => navigate(`/profile/${__USERID}`)}>
+            <p
+              className="nav-item"
+              onClick={() => navigate(`/profile/${__USERID}`)}
+            >
               My Profile
             </p>
           </li>
-        ) : <></>}
+        ) : (
+          <></>
+        )}
       </ul>
       {Auth.loggedIn() ? (
         <>
@@ -69,6 +79,6 @@ const Navbar = () => {
       )}
     </div>
   );
-}
+};
 
 export default Navbar;

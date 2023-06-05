@@ -56,34 +56,13 @@ input-group {
     /* align-items: stretch; */
 }
 
-.artists-section {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 30px;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-    /* align-items: stretch; */
-}
+
 
 
 .album-card {
     margin: 20px;
     /* flex-shrink: 0.3;
     flex-grow: 3; */
-}
-
-.spotify-artist-card {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    margin-top: 50px;
-    font-family: 'Orbitron', sans-serif;
-}
-
-.artist-title {
-    margin: 0px;
 }
 
 .spotty-link {
@@ -114,33 +93,3 @@ input-group {
 
 }
 
-.artist-image {
-    height: 250px;
-    width: 250px;
-}
-
-@media screen and (max-width: 350px) {
-
-    .album-image {
-        height: 200px;
-    width: 200px;
-    }
-
-    .artist-image {
-        height: 150;
-    width: 150;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-
-    .album-image {
-        height: 325px;
-    width: 325px;
-    }
-
-    .artist-image {
-        height: 400px;
-    width: 400px;
-    }
-}

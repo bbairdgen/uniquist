@@ -4,15 +4,21 @@ import "../css/spotArtist.css";
 function SpotArtist(props) {
   return (
     <div className="spotify-artist-card">
-      <h4 className="artist-title">{props.name}</h4>
       <a
         className="spotty-link"
         href={props.externalUrl}
         target="_blank"
         rel="noreferrer"
       >
-        visit on spotify
+        {props.name}
       </a>
+      <ul className="genre-list">
+        {props.genres.map((genre, i) => {
+          if (!genre) {
+            return <li>no genre</li>;
+          } else return <li>{genre}</li>;
+        })}
+      </ul>
       <div className="img-box">
         <img
           className="artist-image"

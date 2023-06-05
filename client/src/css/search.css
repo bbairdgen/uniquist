@@ -1,0 +1,77 @@
+.all-results-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.artists-section {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    align-content: top;
+    justify-content: center;
+    word-wrap: normal;
+
+    text-align: center;
+    /* align-items: stretch; */
+}
+
+.disco-result-container {
+    max-width: 50%;
+   
+}
+
+.spotify-artist-card {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-top: 50px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.artist-title {
+    margin: 0px;
+}
+
+.genre-list {
+    list-style: none;
+    font-size: smaller;
+    text-align: left;
+}
+
+.artist-image {
+    height: 100px;
+    width: 100px;
+}
+
+@media screen and (max-width: 350px) {
+
+    .artist-image {
+        height: 75px;
+    width: 75px;
+    }
+
+    .spotify-artist-card {
+        width: 75px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+
+    .artist-image {
+        height: 200px;
+    width: 200px;
+    }
+    .spotify-artist-card {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .all-results-container {
+        display: flex;
+        flex-direction: column;
+    }
+} 

@@ -98,7 +98,7 @@ function Search() {
     <div>
       <div>
         <input-group>
-          <form className="search-form">
+          <form className="search-form" id="search-bar">
             <input
               placeholder="Search for Artist"
               type="text"
@@ -110,8 +110,17 @@ function Search() {
           </form>
         </input-group>
       </div>
+      <h4>GO TO</h4>
+
+      <a className="nav-button" href="#disco-result-container">
+        Discogs Results
+      </a>
+      <a className="nav-button" href="#spotty-result-container">
+        Spotify Results
+      </a>
+
       <div className="all-results-container">
-        <div className="result-container disco-result-container">
+        <div className="result-container" id="disco-result-container">
           <h2>Results from Discogs</h2>
           <section className="artists-section disco-artist-section">
             {discoReturns.map((discoArtist, i) => {
@@ -137,7 +146,10 @@ function Search() {
             })}
           </section>
         </div>
-        <div className="result-container">
+        <a className="nav-button" href="#search-bar">
+          Back to top
+        </a>
+        <div className="result-container" id="spotty-result-container">
           <h2>Results from Spotify</h2>
 
           <section className="artists-section spotty-artist-section">
@@ -163,6 +175,9 @@ function Search() {
             })}
           </section>
         </div>
+        <a className="nav-button" href="#search-bar">
+          Back to top
+        </a>
       </div>
     </div>
   );

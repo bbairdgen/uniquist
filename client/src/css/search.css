@@ -1,6 +1,16 @@
+.nav-button {
+    margin-top: 5px;
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(to left, #f0f8ff00, #f0f8ff00, #f0f8ff00, #f0f8ff3f, #f0f8ff00, #f0f8ff00, #f0f8ff00);
+}
+
+.nav-button:hover {
+    color:#f0f8ffb1;
+}
+
 .all-results-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .artists-section {
@@ -15,11 +25,6 @@
 
     text-align: center;
     /* align-items: stretch; */
-}
-
-.disco-result-container {
-    max-width: 50%;
-   
 }
 
 .spotify-artist-card {

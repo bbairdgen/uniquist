@@ -10,7 +10,6 @@ import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import Spotify from "./pages/Spotify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
@@ -72,7 +71,6 @@ function App() {
         <div className="stuff">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/spotify" element={<Spotify />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />

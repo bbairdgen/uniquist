@@ -20,12 +20,7 @@ function SpotArtist(props) {
         })}
       </ul>
       <div className="img-box">
-        <img
-          className="artist-image"
-          src={props.imageURL}
-          alt="artist"
-          {...props.name}
-        />
+        <img className="artist-image" src={props.imageURL} alt="artist" />
       </div>
     </div>
   );

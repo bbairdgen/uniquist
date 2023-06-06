@@ -36,11 +36,6 @@ const Navbar = () => {
           </p>
         </li>
         <li>
-          <p className="nav-item" onClick={() => navigate("/spotify")}>
-            Spotify Search
-          </p>
-        </li>
-        <li>
           <p className="nav-item" onClick={() => navigate("/search")}>
             Search
           </p>

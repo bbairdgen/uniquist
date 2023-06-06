@@ -7,7 +7,6 @@ const discogsSecret = "tGPaeTNGkmkGDtRLWwVOopDwpSHseEgZ";
 function Discogs() {
   const [discoSearchInput, setDiscoSearchInput] = useState("");
   const [discoReturns, setDiscoReturns] = useState([]);
-  const [hideReturns, setHideReturns] = useState(false);
   async function searchName(e) {
     e.preventDefault();
     try {

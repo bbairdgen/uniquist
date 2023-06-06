@@ -16,7 +16,6 @@ function Search() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [artistResults, setArtistResults] = useState([]);
-
   const [discoReturns, setDiscoReturns] = useState([]);
 
   useEffect(() => {
@@ -59,6 +58,7 @@ function Search() {
             .then((data) => {
               setArtistResults(data.artists.items);
               console.log(artistResults);
+
               return artistResults;
             });
         } catch (error) {
@@ -101,6 +101,7 @@ function Search() {
           Currently, we will check for artists with the same name on Discogs and
           Spotify but we will be implementing a wider search soon.
         </p>
+
         <input-group>
           <form className="search-form" id="search-bar">
             <input

@@ -1,4 +1,3 @@
-import { redirect } from "react-router-dom";
 import "../css/spotArtist.css";
 
 function SpotArtist(props) {

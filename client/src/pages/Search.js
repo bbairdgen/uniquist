@@ -96,6 +96,11 @@ function Search() {
   return (
     <div>
       <div>
+        <p>Search a band name and see if it's already taken</p>
+        <p>
+          Currently, we will check for artists with the same name on Discogs and
+          Spotify but we will be implementing a wider search soon.
+        </p>
         <input-group>
           <form className="search-form" id="search-bar">
             <input

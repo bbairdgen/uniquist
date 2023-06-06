@@ -1,4 +1,3 @@
-import "../css/spotify.css";
 import "../css/search.css";
 import { useState, useEffect } from "react";
 import SpotArtist from "../components/SpotArtist";

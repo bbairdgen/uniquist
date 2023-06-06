@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { HashLink } from "react-router-hash-link";
-import AddFavorite from '../components/AddFavorite';
+import AddFavorite from "../components/AddFavorite";
 import "../css/home.css";
 import { useMutation } from "@apollo/client";
 import { ADD_FAVORITE } from "../utils/mutations";
 // import { rapidApiKey, randomApiKey } from '/utils/keys'
 // require('dotenv').config()
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const NameGenerator = () => {
-
   let __USERID = "";
   if (Auth.loggedIn()) {
     __USERID = Auth.getProfile().data._id;
@@ -21,7 +20,6 @@ const NameGenerator = () => {
   const [bandNameHeader, setBandNameHeader] = useState("");
   const [viewAllSavedHeader, setViewAllSavedHeader] = useState("");
 
-  
   const [successMsg, setSuccessMsg] = useState("");
   const [addFavorite] = useMutation(ADD_FAVORITE);
 
@@ -58,13 +56,12 @@ const NameGenerator = () => {
       const wordTypes = ["synonyms", "hypernyms", "hyponyms"];
       const currentWordType = wordTypes[Math.floor(Math.random() * 3)];
 
-      const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY
+      const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY;
       const url = `https://languagetools.p.rapidapi.com/${currentWordType}/${word}`;
       const options = {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key":
-            rapidApiKey,
+          "X-RapidAPI-Key": rapidApiKey,
           "X-RapidAPI-Host": "languagetools.p.rapidapi.com",
         },
       };
@@ -80,19 +77,19 @@ const NameGenerator = () => {
         if (currentWordArray.synonyms) {
           const currentWord =
             currentWordArray.synonyms[
-            Math.floor(Math.random() * currentWordArray.synonyms.length)
+              Math.floor(Math.random() * currentWordArray.synonyms.length)
             ];
           bandNameArray.push(currentWord);
         } else if (currentWordArray.hypernyms) {
           const currentWord =
             currentWordArray.hypernyms[
-            Math.floor(Math.random() * currentWordArray.hypernyms.length)
+              Math.floor(Math.random() * currentWordArray.hypernyms.length)
             ];
           bandNameArray.push(currentWord);
         } else if (currentWordArray.hyponyms) {
           const currentWord =
             currentWordArray.hyponyms[
-            Math.floor(Math.random() * currentWordArray.hyponyms.length)
+              Math.floor(Math.random() * currentWordArray.hyponyms.length)
             ];
           bandNameArray.push(currentWord);
         }
@@ -111,14 +108,15 @@ const NameGenerator = () => {
     const randChance = Math.floor(Math.random() * 10);
 
     if (randChance > 5) {
-      const url = 'https://random-words5.p.rapidapi.com/getMultipleRandom?count=1';
-      const randomApiKey = process.env.REACT_APP_RANDOM_API_KEY
+      const url =
+        "https://random-words5.p.rapidapi.com/getMultipleRandom?count=1";
+      const randomApiKey = process.env.REACT_APP_RANDOM_API_KEY;
       const options = {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'X-RapidAPI-Key': randomApiKey,
-          'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-        }
+          "X-RapidAPI-Key": randomApiKey,
+          "X-RapidAPI-Host": "random-words5.p.rapidapi.com",
+        },
       };
 
       try {
@@ -127,19 +125,19 @@ const NameGenerator = () => {
         const randWordResult = JSON.parse(result);
         console.log(randWordResult[0]);
 
-        bandName = bandName + " " + randWordResult[0]
+        bandName = bandName + " " + randWordResult[0];
       } catch (error) {
         console.error(error);
       }
     }
 
-    bandName ? setBandNameHeader(bandName) : setBandNameHeader("Prompt not descriptive enough");
+    bandName
+      ? setBandNameHeader(bandName)
+      : setBandNameHeader("Prompt not descriptive enough");
     // console.log(bandName)
 
     setPrompt("");
   };
-
-
 
   const handleSaveName = (e) => {
     e.preventDefault();
@@ -157,8 +155,8 @@ const NameGenerator = () => {
           onCompleted: () => {
             e.target.classList.toggle("btn-favorited");
             e.target.textContent = "Favorited!";
-            setViewAllSavedHeader("view all saved names")
-          }
+            setViewAllSavedHeader("view all saved names");
+          },
         });
       } // no else; text box being empty is error-handled elsewhere
     } catch (err) {
@@ -182,26 +180,30 @@ const NameGenerator = () => {
         </button>
       </form>
       <h2 id="band-name">{bandNameHeader}</h2>
-      {Auth.loggedIn()
-        && bandNameHeader
-        && bandNameHeader !== "Prompt not descriptive enough"
-        && bandNameHeader !== "No prompt entered"
-        ? (
-          <>
+      {Auth.loggedIn() &&
+      bandNameHeader &&
+      bandNameHeader !== "Prompt not descriptive enough" &&
+      bandNameHeader !== "No prompt entered" ? (
+        <>
           <button
             id="fave-btn"
             type="button"
             className="btn"
             onClick={handleSaveName}
-          >♥ Favorite</button>
+          >
+            ♥ Favorite
+          </button>
           {viewAllSavedHeader ? (
-            <HashLink to={`/profile/${__USERID}#saved-names`} id="view-all-saved">{viewAllSavedHeader}</HashLink>
+            <HashLink
+              to={`/profile/${__USERID}#saved-names`}
+              id="view-all-saved"
+            >
+              {viewAllSavedHeader}
+            </HashLink>
           ) : null}
-          </>
-      ) : (
-        <>
-        {errorMessage}
         </>
+      ) : (
+        <>{errorMessage}</>
       )}
     </div>
   );

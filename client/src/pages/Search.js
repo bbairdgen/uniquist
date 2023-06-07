@@ -3,14 +3,17 @@ import { useState, useEffect } from "react";
 import SpotArtist from "../components/SpotArtist";
 import DiscogsArtist from "../components/DiscogsArtist";
 
-// const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
-// const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
+// const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+// const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
+
+// const DISCOGS_API_KEY = process.env.REACT_APP_DISCOGS_API_KEY;
+// const DISCOGS_CLIENT_SECRET = process.env.REACT_APP_DISCOGS_CLIENT_SECRET;
 
 const CLIENT_ID = "f5de3e2e93b2497a99d948722d38f58f";
 const CLIENT_SECRET = "8a8d597f57214a25873bb057c7d41702";
 
-const discogsKey = "eKWMUYDhyHMLcJROWoyt";
-const discogsSecret = "tGPaeTNGkmkGDtRLWwVOopDwpSHseEgZ";
+const DISCOGS_API_KEY = "eKWMUYDhyHMLcJROWoyt";
+const DISCOGS_CLIENT_SECRET = "tGPaeTNGkmkGDtRLWwVOopDwpSHseEgZ";
 
 function Search() {
   const [searchInput, setSearchInput] = useState("");
@@ -72,9 +75,9 @@ function Search() {
             "https://api.discogs.com/database/search?q=" +
               searchInput +
               "&type=artist&key=" +
-              discogsKey +
+              DISCOGS_API_KEY +
               "&secret=" +
-              discogsSecret
+              DISCOGS_CLIENT_SECRET
           )
             .then((response) => response.json())
             .then((data) => {

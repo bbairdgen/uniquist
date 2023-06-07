@@ -8,10 +8,10 @@ var Discogs = require("disconnect").Client;
 
 
 
-const discogsKey = process.env.REACT_APP_DISCOGS_API_KEY;
-const discogsSecret = process.env.REACT_APP_DISCOGS_CLIENT_SECRET;
-// const discogsKey = "eKWMUYDhyHMLcJROWoyt";
-// const discogsSecret = "tGPaeTNGkmkGDtRLWwVOopDwpSHseEgZ";
+// const discogsKey = process.env.REACT_APP_DISCOGS_API_KEY;
+// const discogsSecret = process.env.REACT_APP_DISCOGS_CLIENT_SECRET;
+const discogsKey = "eKWMUYDhyHMLcJROWoyt";
+const discogsSecret = "tGPaeTNGkmkGDtRLWwVOopDwpSHseEgZ";
 
 function searchName() {
   fetch(

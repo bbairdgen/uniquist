@@ -3,8 +3,11 @@ import { useState, useEffect } from "react";
 import SpotArtist from "../components/SpotArtist";
 import DiscogsArtist from "../components/DiscogsArtist";
 
-// const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
-// const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
+// const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+// const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
+
+// const DISCOGS_API_KEY = process.env.REACT_APP_DISCOGS_API_KEY;
+// const DISCOGS_CLIENT_SECRET = process.env.REACT_APP_DISCOGS_CLIENT_SECRET;
 
 // const DISCOGS_API_KEY = process.env.REACT_APP_DISCOGS_API_KEY;
 // const DISCOGS_CLIENT_SECRET = process.env.REACT_APP_DISCOGS_CLIENT_SECRET;

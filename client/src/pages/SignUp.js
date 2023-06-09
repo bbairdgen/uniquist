@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
-import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../utils/mutations';
-import "../css/signup.css"
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "../utils/mutations";
+import "../css/signup.css";
 import Auth from "../utils/auth";
 
 const SignUp = () => {
@@ -35,7 +34,6 @@ const SignUp = () => {
       console.log(formState);
       console.error(err);
     }
-    
   };
   return (
     <main>

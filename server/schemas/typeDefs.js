@@ -35,6 +35,36 @@ const typeDefs = gql`
     user: User
   }
 
+  type Post {
+    _id: ID!
+    createdBy: User
+    content: String
+    media: [Media]
+    band: Band
+    dateCreated: Date
+    reactions: [Reaction]
+    comments: [Comment]
+  }
+
+  type Media {
+    mediaType: String
+    url: String
+  }
+
+  type Comment {
+    _id: ID!
+    user: User
+    content: String
+    dateCreated: Date
+    reactions: [Reaction]
+  }
+
+  type Reaction {
+    _id: ID!
+    user: User
+    reactionType: String
+  }
+
   type Query {
     users: [User]
     user(_id: ID!): User
@@ -57,6 +87,8 @@ const typeDefs = gql`
     removeFriend(userID: ID!, friendID: ID!): User
     addFavorite(userID: ID!, text: String!): User
     removeFavorite(userID: ID!, text: String!): User
+    # The 2 routes below have auth issues and are deprecated for now
+    # The auth issues will be resolved by implementing a 'request'
     # addBandToUser(userID: ID!, bandID: ID!): User
     # removeBandFromUser(userID: ID!, bandID: ID!): User
 
@@ -67,6 +99,9 @@ const typeDefs = gql`
     removeBandMember(bandID: ID!, userID: ID!): Band
     addStreamLink(bandID: ID!, streamLink: String!): Band
     removeStreamLink(bandID: ID!, streamLink: String!): Band
+
+    # ROUTES FOR POSTS
+    createPost()
   }
 `;
 

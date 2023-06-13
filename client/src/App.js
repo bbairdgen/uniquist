@@ -10,7 +10,6 @@ import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import Spotify from "./pages/Spotify";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import AllUsers from "./pages/AllUsers";
@@ -18,13 +17,12 @@ import Profile from "./pages/Profile";
 import Band from "./pages/BandPage";
 import CreateBand from "./pages/CreateBand";
 import Footer from "./components/Footer";
-
+import Search from "./pages/Search";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 
-
-import { onError } from 'apollo-link-error';
-import { ApolloLink } from 'apollo-link';
+import { onError } from "apollo-link-error";
+import { ApolloLink } from "apollo-link";
 //import { Token } from "graphql"; // noah says: idk what this is or where it came from
 
 // This stuff will print helpful error messages to the console
@@ -73,12 +71,15 @@ function App() {
         <div className="stuff">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Spotify />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
+            <Route path="/search" element={<Search />} />
             <Route exact path="/profile/:profileID" element={<Profile />} />
-            <Route path="/profile/:profileID/new-band" element={<CreateBand />} />
+            <Route
+              path="/profile/:profileID/new-band"
+              element={<CreateBand />}
+            />
             <Route path="/bands/:bandID" element={<Band />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

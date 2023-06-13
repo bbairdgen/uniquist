@@ -1,7 +1,10 @@
 {
-  "name": "tech-matchup-app",
+  "name": "uniqist",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "16.16.0"
+  },
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js --ignore client",

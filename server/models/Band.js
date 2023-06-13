@@ -14,8 +14,15 @@ const bandSchema = new Schema({
         ref: 'User'
     }],
     stream_links: [{
-        type: String
-    }]
+        type: String,
+        match: /^(https?:\/\/)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)$/
+    }],
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+      }
+    ]
 });
 
 const Band = model('Band', bandSchema);

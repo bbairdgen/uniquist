@@ -29,6 +29,12 @@ const userSchema = new Schema({
       ref: "Band",
     },
   ],
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ]
 });
 
 // hash user password on user creation

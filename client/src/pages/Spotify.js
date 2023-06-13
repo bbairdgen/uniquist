@@ -8,6 +8,9 @@ import { ADD_FAVORITE } from "../utils/mutations";
 // import { CLIENT_ID, CLIENT_SECRET } from "/utils/keys"
 const CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
+
+const bandcamp = require('bandcamp-scraper');
+
 function Spotify() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
@@ -16,6 +19,9 @@ function Spotify() {
   const [albums, setAlbums] = useState([]);
   const [artistName, setArtistName] = useState("");
   const [artistID, setArtistID] = useState("");
+
+  // bandcamp search state
+  //const [bcSearchInput, setBcSearchInput] = useState("");
 
   useEffect(() => {
     var authParameters = {
@@ -94,6 +100,21 @@ function Spotify() {
     //Display those albums to the user
   }
 
+  // async function bcSearch() {
+  //   const params = {
+  //     query: bcSearchInput,
+  //     page: 1
+  //   }
+
+  //   bandcamp.search(params, function (error, searchResults) {
+  //     if (error) {
+  //       console.log(error)
+  //     } else {
+  //       console.log(searchResults)
+  //     }
+  //   })
+  // }
+
   const returnedAlbums = async function (aId) {
     var searchParameters = {
       method: "GET",
@@ -135,6 +156,20 @@ function Spotify() {
             </button>
           </form>
         </input-group>
+        {/* <input-group>
+          <form>
+            <input 
+              placeholder="Bandcamp search"
+              type="text"
+              onChange={(event) => setBcSearchInput(event.target.value)}
+            />
+            <button
+              type="submit"
+              className="search-button"
+              onClick={bcSearch}
+            >Search</button>
+          </form>
+        </input-group> */}
       </div>
       <div>
         <h3>{searchInput}</h3>

@@ -15,7 +15,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_USER = gql`
-  mutation createUser($username: String!, $password: String!) {
+  mutation CreateUser($username: String!, $password: String!) {
     createUser(username: $username, password: $password) {
       token
       user {
@@ -38,10 +38,7 @@ export const UPDATE_USERNAME = gql`
 `;
 
 export const UPDATE_PASSWORD = gql`
-  mutation UpdatePassword(
-    $userID: ID!
-    $password: String!
-  ) {
+  mutation UpdatePassword($userID: ID!, $password: String!) {
     updatePassword(
       userID: $userID
       password: $password
@@ -127,16 +124,8 @@ export const REMOVE_FAVORITE = gql`
 // BAND ROUTES
 
 export const CREATE_BAND = gql`
-  mutation CreateBand(
-    $bandname: String!
-    $members: [ID]
-    $streamLinks: [String]
-  ) {
-    createBand(
-      bandname: $bandname
-      members: $members
-      stream_links: $streamLinks
-    ) {
+  mutation CreateBand( $bandname: String!, $members: [ID], $streamLinks: [String]) {
+    createBand(bandname: $bandname, members: $members, stream_links: $streamLinks) {
       _id
       bandname
       members {

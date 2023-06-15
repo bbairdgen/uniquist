@@ -11,7 +11,7 @@ const mediaSchema = new Schema({
         required: true
     },
     url: {
-        type: String,
+        type: String
     }
 });
 

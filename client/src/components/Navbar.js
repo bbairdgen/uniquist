@@ -10,14 +10,14 @@ const Navbar = () => {
   // This is here so that clicking "My Profile" will send you to `profile/${userID}`
   // It's initialized empty because it doesn't assume you're logged in and authorized.
   // However, at least once in the past it did not update this string for some reason.
-  // I couldn't figure out why, and then it just started working as expected.
+  // I couldn't figure out why, but then it just started working again.
   // So just warning y'all, if the "My Profile" button doesn't take you anywhere,
   // then that means this code is inconsistent and we'll probably need to
   // implement global state.
   let __USERID = "";
   let __USERNAME = "";
   if (Auth.loggedIn()) {
-    //console.log("AUTH SAYS:", Auth.getProfile());
+    // console.log("AUTH SAYS:", Auth.getProfile()); // debug
     __USERID = Auth.getProfile().data?._id;
     __USERNAME = Auth.getProfile().data?.username;
   }
@@ -45,6 +45,14 @@ const Navbar = () => {
             See Users
           </p>
         </li>
+        <li>
+          <p
+            className="nav-item"
+            onClick={() => navigate("/feed")}
+          >
+            Feed
+          </p>
+        </li>
         {Auth.loggedIn() ? (
           <li>
             <p
@@ -55,7 +63,7 @@ const Navbar = () => {
             </p>
           </li>
         ) : (
-          <></>
+          null
         )}
       </ul>
       {Auth.loggedIn() ? (
@@ -68,7 +76,7 @@ const Navbar = () => {
       ) : (
         <>
           <p className="stuff login-btn" onClick={() => navigate("/login")}>
-            Login/Sign Up
+            Log In / Sign Up
           </p>
         </>
       )}

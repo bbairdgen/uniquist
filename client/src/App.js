@@ -20,6 +20,7 @@ import Footer from "./components/Footer";
 import Search from "./pages/Search";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
+import Feed from "./pages/Feed";
 
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
@@ -75,6 +76,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/allusers" element={<AllUsers />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/feed" element={<Feed />} />
             <Route exact path="/profile/:profileID" element={<Profile />} />
             <Route
               path="/profile/:profileID/new-band"

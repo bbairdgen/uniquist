@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "16.16.0"
+    "node": "16.19.0"
   },
   "main": "server/server.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "nodemon": "^2.0.22"
   },
   "dependencies": {
+    "dayjs": "^1.11.8",
     "dotenv": "^16.0.3",
     "path": "^0.12.7"
   }

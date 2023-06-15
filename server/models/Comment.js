@@ -2,9 +2,10 @@ const { Schema } = require('mongoose');
 const reactionSchema = require('./Reaction');
 
 const commentSchema = new Schema({
-    user: {
+    user_id: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     content: {
         type: String,
@@ -14,7 +15,8 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    reactions: [reactionSchema]
+    reactions: [reactionSchema],
+    replies: [this]
 });
 
 module.exports = commentSchema;

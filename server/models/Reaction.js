@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 
 const reactionSchema = new Schema({
-    user: {
+    user_id: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true

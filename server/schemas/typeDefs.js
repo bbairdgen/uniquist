@@ -41,7 +41,7 @@ const typeDefs = gql`
     content: String
     media: [Media]
     band: Band
-    dateCreated: Date
+    dateCreated: String
     reactions: [Reaction]
     comments: [Comment]
   }
@@ -55,7 +55,7 @@ const typeDefs = gql`
     _id: ID!
     user: User
     content: String
-    dateCreated: Date
+    dateCreated: String
     reactions: [Reaction]
   }
 
@@ -79,10 +79,7 @@ const typeDefs = gql`
 
     # USER ROUTES
     updateUsername(userID: ID!, username: String!): User
-    updatePassword(
-      userID: ID!
-      password: String!
-    ): User
+    updatePassword(userID: ID!, password: String!): User
     addFriend(userID: ID!, friendID: ID!): User
     removeFriend(userID: ID!, friendID: ID!): User
     addFavorite(userID: ID!, text: String!): User
@@ -101,7 +98,7 @@ const typeDefs = gql`
     removeStreamLink(bandID: ID!, streamLink: String!): Band
 
     # ROUTES FOR POSTS
-    createPost()
+    # createPost()
   }
 `;
 

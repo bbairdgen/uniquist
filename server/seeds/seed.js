@@ -1,9 +1,10 @@
 const connection = require('../config/connection');
-const { User, Band } = require('../models');
+const { User, Band, Post } = require('../models');
 
 // import data
 const userData = require('./userData.json');
 const bandData = require('./bandData.json');
+const postData = require('./postData.json');
 
 connection.on('error', (err) => console.error(err));
 
@@ -11,14 +12,21 @@ connection.once('open', async () => {
   // wipe db
   await User.deleteMany({});
   await Band.deleteMany({});
+  await Post.deleteMany({});
 
-  // bulk creation from JSON data files
+  // Bulk creation from JSON data files.
+  // Note: We can't create Posts here because of the
+  // required field `createdBy`, which is of type ObjectID and must
+  // be populated one user at a time.
   const users = await User.create(userData);
   const bands = await Band.create(bandData);
 
+  const userIDs = users.map((user) => user._id);
+  // console.log('userIDs:', userIDs); // debug
+
   for (let newUser of users) {
     // give user three random friends, cannot be themselves
-    const friends = randomFriends(users, 3, newUser._id);
+    const friends = getRandomUsers(users, 3, newUser._id);
     friends.forEach((friend) => newUser.friends.push(friend));
     
     // add user to a random band document
@@ -27,6 +35,49 @@ connection.once('open', async () => {
     await tempBand.save();
     // now add that band to the user document
     newUser.bands.push(tempBand._id);
+
+    // add 2 random posts to new user with 1 comment and reaction each
+    // (and each comment will have 1 reaction and 1 reply)
+    const postsToAdd = getRandomElements(postData, 2);
+    for (let post in postsToAdd) {
+      const newPost = await Post.create({
+        createdBy: newUser._id,
+        content: post,
+        reactions: [
+          {
+            user_id: getRandomUsers(userIDs, 1, newUser._id),
+            reactionType: getRandomElements(['like', 'dislike'], 1)
+          }
+        ],
+        comments: [
+          {
+            user_id: getRandomUsers(userIDs, 1, newUser._id),
+            content: getRandomElements(postData, 1),
+            reactions: [
+              {
+                user_id: getRandomUsers(userIDs, 1, newUser._id),
+                reactionType: getRandomElements(['like', 'dislike'], 1)
+              }
+            ],
+            replies: [
+              {
+                user_id: getRandomUsers(userIDs, 1, newUser._id),
+                content: getRandomElements(postData, 1),
+                reactions: [
+                  {
+                    user_id: getRandomUsers(userIDs, 1, newUser._id),
+                    reactionType: getRandomElements(['like', 'dislike'], 1)
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      });
+
+      newUser.posts.push(newPost);
+    }
+
     await newUser.save();
   }
 
@@ -46,7 +97,7 @@ connection.once('open', async () => {
  * @param {ObjectID} excludeID This ObjectID will not be present in the returned array.
  * @returns {Array} An array of elements randomly selected from `arr`.
  */
-function randomFriends(arr, num, excludeID) {
+function getRandomUsers(arr, num, excludeID) {
   // this is the array we will return
   let friendsArray = [];
 
@@ -54,7 +105,7 @@ function randomFriends(arr, num, excludeID) {
   // that the algorithm can push to friendsArray.
   let chooseables = [...arr];
 
-  // exclude the excludeID
+  // exclude the excludeID from chooseable IDs
   // user IDs are always unique so `indexOf` is reliable
   chooseables.splice(chooseables.indexOf(excludeID), 1)
 
@@ -71,4 +122,26 @@ function randomFriends(arr, num, excludeID) {
   // friendsArray.forEach((friend) => console.log("friend: ", friend._id))
   // console.log("\n")
   return friendsArray;
+}
+
+/**
+ * Returns the specified number of random elements from the specified array.
+ * @param {Array} arr The array from which to grab random elements.
+ * @param {Number} num The number of random elements to grab.
+ * @returns {Array} An array of random elements from the specified array.
+ */
+function getRandomElements(arr, num) {
+  let elements = [];
+
+  for (let i = 0; i < num; i++) {
+    elements.push(arr[Math.floor(Math.random() * arr.length)]);
+  }
+
+  // This function is versatile. Don't return an array if only one
+  // random element was requested.
+  if (num === 1) {
+    return elements[0];
+  }
+
+  return elements;
 }

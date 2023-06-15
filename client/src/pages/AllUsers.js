@@ -19,23 +19,27 @@ const AllUsers = () => {
   return (
     <>
       <h2>OUR UNIQISTS</h2>
-      <section className="user-info">
-        {userList.map((user) => {
-          // console.log(user);
-          // console.log(user.username);
-          // if (user.favorites[0].text) {
-          //   console.log(user.favorites[0].text);
-          // }
-          return (
-            <UserInfo
-              key={user._id}
-              id={user._id}
-              name={user.username}
-              bandNames={user.favorites}
-            ></UserInfo>
-          );
-        })}
-      </section>
+      {loading
+      ? (<p>Loading...</p>)
+      : (
+        <section className="user-info">
+          {userList.map((user) => {
+            // console.log(user);
+            // console.log(user.username);
+            // if (user.favorites[0].text) {
+            //   console.log(user.favorites[0].text);
+            // }
+            return (
+              <UserInfo
+                key={user._id}
+                id={user._id}
+                name={user.username}
+                bandNames={user.favorites}
+              ></UserInfo>
+            );
+          })}
+        </section>
+      )}
     </>
   );
 };
